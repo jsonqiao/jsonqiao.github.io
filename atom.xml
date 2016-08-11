@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-08-03T08:00:34.000Z</updated>
+  <updated>2016-08-11T12:23:04.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -14,6 +14,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>支付宝支付证书坑</title>
+    <link href="http://yoursite.com/2016/08/11/%E6%94%AF%E4%BB%98%E5%AE%9D%E6%94%AF%E4%BB%98%E8%AF%81%E4%B9%A6%E5%9D%91/"/>
+    <id>http://yoursite.com/2016/08/11/支付宝支付证书坑/</id>
+    <published>2016-08-11T12:16:20.000Z</published>
+    <updated>2016-08-11T12:23:04.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>使用支付宝官方提供的rsa生成公钥和私钥时，更新到支付宝的商户平台，点击商户平台上的查看支付宝公钥，此时显示的公钥不能正常显示，故作此笔记备注一下</p>
+<h3 id="正确的姿势"><a href="#正确的姿势" class="headerlink" title="正确的姿势"></a>正确的姿势</h3><p>使用自己生成的证书里面的公钥和私钥配置即可</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用支付宝官方提供的rsa生成公钥和私钥时，更新到支付宝的商户平台，点击商户平台上的查看支付宝公钥，此时显示的公钥不能正常显示，故作此笔记备注一下&lt;/p&gt;
+&lt;h3 id=&quot;正确的姿势&quot;&gt;&lt;a href=&quot;#正确的姿势&quot; class=&quot;headerlink&quot; title=&quot;正
+    
+    </summary>
+    
+      <category term="java" scheme="http://yoursite.com/categories/java/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="开发问题" scheme="http://yoursite.com/tags/%E5%BC%80%E5%8F%91%E9%97%AE%E9%A2%98/"/>
+    
+  </entry>
   
   <entry>
     <title>Hexo入门</title>
