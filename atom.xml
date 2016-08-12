@@ -82,8 +82,8 @@
   
   <entry>
     <title>Hexo入门</title>
-    <link href="http://yoursite.com/2016/08/03/hexo_index/"/>
-    <id>http://yoursite.com/2016/08/03/hexo_index/</id>
+    <link href="http://yoursite.com/2016/08/03/Hexo%E5%85%A5%E9%97%A8_/"/>
+    <id>http://yoursite.com/2016/08/03/Hexo入门_/</id>
     <published>2016-08-03T08:00:34.000Z</published>
     <updated>2016-08-03T08:00:34.000Z</updated>
     
@@ -107,127 +107,564 @@
   </entry>
   
   <entry>
-    <title>设计模式之策略模式</title>
-    <link href="http://yoursite.com/2014/11/12/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F/"/>
-    <id>http://yoursite.com/2014/11/12/策略模式/</id>
-    <published>2014-11-12T14:17:07.000Z</published>
-    <updated>2016-08-03T09:17:00.000Z</updated>
+    <title>Mac下ssh 免密登录脚本</title>
+    <link href="http://yoursite.com/2016/07/25/Mac%E4%B8%8Bssh_%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95%E8%84%9A%E6%9C%AC/"/>
+    <id>http://yoursite.com/2016/07/25/Mac下ssh_免密登录脚本/</id>
+    <published>2016-07-25T08:04:06.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
     
-    <content type="html"><![CDATA[<pre class="lang:default decode:true">设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。</pre>
-&nbsp;
-
-##### 开始之前
-
-        约翰逊说过伟大的作品不是靠力量,而是靠坚持来完成的，所以做事贵乎恒。博客搭建完成后，自己又很久没有写博客了，果然自己是个三分钟热情的人啊……
-
-        为了改变自己这种惰性，先强迫自己写一个设计模式的系列文章吧，回到今天的主题策略模式。
-
-##### 策略模式定义
-
-        原文：The Strategy Pattern defines a family of algorithms,encapsulates each one,and makes them interchangeable. Strategy lets the algorithm vary independently from clients that use it.
-
-        翻译：策略模式定义一个算法集，并将每个算法封装，使其可以相互替换，让算法的变化独立于使用算法的客户端。
-
-##### 策略模式UML
-
-[![策略模式](http://www.jsonqiao.com/json/wp-content/uploads/2014/11/策略模式.png "策略模式UML")](http://www.jsonqiao.com/json/wp-content/uploads/2014/11/策略模式.png)
-
-#####  应用场景
-
-        从策略模式的定义及上面的UML可以看出，策略模式的重点是将系统中易于变化的算法抽离成独立的部分，让其变化独立与于使用该算法的上下文环境，所以策略模式的<span style="color: #ff6600">重点作用是分离系统中变化与不变的部分，其实这是系统设计时我们遵循的一大原则。</span>
-
-##### OO设计准则
-
-1.  封装变化
-2.  多用组合少用继承（Favor composition over inheritance）
-3.  针对接口编程而不是实现
-
-##### 示例代码
-
-<pre lang="java" line="1">package com.jsonqiao.strategy;
-
-/**
- * 策略模式的策略接口
- *
- * Created by json_qiao on 2014/11/4.
- */
-public interface Strategy {
-
- /**
- * 策略方法
- *
- * @return
- */
- public String doStrategy();
-}
-
-package com.jsonqiao.strategy;
-
-/**
- * 具体的算法策略
- *
- * Created by json_qiao on 2014/11/4.
- */
-public class DefaultStrategy implements Strategy {
-
-    @Override
-    public String doStrategy() {
-        return "This is the default strategy";
-    }
-}
-
-package com.jsonqiao.strategy;
-
-/**
- * 调用策略的上下文
- * 
- * &lt;p&gt;策略模式遵循的原则是将变化部分与不变部分分离，将变化的部分封装成良好的接口提供给上下文环境&lt;/p&gt;
- * 
- * Created by json_qiao on 2014/11/4.
- */
-public class Context {
-
- private Strategy strategy;
-
- public void callStrategy() {
- //不同的部分用策略进行封装
- String strategyResult = strategy.doStrategy();
- System.out.println(strategyResult);
- //做相同的处理
- doSomethingInCommon();
- }
-
- public void setStrategy(Strategy strategy) {
- this.strategy = strategy;
- }
-
- private void doSomethingInCommon() {
- System.out.println("I'll do something in common after calling the strategy...");
- }
-
- public static void main(String[] args) {
- Context context = new Context();
- context.setStrategy(new DefaultStrategy());
- context.callStrategy();
- }
-
-}</pre>
-
-<h5 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h5><pre><code>策略模式是一种简单、常用的设计模式，在我们做OO设计时，一旦我们涉及到抽象封装，基本上都可以看成是在使用策略模式。在WEB开发中的MVC分层模式、ISO网络的分层架构中，其实都是基于策略模式的精髓-&lt;span style=&quot;color: #ff9900;&quot;&gt;将变化分离，让变化独立于使用变化的上下文环境。&lt;/span&gt;
-</code></pre>]]></content>
+    <content type="html"><![CDATA[<h4 id="1-原因"><a href="#1-原因" class="headerlink" title="1. 原因"></a>1. 原因</h4><p>在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。</p>
+<h4 id="2-代码"><a href="#2-代码" class="headerlink" title="2. 代码"></a>2. 代码</h4><p>代码执行环境：Mac＋iTerm2+zsh</p>
+<p>1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代码：</p>
+<p><pre class="lang:sh decode:true" title="mac下ssh免密登陆">#!/usr/bin/expect -f</pre></p>
+<h2 id="替换成ssh服务器的端口"><a href="#替换成ssh服务器的端口" class="headerlink" title="替换成ssh服务器的端口"></a>替换成ssh服务器的端口</h2><p>set port &lt;port&gt; </p>
+<h2 id="替换成ssh服务器的用户名"><a href="#替换成ssh服务器的用户名" class="headerlink" title="替换成ssh服务器的用户名"></a>替换成ssh服务器的用户名</h2><p>set user &lt;username&gt;</p>
+<h2 id="替换成ssh服务器主机IP或者域名"><a href="#替换成ssh服务器主机IP或者域名" class="headerlink" title="替换成ssh服务器主机IP或者域名"></a>替换成ssh服务器主机IP或者域名</h2><p>set host &lt;server-ip&gt;</p>
+<h2 id="登陆密码"><a href="#登陆密码" class="headerlink" title="登陆密码"></a>登陆密码</h2><p>set password &lt;password of login&gt;<br>set timeout -1</p>
+<p>spawn ssh -p $port $user@$host</p>
+<h2 id="注意与响应信息匹配"><a href="#注意与响应信息匹配" class="headerlink" title="注意与响应信息匹配"></a>注意与响应信息匹配</h2><p>expect “password:”<br>send “$password\r”<br>interact</p>
+<p>expect eof<br>2.  将该文件配置问iTerm2的profiles</p>
+<p>2.1 打开iTerm2终端，选择工具栏中的Profiles-&gt; Open Profiles(command + o), 如下图所示</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png" alt="1"></a></p>
+<p>2.2 选择如上图的Edit Profiles, 然后点击左下脚的添加按钮, 最后写下如下图所示的命令就OK了</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/2.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/2.png" alt="2"></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></content>
     
     <summary type="html">
     
-      &lt;pre class=&quot;lang:default decode:true&quot;&gt;设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。&lt;/pre&gt;
-&amp;nbsp;
+      &lt;h4 id=&quot;1-原因&quot;&gt;&lt;a href=&quot;#1-原因&quot; class=&quot;headerlink&quot; title=&quot;1. 原因&quot;&gt;&lt;/a&gt;1. 原因&lt;/h4&gt;&lt;p&gt;在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>spring源码导入Intellij idea</title>
+    <link href="http://yoursite.com/2015/12/23/spring%E6%BA%90%E7%A0%81%E5%AF%BC%E5%85%A5Intellij_idea/"/>
+    <id>http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/</id>
+    <published>2015-12-23T05:33:53.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="1-配置spring源码运行环境"><a href="#1-配置spring源码运行环境" class="headerlink" title="1. 配置spring源码运行环境"></a>1. 配置spring源码运行环境</h4><p>1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，<span style="color: #ff0000">防止spring编译出错，spring编译时会读取JAVA_HOME环境变量</span></p>
+<p>1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编译系统</p>
+<h4 id="2-下载spring源码到本地"><a href="#2-下载spring源码到本地" class="headerlink" title="2. 下载spring源码到本地"></a>2. 下载spring源码到本地</h4><pre class="lang:default decode:true">git clone https://github.com/spring-projects/spring-framework.git</pre>
 
-##### 开始之前
+<h4 id="3-修改gradlew-bat"><a href="#3-修改gradlew-bat" class="headerlink" title="3. 修改gradlew.bat"></a>3. 修改gradlew.bat</h4><pre class="lang:default decode:true">@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+@rem 注释掉下面这句代码
+@rem set GRADLE_OPTS=-XX:MaxMetaspaceSize=512m -Xmx1024m -XX:MaxHeapSize=256m %GRADLE_OPTS%
+set DEFAULT_JVM_OPTS=</pre>
 
-        约翰逊说过伟大的作品不是靠力量,而是靠坚持来完成的，
+<h4 id="4-按照import-into-idea-md文件中说明的步骤执行"><a href="#4-按照import-into-idea-md文件中说明的步骤执行" class="headerlink" title="4. 按照import-into-idea.md文件中说明的步骤执行"></a>4. 按照import-into-idea.md文件中说明的步骤执行</h4><p>4.1 执行预编译步骤，执行命令如下</p>
+<pre class="lang:default decode:true" title="spring源码存储目录下执行">gradlew cleanIdea :spring-oxm:compileTestJava</pre>
+4.2 导入Intellij idea
+
+&nbsp;
+
+<span style="color: #ff0000">**备注：因为天朝网络的缘故需要不断的杀掉进程重新编译，都是体力活，程序猿不容易，当编译过程出现错误时，请使用如下命令重新编译[该命令使用后能在控制台看见错误详情]**</span>
+<pre class="lang:default decode:true">gradlew --debug cleanIdea :spring-oxm:compileTestJava</pre>
+
+<h4 id="5-最后的成果"><a href="#5-最后的成果" class="headerlink" title="5. 最后的成果"></a>5. 最后的成果</h4><p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png" alt="spring_source"></a></p>
+<p>##### </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;1-配置spring源码运行环境&quot;&gt;&lt;a href=&quot;#1-配置spring源码运行环境&quot; class=&quot;headerlink&quot; title=&quot;1. 配置spring源码运行环境&quot;&gt;&lt;/a&gt;1. 配置spring源码运行环境&lt;/h4&gt;&lt;p&gt;1.1 安装jdk 1.
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>一个JAVA程序员的情书</title>
+    <link href="http://yoursite.com/2015/12/10/%E4%B8%80%E4%B8%AAJAVA%E7%A8%8B%E5%BA%8F%E5%91%98%E7%9A%84%E6%83%85%E4%B9%A6/"/>
+    <id>http://yoursite.com/2015/12/10/一个JAVA程序员的情书/</id>
+    <published>2015-12-10T07:33:59.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我能抽象出整个世界．．．<br>但是我不能抽象出你．．．<br>因为你在我心中是那么的具体．．．<br>所以我的世界并不完整．．．<br>我可以重载甚至覆盖这个世界里的任何一种方法．．．<br>但是我却不能重载对你的思念．．．<br>也许命中注定了 你在我的世界里永远的烙上了静态的属性．．．<br>而我不慎调用了爱你这个方法．．．<br>当我义无返顾的把自己作为参数传进这个方法时．．．<br>我才发现爱上你是一个死循环．．．<br>它不停的返回对你的思念压入我心里的堆栈．．．<br>在这无尽的黑夜中．．．<br>我的内存里已经再也装不下别人．．．<br>我不停的向系统申请空间．．．<br>但却捕获一个异常－－－我爱的人不爱我．．．<br>为了解决这个异常．．．<br>我愿意虚拟出最后一点内存．．．<br>把所有我能实现的方法地址压入堆栈．．．<br>并且在栈尾压入最后一个方法－－－将字符串＂我爱你，你爱我吗？＂传递给你．．．<br>如果返回值为真－－我将用尽一生去爱你．．．<br>否则－－我将释放掉所有系统资源．</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我能抽象出整个世界．．．&lt;br&gt;但是我不能抽象出你．．．&lt;br&gt;因为你在我心中是那么的具体．．．&lt;br&gt;所以我的世界并不完整．．．&lt;br&gt;我可以重载甚至覆盖这个世界里的任何一种方法．．．&lt;br&gt;但是我却不能重载对你的思念．．．&lt;br&gt;也许命中注定了 你在我的世界里永远的烙上
+    
+    </summary>
+    
+      <category term="生活" scheme="http://yoursite.com/categories/%E7%94%9F%E6%B4%BB/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>查看linux系统发型版本命令</title>
+    <link href="http://yoursite.com/2015/04/03/%E6%9F%A5%E7%9C%8Blinux%E7%B3%BB%E7%BB%9F%E5%8F%91%E5%9E%8B%E7%89%88%E6%9C%AC%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2015/04/03/查看linux系统发型版本命令/</id>
+    <published>2015-04-03T02:26:57.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><pre class="lang:default decode:true">lsb-release   # 查看linux系统发型版本</pre></p>
+<p>lsb-release -a  # 格式化输出<br>&nbsp;</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;&lt;pre class=&quot;lang:default decode:true&quot;&gt;lsb-release   # 查看linux系统发型版本&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;lsb-release -a  # 格式化输出&lt;br&gt;&amp;nbsp;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vim编码方式</title>
+    <link href="http://yoursite.com/2015/02/03/vim%E7%BC%96%E7%A0%81%E6%96%B9%E5%BC%8F/"/>
+    <id>http://yoursite.com/2015/02/03/vim编码方式/</id>
+    <published>2015-02-03T14:05:09.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<pre class="">[参考网址：http://blog.csdn.net/sws9999/article/details/6088645](http://blog.csdn.net/sws9999/article/details/6088645 "vim编码")</pre>
+
+<h5 id="各种编码配置说明"><a href="#各种编码配置说明" class="headerlink" title="各种编码配置说明"></a>各种编码配置说明</h5><p><pre class="lang:default decode:true">encoding：vim内部的编码，包括 Vim 的 buffer (缓冲区)、菜单文本、消息文本等。默认是根据你的locale选择.用户手册上建议只在 .vimrc 中改变它的值，事实上似乎也只有在.vimrc 中改变它的值才有意义。你可以用另外一种编码来编辑和保存文件，如你的vim的encoding为utf-8,所编辑的文件采用cp936编码,vim会 自动将读入的文件转成utf-8(vim的能读懂的方式），而当你写入文件时,又会自动转回成cp936（文件的保存编码).</pre></p>
+<p>fileencoding: vim中当前编辑的文件的字符编码方式，Vim 保存文件时也会将文件保存为这种字符编码方式 (不管是否新文件都如此).</p>
+<p>fileencodings: vim自动探测fileencoding的顺序列表，启动时会按照该配置所列出的字符编码方式逐一探测即将打开的文件的字符编码方式，并且将 fileencoding 设置为最终探测到的字符编码方式。因此最好将Unicode 编码方式放到这个列表的最前面，将拉丁语系编码方式 latin1 放到最后面.</p>
+<p>termencoding: vim 所工作的终端的字符编码方式。如果vim所在的termimal与vim编码相同，则无需设置。如其不然，你可以用vim的termencoding选项将自动转换成term 的编码.<br>&nbsp;</p>
+<h5 id="vim编码设置流程"><a href="#vim编码设置流程" class="headerlink" title="vim编码设置流程"></a>vim编码设置流程</h5><p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/02/vim编码.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/02/vim编码.png" alt="vim编码"></a></p>
+<h5 id="中文乱码解决方法"><a href="#中文乱码解决方法" class="headerlink" title="中文乱码解决方法"></a>中文乱码解决方法</h5><p><pre class="lang:default decode:true">第一步：<br>      让系统增加需要的编码，ubuntu系统编辑文件/vim /var/lib/locales/supported.d/local，增加以下内容以支持GBK编码。<br>      zh_CN.UTF-8 UTF-8<br>第二步：使用命令  dpkg-reconfigure locales 使新添加的编码生效。</pre></p>
+<p>第三步：编辑文件~/.vimrc，设置vim的编码，添加如下内容。<br>       set fileencodings=utf-8,gbk<br>       set termencoding=utf-8<br>       set encoding=prc<br>&nbsp;</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;pre class=&quot;&quot;&gt;[参考网址：http://blog.csdn.net/sws9999/article/details/6088645](http://blog.csdn.net/sws9999/article/details/6088645 &quot;vim编码&quot;)&lt;/pre
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>vim shortcut</title>
+    <link href="http://yoursite.com/2015/01/20/vim_shortcut/"/>
+    <id>http://yoursite.com/2015/01/20/vim_shortcut/</id>
+    <published>2015-01-20T14:45:55.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h5><p>vim为编辑器之神，对于我这种小菜鸟，vim只能是提升逼格的工具-哈哈，经过一段时间的基础使用，将vim常用的命令记录下来，加深自己的映象吧！</p>
+<h5 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h5><p><pre class="lang:default decode:true"># 进入插入模式快捷键</pre></p>
+<p>a append ：在光标后一个位置插入<br>i insert     ：在光标所在位置插入<br>o               ：在光标所在行的下一行插入，光标移动到插入的新行行首<br>O              ：在光标所在行的上一行插入，光标移动到插入的新行行首</p>
+<h1 id="命令模式下的常见操作"><a href="#命令模式下的常见操作" class="headerlink" title="命令模式下的常见操作"></a>命令模式下的常见操作</h1><h1 id="复制"><a href="#复制" class="headerlink" title="复制"></a>复制</h1><pre><code>[N]yy：复制光标所在行向下N行的数据，如2yy表示复制光标及光标所在行 下一行，共计2行的数据，如若前面不加数字N，则表示复制。
+yw：复制光标所在字符到单词结尾部分的数据。
+y$：复制光标所在字符到行尾的数据。
+y^：复制光标所在字符前一个字符到行首的数据。
+</code></pre><p>#删除<br>           [N]dd：删除光标所在行向下N行的数据，如同复制命令。<br>           dw：删除光标所在字符到单词尾部的数据。<br>           d$：删除光标所在字符到行尾的数据。<br>           d^：删除光标所在字符前一个字符到行首的数据。<br>           x   ：删除光标所在的字符。</p>
+<p>#粘贴<br>           p  ：如果是整行拷贝，则在光标所在行的下一行贴入，如果不是整行而是部分字符拷贝，则在光标所在字符后一个位置贴入。<br>           P  ：与小写的p相反，大写的P在光标所在的前一个字符或者前一行插入。</p>
+<p>#移动<br>           上下左右移动          ：k，j，h，l<br>           前一页，后一页      ：ctrl+f（forward），ctrl+b（back）。<br>           跳转到指定的行      ：[N]gg，如果没有数字N，则表示跳转到首行，否则表示跳转大N制定的行，例如10gg表示跳转到第10行。</p>
+<p>#撤销，还原<br>           撤销     ：u，小写的u表示往前撤销一些列的编辑，大写的U表示在最后一次编辑的撤销与还原。<br>           还原     ：ctrl+r（recover）</p>
+<p>#末行模式的操作<br>          查找      ： /regex    在文件中从光标所在的位置开始查找满足正则表达式的文本，小写的n表示向下查找下一个，大写的N表示向上查找上一个。<br>          替换      ：%/source/replacement/[gc] 在文件中搜索满足source表达式的字符，并替换为replacement字符，后面的跟的g或者c表示全局替换，还是确认替换。例如%/hello/world/g表示在整个文件中将hello全部替换为world，而%/hello/world/c则表示找到需要替换的内容world，由你自己决定是否替换，替换按y确认，跳过按n。<br>&nbsp;</p>
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><p>暂时自己在使用的过程中就是这些吧，后期使用多了相关的快捷键命令在补充！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h5&gt;&lt;p&gt;vim为编辑器之神，对于我这种小菜鸟，vim只能是提升逼格的工具-哈哈，经过一段时间的基础使用，将vim常用的命令记录下来，加深自己的映象吧
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>命令模式</title>
+    <link href="http://yoursite.com/2015/01/17/%E5%91%BD%E4%BB%A4%E6%A8%A1%E5%BC%8F/"/>
+    <id>http://yoursite.com/2015/01/17/命令模式/</id>
+    <published>2015-01-17T05:36:14.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<pre>设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。</pre>
+
+<h5 id="命令模式定义"><a href="#命令模式定义" class="headerlink" title="命令模式定义"></a>命令模式定义</h5><p>原文：<strong>The Command Pattern</strong> encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.</p>
+<p>翻译：命令模式将请求封装为单个对象，从而让你能够将其它对象参数化为不通的请求对象，可以对请求进行排队或者日志记录并且支持撤销操作。</p>
+<h5 id="命令模式UML"><a href="#命令模式UML" class="headerlink" title="命令模式UML"></a>命令模式UML</h5><p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/01/commandPattern.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/01/commandPattern.png" alt="commandPattern"></a></p>
+<h5 id="职责描述"><a href="#职责描述" class="headerlink" title="职责描述"></a>职责描述</h5><p>command interface：command接口是对所有命令对象的抽象，将具体的命令对象与命令的调用对象进行隔离，为命令调用对象提供统一的调用入口。</p>
+<p>Invoker class：命令的调用者，持用命令对象的引用。</p>
+<p>Receiver class：命令的接收者，负责执行具体的命令，具体的命令绑定具体的接收对象。</p>
+<h5 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h5><pre lang="java" line="1">package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 命令接口对象
+ *
+ * Created by jsonqiao on 2015/1/17
+ */
+public interface Command {
+
+   /**
+    * 执行命令，所有具体的命令对象需要实现该接口。
+    */
+   public void execute();
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * Created by jsonqiao on 2015/1/17
+ */
+public class LightOffCommand implements Command {
+
+   private Light lightOff;
+
+   LightOffCommand(Light lightOff){
+       this.lightOff = lightOff;
+   }
+
+   @Override
+   public void execute() {
+       lightOff.off();
+   }
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 具体的命令对象，执行关灯操作，绑定关灯接收对象
+ *
+ * Created by jsonqiao on 2015/1/17
+ */
+public class LightOffCommand implements Command {
+
+   //Receiver接收对象
+   private Light lightOff;
+
+   LightOffCommand(Light lightOff){
+       this.lightOff = lightOff;
+   }
+
+   @Override
+   public void execute() {
+       lightOff.off();
+   }
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 命令接收类，负责接收相应的命令执行相关命令
+ *
+ * Created by jsonqiao on 2015/1/17
+ */
+public class Light {
+
+   public void off(){
+       System.out.println("I'll turn off, please notice!");
+   }
+
+   public void on(){
+       System.out.println("I'll turn on, welcome!");
+   }
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 测试类
+ * 
+ * Created by jsonqiao on 2015/1/17
+ */
+public class CommandPatternDemo {
+
+   public static void main(String[] args) {
+       Light lightOff = new Light();
+       Command command = new LightOffCommand(lightOff);
+       Invoker invoker = new Invoker();
+       invoker.setCommand(command);
+       invoker.turnoff();
+   }
+}</pre>
+
+<h5 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h5><p>学习设计模式已经有一段时间了，在项目过程中也或多或少的运用一些部分设计模式，但发现自己容易陷入不同的语境运用不合适的模式，所以<span style="color: #ff0000"><strong>模式的运用最重要的是合适，不要依赖于模式，Simple is the best !!!</strong></span></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;pre&gt;设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。&lt;/pre&gt;
+
+&lt;h5 id=&quot;命令模式定义&quot;&gt;&lt;a href=&quot;#命令模式定义&quot; class=&quot;headerlink&quot; title=&quot;命令模式定义&quot;&gt;&lt;/a&gt;命令模式定义&lt;/h5&gt;&lt;p&gt;
     
     </summary>
     
       <category term="设计模式" scheme="http://yoursite.com/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Python namespace</title>
+    <link href="http://yoursite.com/2014/12/15/Python_namespace/"/>
+    <id>http://yoursite.com/2014/12/15/Python_namespace/</id>
+    <published>2014-12-15T01:59:01.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Recently, I’ve learn python, There is an arctile, which is helpful to give me a insight。</p>
+<p><a href="http://nbviewer.ipython.org/github/rasbt/python_reference/blob/master/tutorials/scope_resolution_legb_rule.ipynb" title="python namespace" target="_blank" rel="external">http://nbviewer.ipython.org/github/rasbt/python_reference/blob/master/tutorials/scope_resolution_legb_rule.ipynb</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Recently, I’ve learn python, There is an arctile, which is helpful to give me a insight。&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://nbviewer.ipython.org/gith
+    
+    </summary>
+    
+      <category term="Python" scheme="http://yoursite.com/categories/Python/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>JDK DynamicProxy生成源码</title>
+    <link href="http://yoursite.com/2014/11/24/JDK_DynamicProxy%E7%94%9F%E6%88%90%E6%BA%90%E7%A0%81/"/>
+    <id>http://yoursite.com/2014/11/24/JDK_DynamicProxy生成源码/</id>
+    <published>2014-11-24T15:57:30.000Z</published>
+    <updated>2016-08-12T08:36:26.000Z</updated>
+    
+    <content type="html"><![CDATA[<pre lang="java" line="1">package dynamicProxy;
+
+/**
+ * 可飞行动物实现飞行接口-学习JDK动态代理
+ *
+ * Created by json_qiao on 2014/11/24.
+ */
+public interface Flyable {
+
+     /**
+      * 飞行
+      */
+     public void fly();
+}
+
+package dynamicProxy;
+
+/**
+ * 高空飞行
+ *
+ * Created by json_qiao on 2014/11/24.
+ */
+public class HighFly implements Flyable {
+
+     @Override
+     public void fly() {
+         System.out.println("I'm fly very high!");
+     }
+}
+
+package dynamicProxy;
+
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+
+/**
+ * JDK动态代理需实现该接口
+ *
+ * Created by json_qiao on 2014/11/24.
+ */
+public class InvokerHandler implements InvocationHandler {
+
+     private Object target;
+
+     public InvokerHandler(Object target){
+         super();
+         this.target = target;
+     }
+
+     @Override
+     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+         doBefore();
+         method.invoke(target, args);
+         doAfter();
+         return proxy;
+     }
+
+     protected void doBefore(){
+         System.out.println("I'll do something before calling the method!");
+     }
+
+     protected void doAfter(){
+         System.out.println("I'll do something after calling the method!");
+     }
+}
+
+package dynamicProxy;
+
+import sun.misc.ProxyGenerator;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.lang.reflect.Proxy;
+
+/**
+ * 动态代理测试
+ * 
+ * Created by json_qiao on 2014/11/24.
+ */
+public class ProxyTest {
+
+     public static void main(String[] args) {
+         Flyable proxy = getProxy();
+         testFly(proxy);
+         saveProxyClass2Disk(proxy);
+     }
+
+     /**
+      * 生成代理类
+      * 
+      * @return
+      */
+     private static Flyable getProxy(){
+         Flyable fly = new HighFly();
+         InvokerHandler invoker = new InvokerHandler(fly);
+         return (Flyable)Proxy.newProxyInstance(
+                             fly.getClass().getClassLoader(),fly.getClass().getInterfaces(), invoker);
+     }
+
+     /**
+      * 测试代理类相关的方法Fly
+      * 
+      * @param proxy
+      */
+     private static void testFly(Flyable proxy) {
+         proxy.fly();
+     }
+
+     /**
+      * 将缓存中的代理类字节码保存到磁盘
+      * 
+      * @param flyable
+      */
+     private static void saveProxyClass2Disk(Flyable flyable) {
+         String savePath = System.getProperty("user.dir") + "/$Proxy0.class";
+         FileOutputStream stream = null;
+         try {
+             stream = new FileOutputStream(savePath);
+             stream.write(ProxyGenerator.generateProxyClass(
+                             flyable.getClass().getName(),flyable.getClass().getInterfaces()));
+         } catch (FileNotFoundException e) {
+             System.out.println(e);
+         } catch (IOException e) {
+             System.out.println(e);
+        } finally {
+            try {
+                if (stream != null) {
+                    stream.close();
+                }
+            } catch (IOException e) {
+               System.out.println(e);
+           }
+       }
+    }
+}
+
+package com.sun.proxy;
+
+import dynamicProxy.Flyable;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.lang.reflect.UndeclaredThrowableException;
+
+/**
+ * 生成的字节码反编译后的代码
+ */
+public final class $Proxy0 extends Proxy implements Flyable{
+     private static Method m1;
+     private static Method m3;
+     private static Method m0;
+     private static Method m2;
+
+     public $Proxy0(InvocationHandler paramInvocationHandler) throws{
+         super(paramInvocationHandler);
+     }
+
+     public final boolean equals(Object paramObject) throws {
+         try {
+             return ((Boolean)this.h.invoke(this, m1, new Object[] { paramObject })).booleanValue();
+         } catch (Error|RuntimeException localError) {
+            throw localError;
+         } catch (Throwable localThrowable) {
+            throw new UndeclaredThrowableException(localThrowable);
+         }
+     }
+
+     public final void fly() throws {
+         try {
+             this.h.invoke(this, m3, null);
+             return;
+         } catch (Error|RuntimeException localError) {
+             throw localError;
+         } catch (Throwable localThrowable){
+             throw new UndeclaredThrowableException(localThrowable);
+         }
+     }
+
+     public final int hashCode() throws {
+         try {
+             return ((Integer)this.h.invoke(this, m0, null)).intValue();
+         }catch (Error|RuntimeException localError) {
+            throw localError;
+         } catch (Throwable localThrowable) {
+            throw new UndeclaredThrowableException(localThrowable);
+         }
+     }
+
+     public final String toString() throws {
+         try {
+             return (String)this.h.invoke(this, m2, null);
+         } catch (Error|RuntimeException localError) {
+            throw localError;
+         } catch (Throwable localThrowable) {
+            throw new UndeclaredThrowableException(localThrowable);
+         }
+     }
+
+     static {
+         try {
+             m1 = Class.forName("java.lang.Object").getMethod("equals", 
+                            new Class[] {Class.forName("java.lang.Object") });
+             m3 = Class.forName("dynamicProxy.Flyable").getMethod("fly", new Class[0]);
+             m0 = Class.forName("java.lang.Object").getMethod("hashCode", new Class[0]);
+             m2 = Class.forName("java.lang.Object").getMethod("toString", new Class[0]);
+             return;
+         } catch (NoSuchMethodException localNoSuchMethodException) {
+             throw new NoSuchMethodError(localNoSuchMethodException.getMessage());
+         } catch (ClassNotFoundException localClassNotFoundException) {
+             throw new NoClassDefFoundError(localClassNotFoundException.getMessage());
+         }
+     }
+}</pre>]]></content>
+    
+    <summary type="html">
+    
+      &lt;pre lang=&quot;java&quot; line=&quot;1&quot;&gt;package dynamicProxy;
+
+/**
+ * 可飞行动物实现飞行接口-学习JDK动态代理
+ *
+ * Created by json_qiao on 2014/11/24.
+ */
+public interface
+    
+    </summary>
+    
+      <category term="Java" scheme="http://yoursite.com/categories/Java/"/>
     
     
   </entry>

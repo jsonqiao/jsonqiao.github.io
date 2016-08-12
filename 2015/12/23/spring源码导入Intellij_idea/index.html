@@ -84,15 +84,21 @@
 
 
 
-<meta name="description" content="一个猿猿的技术独白">
-<meta property="og:type" content="website">
-<meta property="og:title" content="栀子花开">
-<meta property="og:url" content="http://yoursite.com/categories/工具/index.html">
+<meta name="description" content="1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
+1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring源码导入Intellij idea">
+<meta property="og:url" content="http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="一个猿猿的技术独白">
+<meta property="og:description" content="1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
+1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png">
+<meta property="og:updated_time" content="2016-08-12T08:36:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="栀子花开">
-<meta name="twitter:description" content="一个猿猿的技术独白">
+<meta name="twitter:title" content="spring源码导入Intellij idea">
+<meta name="twitter:description" content="1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
+1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编">
+<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png">
 
 
 
@@ -113,9 +119,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/工具/">
+  <link rel="canonical" href="http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/">
 
-  <title> 分类: 工具 | 栀子花开 </title>
+  <title> spring源码导入Intellij idea | 栀子花开 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,7 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left">
+  <div class="container one-collumn sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,45 +230,166 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2>
-        工具
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
+
+  
+  
+
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <h1 class="post-title">
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/08/12/ubuntu安装shadowsocks/" itemprop="url">
-              
-                <span itemprop="name">ubuntu安装shadowsocks</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                spring源码导入Intellij idea
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-08-12T16:04:13+08:00" content="2016-08-12">
-          08-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-23T13:33:53+08:00" content="2015-12-23">
+              2015-12-23
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/23/spring源码导入Intellij_idea/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/spring源码导入Intellij_idea/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-配置spring源码运行环境"><a href="#1-配置spring源码运行环境" class="headerlink" title="1. 配置spring源码运行环境"></a>1. 配置spring源码运行环境</h4><p>1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，<span style="color: #ff0000">防止spring编译出错，spring编译时会读取JAVA_HOME环境变量</span></p>
+<p>1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编译系统</p>
+<h4 id="2-下载spring源码到本地"><a href="#2-下载spring源码到本地" class="headerlink" title="2. 下载spring源码到本地"></a>2. 下载spring源码到本地</h4><pre class="lang:default decode:true">git clone https://github.com/spring-projects/spring-framework.git</pre>
+
+<h4 id="3-修改gradlew-bat"><a href="#3-修改gradlew-bat" class="headerlink" title="3. 修改gradlew.bat"></a>3. 修改gradlew.bat</h4><pre class="lang:default decode:true">@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+@rem 注释掉下面这句代码
+@rem set GRADLE_OPTS=-XX:MaxMetaspaceSize=512m -Xmx1024m -XX:MaxHeapSize=256m %GRADLE_OPTS%
+set DEFAULT_JVM_OPTS=</pre>
+
+<h4 id="4-按照import-into-idea-md文件中说明的步骤执行"><a href="#4-按照import-into-idea-md文件中说明的步骤执行" class="headerlink" title="4. 按照import-into-idea.md文件中说明的步骤执行"></a>4. 按照import-into-idea.md文件中说明的步骤执行</h4><p>4.1 执行预编译步骤，执行命令如下</p>
+<pre class="lang:default decode:true" title="spring源码存储目录下执行">gradlew cleanIdea :spring-oxm:compileTestJava</pre>
+4.2 导入Intellij idea
+
+&nbsp;
+
+<span style="color: #ff0000">**备注：因为天朝网络的缘故需要不断的杀掉进程重新编译，都是体力活，程序猿不容易，当编译过程出现错误时，请使用如下命令重新编译[该命令使用后能在控制台看见错误详情]**</span>
+<pre class="lang:default decode:true">gradlew --debug cleanIdea :spring-oxm:compileTestJava</pre>
+
+<h4 id="5-最后的成果"><a href="#5-最后的成果" class="headerlink" title="5. 最后的成果"></a>5. 最后的成果</h4><p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png" alt="spring_source"></a></p>
+<p>##### </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/10/一个JAVA程序员的情书/" rel="next" title="一个JAVA程序员的情书">
+                <i class="fa fa-chevron-left"></i> 一个JAVA程序员的情书
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/25/Mac下ssh_免密登录脚本/" rel="prev" title="Mac下ssh 免密登录脚本">
+                Mac下ssh 免密登录脚本 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -270,6 +397,13 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/23/spring源码导入Intellij_idea/" data-title="spring源码导入Intellij idea" data-url="http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -289,8 +423,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg" alt="jsonqiao">
           <p class="site-author-name" itemprop="name">jsonqiao</p>
@@ -395,6 +538,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置spring源码运行环境"><span class="nav-number">1.</span> <span class="nav-text">1. 配置spring源码运行环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-下载spring源码到本地"><span class="nav-number">2.</span> <span class="nav-text">2. 下载spring源码到本地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-修改gradlew-bat"><span class="nav-number">3.</span> <span class="nav-text">3. 修改gradlew.bat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-按照import-into-idea-md文件中说明的步骤执行"><span class="nav-number">4.</span> <span class="nav-text">4. 按照import-into-idea.md文件中说明的步骤执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-最后的成果"><span class="nav-number">5.</span> <span class="nav-text">5. 最后的成果</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -497,6 +651,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

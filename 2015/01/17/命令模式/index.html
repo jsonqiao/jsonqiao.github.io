@@ -84,15 +84,24 @@
 
 
 
-<meta name="description" content="一个猿猿的技术独白">
-<meta property="og:type" content="website">
-<meta property="og:title" content="栀子花开">
-<meta property="og:url" content="http://yoursite.com/categories/工具/index.html">
+<meta name="description" content="设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。
+
+命令模式定义原文：The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log reques">
+<meta property="og:type" content="article">
+<meta property="og:title" content="命令模式">
+<meta property="og:url" content="http://yoursite.com/2015/01/17/命令模式/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="一个猿猿的技术独白">
+<meta property="og:description" content="设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。
+
+命令模式定义原文：The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log reques">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/01/commandPattern.png">
+<meta property="og:updated_time" content="2016-08-12T08:36:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="栀子花开">
-<meta name="twitter:description" content="一个猿猿的技术独白">
+<meta name="twitter:title" content="命令模式">
+<meta name="twitter:description" content="设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。
+
+命令模式定义原文：The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log reques">
+<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/01/commandPattern.png">
 
 
 
@@ -113,9 +122,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/工具/">
+  <link rel="canonical" href="http://yoursite.com/2015/01/17/命令模式/">
 
-  <title> 分类: 工具 | 栀子花开 </title>
+  <title> 命令模式 | 栀子花开 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,7 +155,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left">
+  <div class="container one-collumn sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,45 +233,245 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2>
-        工具
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
+
+  
+  
+
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <h1 class="post-title">
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/08/12/ubuntu安装shadowsocks/" itemprop="url">
-              
-                <span itemprop="name">ubuntu安装shadowsocks</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                命令模式
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-08-12T16:04:13+08:00" content="2016-08-12">
-          08-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-17T13:36:14+08:00" content="2015-01-17">
+              2015-01-17
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/设计模式/" itemprop="url" rel="index">
+                    <span itemprop="name">设计模式</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/17/命令模式/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/17/命令模式/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <pre>设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。</pre>
+
+<h5 id="命令模式定义"><a href="#命令模式定义" class="headerlink" title="命令模式定义"></a>命令模式定义</h5><p>原文：<strong>The Command Pattern</strong> encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.</p>
+<p>翻译：命令模式将请求封装为单个对象，从而让你能够将其它对象参数化为不通的请求对象，可以对请求进行排队或者日志记录并且支持撤销操作。</p>
+<h5 id="命令模式UML"><a href="#命令模式UML" class="headerlink" title="命令模式UML"></a>命令模式UML</h5><p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/01/commandPattern.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/01/commandPattern.png" alt="commandPattern"></a></p>
+<h5 id="职责描述"><a href="#职责描述" class="headerlink" title="职责描述"></a>职责描述</h5><p>command interface：command接口是对所有命令对象的抽象，将具体的命令对象与命令的调用对象进行隔离，为命令调用对象提供统一的调用入口。</p>
+<p>Invoker class：命令的调用者，持用命令对象的引用。</p>
+<p>Receiver class：命令的接收者，负责执行具体的命令，具体的命令绑定具体的接收对象。</p>
+<h5 id="示例代码"><a href="#示例代码" class="headerlink" title="示例代码"></a>示例代码</h5><pre lang="java" line="1">package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 命令接口对象
+ *
+ * Created by jsonqiao on 2015/1/17
+ */
+public interface Command {
+
+   /**
+    * 执行命令，所有具体的命令对象需要实现该接口。
+    */
+   public void execute();
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * Created by jsonqiao on 2015/1/17
+ */
+public class LightOffCommand implements Command {
+
+   private Light lightOff;
+
+   LightOffCommand(Light lightOff){
+       this.lightOff = lightOff;
+   }
+
+   @Override
+   public void execute() {
+       lightOff.off();
+   }
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 具体的命令对象，执行关灯操作，绑定关灯接收对象
+ *
+ * Created by jsonqiao on 2015/1/17
+ */
+public class LightOffCommand implements Command {
+
+   //Receiver接收对象
+   private Light lightOff;
+
+   LightOffCommand(Light lightOff){
+       this.lightOff = lightOff;
+   }
+
+   @Override
+   public void execute() {
+       lightOff.off();
+   }
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 命令接收类，负责接收相应的命令执行相关命令
+ *
+ * Created by jsonqiao on 2015/1/17
+ */
+public class Light {
+
+   public void off(){
+       System.out.println("I'll turn off, please notice!");
+   }
+
+   public void on(){
+       System.out.println("I'll turn on, welcome!");
+   }
+}
+
+package com.jsonqiao.designpattern.commandpattern;
+
+/**
+ * 测试类
+ * 
+ * Created by jsonqiao on 2015/1/17
+ */
+public class CommandPatternDemo {
+
+   public static void main(String[] args) {
+       Light lightOff = new Light();
+       Command command = new LightOffCommand(lightOff);
+       Invoker invoker = new Invoker();
+       invoker.setCommand(command);
+       invoker.turnoff();
+   }
+}</pre>
+
+<h5 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h5><p>学习设计模式已经有一段时间了，在项目过程中也或多或少的运用一些部分设计模式，但发现自己容易陷入不同的语境运用不合适的模式，所以<span style="color: #ff0000"><strong>模式的运用最重要的是合适，不要依赖于模式，Simple is the best !!!</strong></span></p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/12/15/Python_namespace/" rel="next" title="Python namespace">
+                <i class="fa fa-chevron-left"></i> Python namespace
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/01/20/vim_shortcut/" rel="prev" title="vim shortcut">
+                vim shortcut <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -270,6 +479,13 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/01/17/命令模式/" data-title="命令模式" data-url="http://yoursite.com/2015/01/17/命令模式/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -289,8 +505,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg" alt="jsonqiao">
           <p class="site-author-name" itemprop="name">jsonqiao</p>
@@ -395,6 +620,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令模式定义"><span class="nav-number">1.</span> <span class="nav-text">命令模式定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命令模式UML"><span class="nav-number">2.</span> <span class="nav-text">命令模式UML</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#职责描述"><span class="nav-number">3.</span> <span class="nav-text">职责描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例代码"><span class="nav-number">4.</span> <span class="nav-text">示例代码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#后话"><span class="nav-number">5.</span> <span class="nav-text">后话</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -497,6 +733,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

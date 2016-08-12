@@ -84,15 +84,25 @@
 
 
 
-<meta name="description" content="一个猿猿的技术独白">
-<meta property="og:type" content="website">
-<meta property="og:title" content="栀子花开">
-<meta property="og:url" content="http://yoursite.com/categories/工具/index.html">
+<meta name="description" content="1. 原因在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。
+2. 代码代码执行环境：Mac＋iTerm2+zsh
+1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mac下ssh 免密登录脚本">
+<meta property="og:url" content="http://yoursite.com/2016/07/25/Mac下ssh_免密登录脚本/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="一个猿猿的技术独白">
+<meta property="og:description" content="1. 原因在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。
+2. 代码代码执行环境：Mac＋iTerm2+zsh
+1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/2.png">
+<meta property="og:updated_time" content="2016-08-12T08:36:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="栀子花开">
-<meta name="twitter:description" content="一个猿猿的技术独白">
+<meta name="twitter:title" content="Mac下ssh 免密登录脚本">
+<meta name="twitter:description" content="1. 原因在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。
+2. 代码代码执行环境：Mac＋iTerm2+zsh
+1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代">
+<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png">
 
 
 
@@ -113,9 +123,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/工具/">
+  <link rel="canonical" href="http://yoursite.com/2016/07/25/Mac下ssh_免密登录脚本/">
 
-  <title> 分类: 工具 | 栀子花开 </title>
+  <title> Mac下ssh 免密登录脚本 | 栀子花开 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -146,7 +156,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left">
+  <div class="container one-collumn sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,45 +234,161 @@
           <div id="content" class="content">
             
 
-  <section id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2>
-        工具
-        <small>分类</small>
-      </h2>
-    </div>
-
+  <div id="posts" class="posts-expand">
     
-      
+
+  
+  
+
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
 
-      <h1 class="post-title">
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2016/08/12/ubuntu安装shadowsocks/" itemprop="url">
-              
-                <span itemprop="name">ubuntu安装shadowsocks</span>
-              
-            </a>
         
-      </h1>
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Mac下ssh 免密登录脚本
+              
+            
+          </h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2016-08-12T16:04:13+08:00" content="2016-08-12">
-          08-12
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-25T16:04:06+08:00" content="2016-07-25">
+              2016-07-25
+            </time>
+          </span>
 
-    </header>
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/25/Mac下ssh_免密登录脚本/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/25/Mac下ssh_免密登录脚本/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-原因"><a href="#1-原因" class="headerlink" title="1. 原因"></a>1. 原因</h4><p>在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。</p>
+<h4 id="2-代码"><a href="#2-代码" class="headerlink" title="2. 代码"></a>2. 代码</h4><p>代码执行环境：Mac＋iTerm2+zsh</p>
+<p>1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代码：</p>
+<p><pre class="lang:sh decode:true" title="mac下ssh免密登陆">#!/usr/bin/expect -f</pre></p>
+<h2 id="替换成ssh服务器的端口"><a href="#替换成ssh服务器的端口" class="headerlink" title="替换成ssh服务器的端口"></a>替换成ssh服务器的端口</h2><p>set port &lt;port&gt; </p>
+<h2 id="替换成ssh服务器的用户名"><a href="#替换成ssh服务器的用户名" class="headerlink" title="替换成ssh服务器的用户名"></a>替换成ssh服务器的用户名</h2><p>set user &lt;username&gt;</p>
+<h2 id="替换成ssh服务器主机IP或者域名"><a href="#替换成ssh服务器主机IP或者域名" class="headerlink" title="替换成ssh服务器主机IP或者域名"></a>替换成ssh服务器主机IP或者域名</h2><p>set host &lt;server-ip&gt;</p>
+<h2 id="登陆密码"><a href="#登陆密码" class="headerlink" title="登陆密码"></a>登陆密码</h2><p>set password &lt;password of login&gt;<br>set timeout -1</p>
+<p>spawn ssh -p $port $user@$host</p>
+<h2 id="注意与响应信息匹配"><a href="#注意与响应信息匹配" class="headerlink" title="注意与响应信息匹配"></a>注意与响应信息匹配</h2><p>expect “password:”<br>send “$password\r”<br>interact</p>
+<p>expect eof<br>2.  将该文件配置问iTerm2的profiles</p>
+<p>2.1 打开iTerm2终端，选择工具栏中的Profiles-&gt; Open Profiles(command + o), 如下图所示</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png" alt="1"></a></p>
+<p>2.2 选择如上图的Edit Profiles, 然后点击左下脚的添加按钮, 最后写下如下图所示的命令就OK了</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/2.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/2.png" alt="2"></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/23/spring源码导入Intellij_idea/" rel="next" title="spring源码导入Intellij idea">
+                <i class="fa fa-chevron-left"></i> spring源码导入Intellij idea
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/08/03/Hexo入门_/" rel="prev" title="Hexo入门">
+                Hexo入门 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </section>
 
-  
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -270,6 +396,13 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/25/Mac下ssh_免密登录脚本/" data-title="Mac下ssh 免密登录脚本" data-url="http://yoursite.com/2016/07/25/Mac下ssh_免密登录脚本/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -289,8 +422,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg" alt="jsonqiao">
           <p class="site-author-name" itemprop="name">jsonqiao</p>
@@ -395,6 +537,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-原因"><span class="nav-number">1.</span> <span class="nav-text">1. 原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-代码"><span class="nav-number">2.</span> <span class="nav-text">2. 代码</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#替换成ssh服务器的端口"><span class="nav-number"></span> <span class="nav-text">替换成ssh服务器的端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换成ssh服务器的用户名"><span class="nav-number"></span> <span class="nav-text">替换成ssh服务器的用户名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换成ssh服务器主机IP或者域名"><span class="nav-number"></span> <span class="nav-text">替换成ssh服务器主机IP或者域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆密码"><span class="nav-number"></span> <span class="nav-text">登陆密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意与响应信息匹配"><span class="nav-number"></span> <span class="nav-text">注意与响应信息匹配</span></a></li></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -497,6 +650,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
