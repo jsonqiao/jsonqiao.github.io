@@ -258,8 +258,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/01/20/vim_shortcut/" itemprop="url">
-                  vim shortcut
+                <a class="post-title-link" href="/2016/05/18/阿里云centos7.0+使用yum安装mysql/" itemprop="url">
+                  阿里云centos7.0+使用yum安装mysql
                 </a>
               
             
@@ -272,8 +272,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-20T22:45:55+08:00" content="2015-01-20">
-              2015-01-20
+            <time itemprop="dateCreated" datetime="2016-05-18T14:44:19+08:00" content="2016-05-18">
+              2016-05-18
             </time>
           </span>
 
@@ -286,8 +286,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -302,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/01/20/vim_shortcut/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/20/vim_shortcut/" itemprop="commentsCount"></span>
+                <a href="/2016/05/18/阿里云centos7.0+使用yum安装mysql/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/阿里云centos7.0+使用yum安装mysql/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,15 +328,16 @@
       
         
           
-          前言vim为编辑器之神，对于我这种小菜鸟，vim只能是提升逼格的工具-哈哈，经过一段时间的基础使用，将vim常用的命令记录下来，加深自己的映象吧！
-常用命令# 进入插入模式快捷键
-a append ：在光标后一个位置插入i insert     ：在光标所在位置插入o               ：在光标所在行的下一行插入，光标移动到插入的新行行首O              ：在光标所在行的上一行插入，光标移动到插入的新行行首
-命令模式下的常见操作复制[N]yy：复制光标所在行向下N行的数据，如2yy表示复制光标及光标所在行 下一行，共计2行的数据，如若前面不加数字N，则表示复制。
-yw：复
+          参考链接
+1.错误的安装姿势1.1 安装命令yum -y install mysql mysql-server mysql-devel
+
+1.2 错误说明以上命令在centos 6.5前能够正确安装的，但centos7.0+以后再使用以上命令安装时，则不能够成功安装mysql，而是安装了mysql的另一个分支名叫mariadb的数据库，关于此数据库各位可以自行谷歌之，抱歉本人讨厌百度。
+2. 正确的安装姿势上文已经对错误的安装原因进行了简要说明，这里开始上正确的干活，本人亲自操作过呢。
+2.1 第一步，用如下命令更新软件包库rpm -Uvh http://dev.mysql.com/get/m
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/20/vim_shortcut/#more" rel="contents">
+            <a class="btn" href="/2016/05/18/阿里云centos7.0+使用yum安装mysql/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -387,8 +388,8 @@ yw：复
             
               
                 
-                <a class="post-title-link" href="/2015/01/17/命令模式/" itemprop="url">
-                  命令模式
+                <a class="post-title-link" href="/2016/04/26/ios_300ms延迟点击时间引起的问题/" itemprop="url">
+                  ios 300ms延迟点击时间引起的问题
                 </a>
               
             
@@ -401,263 +402,8 @@ yw：复
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-17T13:36:14+08:00" content="2015-01-17">
-              2015-01-17
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/17/命令模式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/17/命令模式/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          设计模式是编程经验、是对OO设计准则的良好编程实践。灵活运用是重点，切忌生搬硬套。
-
-命令模式定义原文：The Command Pattern encapsulates a request as an object, thereby letting you parameterize other objects with different requests, queue or log requests, and support undoable operations.
-翻译：命令模式将请求封装为单个对象，从而让你能够将其它对象参数化为不通的请求对象，可以对请求进行排队或者日志记录并且支持撤销操
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/17/命令模式/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/15/Python_namespace/" itemprop="url">
-                  Python namespace
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-15T09:59:01+08:00" content="2014-12-15">
-              2014-12-15
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/15/Python_namespace/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/15/Python_namespace/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Recently, I’ve learn python, There is an arctile, which is helpful to give me a insight。
-http://nbviewer.ipython.org/github/rasbt/python_reference/blob/master/tutorials/scope_resolution_legb_rule.ipynb
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/15/Python_namespace/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/24/JDK_DynamicProxy生成源码/" itemprop="url">
-                  JDK DynamicProxy生成源码
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-11-24T23:57:30+08:00" content="2014-11-24">
-              2014-11-24
+            <time itemprop="dateCreated" datetime="2016-04-26T10:37:28+08:00" content="2016-04-26">
+              2016-04-26
             </time>
           </span>
 
@@ -686,8 +432,8 @@ http://nbviewer.ipython.org/github/rasbt/python_reference/blob/master/tutorials/
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2014/11/24/JDK_DynamicProxy生成源码/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/11/24/JDK_DynamicProxy生成源码/" itemprop="commentsCount"></span>
+                <a href="/2016/04/26/ios_300ms延迟点击时间引起的问题/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/26/ios_300ms延迟点击时间引起的问题/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -712,33 +458,391 @@ http://nbviewer.ipython.org/github/rasbt/python_reference/blob/master/tutorials/
       
         
           
-          package dynamicProxy;
+          ios webview双击页面上移
 
-/**
- * 可飞行动物实现飞行接口-学习JDK动态代理
- *
- * Created by json_qiao on 2014/11/24.
- */
-public interface Flyable {
+          
 
-     /**
-      * 飞行
-      */
-     public void fly();
-}
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/26/ios_300ms延迟点击时间引起的问题/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
 
-package dynamicProxy;
+    <div>
+      
+    </div>
 
-/**
- * 高空飞行
- *
- * Created by json_qiao on 2014/11/24.
- */
-public class HighFly implements Flyab
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/22/jQuery_cookie插件删除cookie失效的解决方案/" itemprop="url">
+                  jQuery cookie插件删除cookie失效的解决方案
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-04-22T13:13:10+08:00" content="2016-04-22">
+              2016-04-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/04/22/jQuery_cookie插件删除cookie失效的解决方案/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/22/jQuery_cookie插件删除cookie失效的解决方案/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          $.removeCookie(“bu“, {path: “/“})参考链接：overstackflow
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/22/jQuery_cookie插件删除cookie失效的解决方案/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/28/spring类内部方法调用时_aop_失效/" itemprop="url">
+                  spring类内部方法调用时 aop 失效
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-28T15:17:28+08:00" content="2016-03-28">
+              2016-03-28
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/28/spring类内部方法调用时_aop_失效/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/28/spring类内部方法调用时_aop_失效/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          最近在工作中使用spring的cache注解缓存时失效，最终发现实现的原因在于不了解spring cache注解的原理AOP，下面结合代码做详细说明，先预览一下涉及的代码
+    // 方法1    @Override    @Cacheable(“test”)    public List&lt;IllegalCarRecord&gt; query(String apiKey, String cityCode, String license, String licenseType, String engineNo, String classNo, String registNo) throw
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2014/11/24/JDK_DynamicProxy生成源码/#more" rel="contents">
+            <a class="btn" href="/2016/03/28/spring类内部方法调用时_aop_失效/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/03/23/快速排序——读书笔记之算法学习/" itemprop="url">
+                  快速排序——读书笔记之算法学习
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-23T13:18:42+08:00" content="2016-03-23">
+              2016-03-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/23/快速排序——读书笔记之算法学习/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/快速排序——读书笔记之算法学习/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          毕业将要3年之余，技术上出现瓶颈，不止如何再进一步，在迷茫中翻看以前学习的数据结构，当作温习，特作此笔记。
+算法思想：快速排序的核心思想为分治策略，何为分治，就是将一个大规模的问题拆分为小规模的一样或者类似的问题处理。
+算法说明首先在需要排序的序列中选出一个基准(pivot)，一般选取序列中的第一个元素作为基准(pivot)，然后在余下的序列元素中从右向左找出序列中比该基准(pivot)小的第一元素，同时，从左向右找出该序列中第一个比该基准(pivot)大的元素，如果从右向左的元素下标和从左向右元素的下标不等，则交换这两个元素，然后重复以上步骤，直到从右向左遍历的下标等于从左向右遍历的下标，此
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/23/快速排序——读书笔记之算法学习/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -772,7 +876,7 @@ public class HighFly implements Flyab
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -813,7 +917,7 @@ public class HighFly implements Flyab
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -821,7 +925,7 @@ public class HighFly implements Flyab
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -830,7 +934,7 @@ public class HighFly implements Flyab
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

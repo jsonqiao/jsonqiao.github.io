@@ -96,7 +96,7 @@
 1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代">
 <meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png">
 <meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/2.png">
-<meta property="og:updated_time" content="2016-08-13T05:42:32.000Z">
+<meta property="og:updated_time" content="2016-08-13T07:04:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac下ssh 免密登录脚本">
 <meta name="twitter:description" content="1. 原因在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。
@@ -334,14 +334,8 @@
         <h4 id="1-原因"><a href="#1-原因" class="headerlink" title="1. 原因"></a>1. 原因</h4><p>在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。</p>
 <h4 id="2-代码"><a href="#2-代码" class="headerlink" title="2. 代码"></a>2. 代码</h4><p>代码执行环境：Mac＋iTerm2+zsh</p>
 <p>1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代码：</p>
-<p><pre class="lang:sh decode:true " title="mac下ssh免密登陆">#!/usr/bin/expect -f</pre></p>
-<h2 id="替换成ssh服务器的端口"><a href="#替换成ssh服务器的端口" class="headerlink" title="替换成ssh服务器的端口"></a>替换成ssh服务器的端口</h2><p>set port &lt;port&gt; </p>
-<h2 id="替换成ssh服务器的用户名"><a href="#替换成ssh服务器的用户名" class="headerlink" title="替换成ssh服务器的用户名"></a>替换成ssh服务器的用户名</h2><p>set user &lt;username&gt;</p>
-<h2 id="替换成ssh服务器主机IP或者域名"><a href="#替换成ssh服务器主机IP或者域名" class="headerlink" title="替换成ssh服务器主机IP或者域名"></a>替换成ssh服务器主机IP或者域名</h2><p>set host &lt;server-ip&gt;</p>
-<h2 id="登陆密码"><a href="#登陆密码" class="headerlink" title="登陆密码"></a>登陆密码</h2><p>set password &lt;password of login&gt;<br>set timeout -1</p>
-<p>spawn ssh -p $port $user@$host</p>
-<h2 id="注意与响应信息匹配"><a href="#注意与响应信息匹配" class="headerlink" title="注意与响应信息匹配"></a>注意与响应信息匹配</h2><p>expect “password:”<br>send “$password\r”<br>interact</p>
-<p>expect eof<br>2.  将该文件配置问iTerm2的profiles</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">!/usr/bin/expect <span class="_">-f</span></div><div class="line"></div><div class="line"><span class="comment"># 替换成ssh服务器的端口</span></div><div class="line"><span class="built_in">set</span> port &lt;port&gt; </div><div class="line"><span class="comment"># 替换成ssh服务器的用户名</span></div><div class="line"><span class="built_in">set</span> user &lt;username&gt;</div><div class="line"><span class="comment">#替换成ssh服务器主机IP或者域名</span></div><div class="line"><span class="built_in">set</span> host &lt;server-ip&gt;</div><div class="line"><span class="comment"># 登陆密码</span></div><div class="line"><span class="built_in">set</span> password &lt;password of login&gt;</div><div class="line"><span class="built_in">set</span> timeout -1</div><div class="line">spawn ssh -p <span class="variable">$port</span> <span class="variable">$user</span>@<span class="variable">$host</span></div><div class="line"></div><div class="line"><span class="comment">#注意与响应信息匹配</span></div><div class="line">expect <span class="string">"password:"</span></div><div class="line"></div><div class="line">send <span class="string">"<span class="variable">$password</span>\r"</span></div><div class="line"></div><div class="line">interact</div><div class="line">expect eof</div></pre></td></tr></table></figure>
+<p>2.  将该文件配置问iTerm2的profiles</p>
 <p>2.1 打开iTerm2终端，选择工具栏中的Profiles-&gt; Open Profiles(command + o), 如下图所示</p>
 <p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/07/11.png" alt="1"></a></p>
 <p>2.2 选择如上图的Edit Profiles, 然后点击左下脚的添加按钮, 最后写下如下图所示的命令就OK了</p>
@@ -373,16 +367,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/03/23/快速排序——读书笔记之算法学习/" rel="next" title="快速排序——读书笔记之算法学习">
-                <i class="fa fa-chevron-left"></i> 快速排序——读书笔记之算法学习
+              <a href="/2016/07/08/二叉树的添加，删除以及前序遍历/" rel="next" title="二叉搜索树的添加，删除以及前序遍历">
+                <i class="fa fa-chevron-left"></i> 二叉搜索树的添加，删除以及前序遍历
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/08/10/Hexo入门_/" rel="prev" title="Hexo入门">
-                Hexo入门 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/08/01/红黑树浅谈/" rel="prev" title="红黑树浅谈">
+                红黑树浅谈 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -455,7 +449,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -463,7 +457,7 @@
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -472,7 +466,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -557,7 +551,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-原因"><span class="nav-number">1.</span> <span class="nav-text">1. 原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-代码"><span class="nav-number">2.</span> <span class="nav-text">2. 代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换成ssh服务器的端口"><span class="nav-number"></span> <span class="nav-text">替换成ssh服务器的端口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换成ssh服务器的用户名"><span class="nav-number"></span> <span class="nav-text">替换成ssh服务器的用户名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#替换成ssh服务器主机IP或者域名"><span class="nav-number"></span> <span class="nav-text">替换成ssh服务器主机IP或者域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登陆密码"><span class="nav-number"></span> <span class="nav-text">登陆密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注意与响应信息匹配"><span class="nav-number"></span> <span class="nav-text">注意与响应信息匹配</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-原因"><span class="nav-number">1.</span> <span class="nav-text">1. 原因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-代码"><span class="nav-number">2.</span> <span class="nav-text">2. 代码</span></a></li></ol></div>
             
           </div>
         </section>

@@ -1,0 +1,816 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="带着目标做一件事情总是显得比较有效率，不会像无头苍蝇似的乱飞，所以此次阅读Spring源码主要有以下两个目的：
+
+了解Spring容器启动过程
+学习Spring源码中涉及的设计模式以及比较良好的编码规范和技巧做过Spring Web开发的都应该知道，我们在集成Spring的时候，通常会在web.xml文件中配置一个ContextLoaderListener的类。这个类就是Spring 容器初始化的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring源码阅读一：容器初始化之一">
+<meta property="og:url" content="http://yoursite.com/2015/12/25/Spring源码阅读一：容器初始化之一/index.html">
+<meta property="og:site_name" content="栀子花开">
+<meta property="og:description" content="带着目标做一件事情总是显得比较有效率，不会像无头苍蝇似的乱飞，所以此次阅读Spring源码主要有以下两个目的：
+
+了解Spring容器启动过程
+学习Spring源码中涉及的设计模式以及比较良好的编码规范和技巧做过Spring Web开发的都应该知道，我们在集成Spring的时候，通常会在web.xml文件中配置一个ContextLoaderListener的类。这个类就是Spring 容器初始化的">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/contextLoaderListener.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/1.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/call1.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/xmlApplicationContext.png">
+<meta property="og:updated_time" content="2016-08-12T08:36:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring源码阅读一：容器初始化之一">
+<meta name="twitter:description" content="带着目标做一件事情总是显得比较有效率，不会像无头苍蝇似的乱飞，所以此次阅读Spring源码主要有以下两个目的：
+
+了解Spring容器启动过程
+学习Spring源码中涉及的设计模式以及比较良好的编码规范和技巧做过Spring Web开发的都应该知道，我们在集成Spring的时候，通常会在web.xml文件中配置一个ContextLoaderListener的类。这个类就是Spring 容器初始化的">
+<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/contextLoaderListener.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/12/25/Spring源码阅读一：容器初始化之一/"/>
+
+  <title> Spring源码阅读一：容器初始化之一 | 栀子花开 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2627f4a76f6228ff020e7524fae592e2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">栀子花开</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">那一年盛夏的栀子花开</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Spring源码阅读一：容器初始化之一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-12-25T11:12:10+08:00" content="2015-12-25">
+              2015-12-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/25/Spring源码阅读一：容器初始化之一/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/25/Spring源码阅读一：容器初始化之一/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>带着目标做一件事情总是显得比较有效率，不会像无头苍蝇似的乱飞，所以此次阅读Spring源码主要有以下两个目的：</p>
+<ol>
+<li>了解Spring容器启动过程</li>
+<li>学习Spring源码中涉及的设计模式以及比较良好的编码规范和技巧<br>做过Spring Web开发的都应该知道，我们在集成Spring的时候，通常会在web.xml文件中配置一个ContextLoaderListener的类。这个类就是Spring 容器初始化的引导类，我们先来看一段该类的文档说明<br><pre class="lang:default decode:true">/**<ul>
+<li>Bootstrap listener to start up and shut down Spring’s root {@link WebApplicationContext}.  </li>
+<li>Simply delegates to {@link ContextLoader} as well as to {@link ContextCleanupListener}.<br>*</li>
+<li>&lt;p&gt;This listener should be registered after {@link org.springframework.web.util.Log4jConfigListener}</li>
+<li>in {@code web.xml}, if the latter is used.<br>*</li>
+<li>&lt;p&gt;As of Spring 3.1, {@code ContextLoaderListener} supports injecting the root web</li>
+<li>application context via the {@link #ContextLoaderListener(WebApplicationContext)}</li>
+<li>constructor, allowing for programmatic configuration in Servlet 3.0+ environments.</li>
+<li>See {@link org.springframework.web.WebApplicationInitializer} for usage examples.<br>*</li>
+<li>@author Juergen Hoeller</li>
+<li>@author Chris Beams</li>
+<li>@since 17.02.2003</li>
+<li>@see #setContextInitializers</li>
+<li>@see org.springframework.web.WebApplicationInitializer</li>
+<li>@see org.springframework.web.util.Log4jConfigListener<br>*/<br>public class ContextLoaderListener extends ContextLoader implements ServletContextListener</li></ul></pre><br>从该类的文档描述中可以看出，这个Listener是一个简单的容器初始化引导类，引导Spring容器进行初始化和销毁过程，而真正进行初始化和销毁的工作就委托给<span style="color: #339966;">ContextLoader</span>类和<span style="color: #339966;">ContextCleanupListener, </span><span style="color: #000000;">这个类的类继承关系图如下：</span></li>
+
+
+</ol>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/contextLoaderListener.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/contextLoaderListener.png" alt="contextLoaderListener"></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>从这个类的继承关系图中可以看出该类通过继承ContextLoader类的方式将初始化容器的工作委托给其父类，同时实现<span style="color: #339966;">ServletContextListener</span>接口实现引导Spring容器的初始化过程。有不了解<span style="color: #339966;">ServletContextListener</span>接口的同学请自行google，通过该类结构图可知，spring容器初始化的入口就在于实现<span style="color: #99cc00;">ServletContextListener的contextInitialized(ServletContextEvent event)</span>方法，如下图所示</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/1.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/1.png" alt="1"></a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>从这个方法开始Spring容器的初始化过程，在该方法中，它仅仅是简单的调用了其父类<span style="color: #339966;">ContextLoader</span>的<span style="color: #99cc00;">initWebApplicationContext(event.getServletContext())</span>方法，这也是前面的文档所说的委托给<span style="color: #339966;">ContextLoader</span>类去执行初始化Spring容器的含义，从这里我们可以简单的看出一点设计原则来，那就是<span style="color: #ff9900;">单一职权原则，<span style="color: #000000;">每个类的职责非常的单一, ContextLoaderListener负责引导Spring容器初始化，而ContextLoader负责真正的容器初始化原则，在Spring的后面的设计中，这种<span style="color: #ff9900;">单一职权原则</span>能够得到很多的体现。</span></span></p>
+<p>下面上一张Spring容器初始化过程的部分方法调用时序时序图，图中的重要调用方法均用红色的标注标出，根据图中的表示我们在后文进行详细说明</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/call1.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/call1.png" alt=""></a></p>
+<p>图中标注了方法调用栈的关键3处，第一处是调用<span style="color: #339966;">ContextLoader</span>的<span style="color: #99cc00;">createWebApplicationContext(ServletContext sc)</span>，默认情况下Spring会根据自身默认配置信息<span style="color: #ff00ff;">[ContextLoader.properties]</span>中的配置创建WebApplicationContext，而在默认的配置中配置的<span style="color: #339966;">WebApplicationContext</span>是<span style="color: #339966;">XmlWebApplication</span>, 因此在默认的情况下，Spring会创建<span style="color: #339966;">XmlApplicationContext</span>的实例。</p>
+<p>从上面的序列图可以看出在调用完<span style="color: #99cc00;">createWebApplicationContext(ServletContext sc)</span>方法后，<span style="color: #339966;">contextLoader</span>会继续调用<span style="color: #99cc00;">configureAndRefreshWebApplication(context, servletContext)</span>方法，即是过程为首先创建<span style="color: #339966;">WebApplicationContext</span>实例，接着进行<span style="color: #339966;">webApplicationContext</span>初始化的工作，程序最后会委托给<span style="color: #339966;">xmlApplicationContext</span>执行真正的初始化工作。</p>
+<p>XmlApplicationContext类的继承关系如下图所示<a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/xmlApplicationContext.png" target="_blank" rel="external"><br><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/xmlApplicationContext.png" alt="xmlApplicationContext"></a></p>
+<p><span style="color: #339966;">XmlWebApplication</span>类的继承关系比较复杂，但从这张类图中也能略微的窥探出Spring IoC设计的全貌，从这个类关系图可以看出<span style="color: #339966;">XmlWebApplicationContext</span>继承到了<span style="color: #339966;">AbstractApplicationContext</span>，而该类则提供了Spring容器初始化的模版方法，从这个方法可以看出Spring容器整个初始化的流程，通过这个方法后spring的初始化过程也算结束，先上这个方法</p>
+<p><pre class="lang:default decode:true">        @Override<br>    public void refresh() throws BeansException, IllegalStateException {<br>        synchronized (this.startupShutdownMonitor) {<br>            // Prepare this context for refreshing.<br>            prepareRefresh();</pre></p>
+<pre><code>        // Tell the subclass to refresh the internal bean factory.
+        ConfigurableListableBeanFactory beanFactory = obtainFreshBeanFactory();
+
+        // Prepare the bean factory for use in this context.
+        prepareBeanFactory(beanFactory);
+
+        try {
+            // Allows post-processing of the bean factory in context subclasses.
+            postProcessBeanFactory(beanFactory);
+
+            // Invoke factory processors registered as beans in the context.
+            invokeBeanFactoryPostProcessors(beanFactory);
+
+            // Register bean processors that intercept bean creation.
+            registerBeanPostProcessors(beanFactory);
+
+            // Initialize message source for this context.
+            initMessageSource();
+
+            // Initialize event multicaster for this context.
+            initApplicationEventMulticaster();
+
+            // Initialize other special beans in specific context subclasses.
+            onRefresh();
+
+            // Check for listener beans and register them.
+            registerListeners();
+
+            // Instantiate all remaining (non-lazy-init) singletons.
+            finishBeanFactoryInitialization(beanFactory);
+
+            // Last step: publish corresponding event.
+            finishRefresh();
+        }
+
+        catch (BeansException ex) {
+            if (logger.isWarnEnabled()) {
+                logger.warn(&quot;Exception encountered during context initialization - &quot; +
+                        &quot;cancelling refresh attempt: &quot; + ex);
+            }
+
+            // Destroy already created singletons to avoid dangling resources.
+            destroyBeans();
+
+            // Reset &apos;active&apos; flag.
+            cancelRefresh(ex);
+
+            // Propagate exception to caller.
+            throw ex;
+        }
+
+        finally {
+            // Reset common introspection caches in Spring&apos;s core, since we
+            // might not ever need metadata for singleton beans anymore...
+            resetCommonCaches();
+        }
+    }
+}&lt;/pre&gt;
+</code></pre><p>这个方法就是Spring容器初始化真正过程描述，下一节将对这个模版方法的细节进行详细描述，今天就到这里。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/12/23/spring源码导入Intellij_idea/" rel="next" title="spring源码导入Intellij idea">
+                <i class="fa fa-chevron-left"></i> spring源码导入Intellij idea
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/23/快速排序——读书笔记之算法学习/" rel="prev" title="快速排序——读书笔记之算法学习">
+                快速排序——读书笔记之算法学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/12/25/Spring源码阅读一：容器初始化之一/"
+           data-title="Spring源码阅读一：容器初始化之一" data-url="http://yoursite.com/2015/12/25/Spring源码阅读一：容器初始化之一/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="jsonqiao" />
+          <p class="site-author-name" itemprop="name">jsonqiao</p>
+          <p class="site-description motion-element" itemprop="description">一个猿猿的技术独白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/jsonqiao" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/jsonqiao" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qiao-yang-30-39" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jsonqiao.com" title="老博客" target="_blank">老博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lijiabei.cn" title="jiabei" target="_blank">jiabei</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jsonqiao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jsonqiao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

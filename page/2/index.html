@@ -258,8 +258,8 @@
             
               
                 
-                <a class="post-title-link" href="/2016/03/23/快速排序——读书笔记之算法学习/" itemprop="url">
-                  快速排序——读书笔记之算法学习
+                <a class="post-title-link" href="/2016/07/25/Mac下ssh_免密登录脚本/" itemprop="url">
+                  Mac下ssh 免密登录脚本
                 </a>
               
             
@@ -272,8 +272,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-23T13:18:42+08:00" content="2016-03-23">
-              2016-03-23
+            <time itemprop="dateCreated" datetime="2016-07-25T16:04:06+08:00" content="2016-07-25">
+              2016-07-25
             </time>
           </span>
 
@@ -286,8 +286,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -302,8 +302,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2016/03/23/快速排序——读书笔记之算法学习/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/23/快速排序——读书笔记之算法学习/" itemprop="commentsCount"></span>
+                <a href="/2016/07/25/Mac下ssh_免密登录脚本/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/25/Mac下ssh_免密登录脚本/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -328,13 +328,14 @@
       
         
           
-          毕业将要3年之余，技术上出现瓶颈，不止如何再进一步，在迷茫中翻看以前学习的数据结构，当作温习，特作此笔记。
-算法思想：快速排序的核心思想为分治策略，何为分治，就是将一个大规模的问题拆分为小规模的一样或者类似的问题处理。
-算法说明首先在需要排序的序列中选出一个基准(pivot)，一般选取序列中的第一个元素作为基准(pivot)，然后在余下的序列元素中从右向左找出序列中比该基准(pivot)小的第一元素，同时，从左向右找出该序列中第一个比该基准(pivot)大的元素，如果从右向左的元素下标和从左向右元素的下标不等，则交换这两个元素，然后重复以上步骤，直到从右向左遍历的下标等于从左向右遍历的下标，此
+          1. 原因在windows下有xshell这种多服务器终端session管理工具实现多台服务器登陆管理，而mac下就没有这么好运气了，但mac继承自linux，那我们就讲求自己动手风衣足食，今天为大家献上mac下ssh免密登陆的脚本。
+2. 代码代码执行环境：Mac＋iTerm2+zsh
+1. 执行脚本，在你喜欢的路径下创建你喜欢名字的文本，用你喜欢的编辑器打开改文本文件，在该文本文件下写入如下代码：
+1234567891011121314151617181920!/usr/bin/expect -f# 替换成ssh服务器的端口set port &lt;port&gt; # 替换成ssh服务器
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/03/23/快速排序——读书笔记之算法学习/#more" rel="contents">
+            <a class="btn" href="/2016/07/25/Mac下ssh_免密登录脚本/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -385,8 +386,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/23/spring源码导入Intellij_idea/" itemprop="url">
-                  spring源码导入Intellij idea
+                <a class="post-title-link" href="/2016/07/08/二叉树的添加，删除以及前序遍历/" itemprop="url">
+                  二叉搜索树的添加，删除以及前序遍历
                 </a>
               
             
@@ -399,8 +400,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-23T13:33:53+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2016-07-08T16:32:25+08:00" content="2016-07-08">
+              2016-07-08
             </time>
           </span>
 
@@ -429,8 +430,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/spring源码导入Intellij_idea/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/spring源码导入Intellij_idea/" itemprop="commentsCount"></span>
+                <a href="/2016/07/08/二叉树的添加，删除以及前序遍历/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/08/二叉树的添加，删除以及前序遍历/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -455,15 +456,14 @@
       
         
           
-          1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
-1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编译系统
-2. 下载spring源码到本地git clone https://github.com/spring-projects/spring-framework.git
-
-3. 修改gradlew.
+          1. 二叉树的定义二叉树是每个节点最多有两个子树的树结构。通常子树被称作“左子树”（left subtree）和“右子树”（right subtree）。
+2. 二叉树的属性性质1：在二叉树的第i层上至多有2i-1个结点（i≥1）。（数学归纳法可证）
+性质2：深度为k的二叉树最多有2k-1个结点（k≥1）。（由性质1，通过等比数列求和可证）
+3. 二叉树的java实现（学习版），实现添加与删除，前序遍历1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/23/spring源码导入Intellij_idea/#more" rel="contents">
+            <a class="btn" href="/2016/07/08/二叉树的添加，删除以及前序遍历/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -514,8 +514,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/12/10/一个JAVA程序员的情书/" itemprop="url">
-                  一个JAVA程序员的情书
+                <a class="post-title-link" href="/2016/06/21/jdk1.7以后switch支持string/" itemprop="url">
+                  jdk1.7以后switch支持string
                 </a>
               
             
@@ -528,8 +528,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-10T15:33:59+08:00" content="2015-12-10">
-              2015-12-10
+            <time itemprop="dateCreated" datetime="2016-06-21T09:55:12+08:00" content="2016-06-21">
+              2016-06-21
             </time>
           </span>
 
@@ -542,8 +542,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -558,8 +558,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/10/一个JAVA程序员的情书/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/10/一个JAVA程序员的情书/" itemprop="commentsCount"></span>
+                <a href="/2016/06/21/jdk1.7以后switch支持string/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/06/21/jdk1.7以后switch支持string/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -584,11 +584,13 @@
       
         
           
-          我能抽象出整个世界．．．但是我不能抽象出你．．．因为你在我心中是那么的具体．．．所以我的世界并不完整．．．我可以重载甚至覆盖这个世界里的任何一种方法．．．但是我却不能重载对你的思念．．．也许命中注定了 你在我的世界里永远的烙上了静态的属性．．．而我不慎调用了爱你这个方法．．．当我义无返顾的把自己作为参数传进这个方法时．．．我才发现爱上你是一个死循环．．．它不停的返回对你的思念压入我心里的堆栈．．．在这无尽的黑夜中．．．我的内存里已经再也装不下别人．．．我不停的向系统申请空间．．．但却捕获一个异常－－－我爱的人不爱我．．．为了解决这个异常．．．我愿意虚拟出最后一点内存．．．把所有我能实现的方法地
-          ...
+          jdk1.7之前在jdk1.7以前，在java的switch语句中只能使用int, enum作为case的条件语句
+jdk1.7以后在jdk1.7以后，在java的switch语句中支持string类型的条件语句，通过string.equal()方法判断
+
+          
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/12/10/一个JAVA程序员的情书/#more" rel="contents">
+            <a class="btn" href="/2016/06/21/jdk1.7以后switch支持string/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -639,8 +641,8 @@
             
               
                 
-                <a class="post-title-link" href="/2015/04/03/查看linux系统发型版本命令/" itemprop="url">
-                  查看linux系统发型版本命令
+                <a class="post-title-link" href="/2016/05/31/Tomcat_Connector_init过程简要梳理/" itemprop="url">
+                  Tomcat Connector init过程简要梳理
                 </a>
               
             
@@ -653,8 +655,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-04-03T10:26:57+08:00" content="2015-04-03">
-              2015-04-03
+            <time itemprop="dateCreated" datetime="2016-05-31T15:31:26+08:00" content="2016-05-31">
+              2016-05-31
             </time>
           </span>
 
@@ -667,8 +669,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -683,8 +685,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/04/03/查看linux系统发型版本命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/04/03/查看linux系统发型版本命令/" itemprop="commentsCount"></span>
+                <a href="/2016/05/31/Tomcat_Connector_init过程简要梳理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/31/Tomcat_Connector_init过程简要梳理/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -709,13 +711,13 @@
       
         
           
-          lsb-release   # 查看linux系统发型版本
-lsb-release -a  # 格式化输出&nbsp;
-
-          
+          最近得空，想学习一些东西，技术门路无非一看二动手，无捷径可言。故看看比较优秀的源码对提升自我无比有好处，无论是习得他的思想精华还是奇技淫巧总归是好的。
+今天就简单看看tomcat启动中connector的初始化过程，connector在tomcat中占有重要地位，通过分析tomcat中connector的源码与设计思想，将有助于自己提升java网络编程方面的知识。
+1. tomcat启动稍微看过tomcat源码的同学大抵应该是了解tomcat启动涉及的核心类是Catalina，这个类中有2个很重要的方法，它们分别是load和start方法，它们是tomcat启动的引导方法。connector初
+          ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/04/03/查看linux系统发型版本命令/#more" rel="contents">
+            <a class="btn" href="/2016/05/31/Tomcat_Connector_init过程简要梳理/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -766,8 +768,8 @@ lsb-release -a  # 格式化输出&nbsp;
             
               
                 
-                <a class="post-title-link" href="/2015/02/03/vim编码方式/" itemprop="url">
-                  vim编码方式
+                <a class="post-title-link" href="/2016/05/18/springMVC方法参数值注入简要源码分析/" itemprop="url">
+                  springMVC方法参数值注入简要源码分析
                 </a>
               
             
@@ -780,8 +782,8 @@ lsb-release -a  # 格式化输出&nbsp;
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-02-03T22:05:09+08:00" content="2015-02-03">
-              2015-02-03
+            <time itemprop="dateCreated" datetime="2016-05-18T16:33:44+08:00" content="2016-05-18">
+              2016-05-18
             </time>
           </span>
 
@@ -794,8 +796,8 @@ lsb-release -a  # 格式化输出&nbsp;
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -810,8 +812,8 @@ lsb-release -a  # 格式化输出&nbsp;
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/02/03/vim编码方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/02/03/vim编码方式/" itemprop="commentsCount"></span>
+                <a href="/2016/05/18/springMVC方法参数值注入简要源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/springMVC方法参数值注入简要源码分析/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -836,13 +838,12 @@ lsb-release -a  # 格式化输出&nbsp;
       
         
           
-          [参考网址：http://blog.csdn.net/sws9999/article/details/6088645](http://blog.csdn.net/sws9999/article/details/6088645 "vim编码")
-
-各种编码配置说明encoding：vim内部的编码，包括 Vim 的 buffer (缓冲区)、菜单文本、消息文本等。默认是根据你的locale选择.用户手册上建议只在 .vimrc 中改变它的值，事实上似乎也只有在.vimrc 中改变它的值才有意义。你可以用另外一种编码来编辑和保存文件，如你的vim的encoding为utf-8,所编辑的文件采用cp
+          1. 开始之前的唠嗑懒惰是前进道路上最大的敌人，懒着懒着心就飘远了，荒废了许久的博客今天稍微重新拾起来，今天带了一篇springMVC源码分析之参数注入。
+2. 步入正题稍微了解springMVC的同学知道，在springMVC的应用中，它采用的中心转发的一种设计模式吧，中心转发这个词是我自己鼓捣出来了，请各位自行理解，何谓中心转发呢，其实就是所有请求一律经过spring中心拦截器拦截派发，这里引出了第一个疑点，springMVC的中心拦截器在哪儿呢，其实就是DispatcherServet这个类了，所有前端发出的请求都经由此类的方法doDispatch方法处理，下面上一张今天我们要将的参数值
           ...
 
           <div class="post-more-link text-center">
-            <a class="btn" href="/2015/02/03/vim编码方式/#more" rel="contents">
+            <a class="btn" href="/2016/05/18/springMVC方法参数值注入简要源码分析/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -876,7 +877,7 @@ lsb-release -a  # 格式化输出&nbsp;
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -917,7 +918,7 @@ lsb-release -a  # 格式化输出&nbsp;
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">52</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -925,7 +926,7 @@ lsb-release -a  # 格式化输出&nbsp;
           
             <div class="site-state-item site-state-categories">
               
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               
             </div>
@@ -934,7 +935,7 @@ lsb-release -a  # 格式化输出&nbsp;
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

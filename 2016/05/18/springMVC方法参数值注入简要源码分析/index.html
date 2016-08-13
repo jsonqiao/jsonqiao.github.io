@@ -1,0 +1,749 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="1. 开始之前的唠嗑懒惰是前进道路上最大的敌人，懒着懒着心就飘远了，荒废了许久的博客今天稍微重新拾起来，今天带了一篇springMVC源码分析之参数注入。
+2. 步入正题稍微了解springMVC的同学知道，在springMVC的应用中，它采用的中心转发的一种设计模式吧，中心转发这个词是我自己鼓捣出来了，请各位自行理解，何谓中心转发呢，其实就是所有请求一律经过spring中心拦截器拦截派发，这里引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springMVC方法参数值注入简要源码分析">
+<meta property="og:url" content="http://yoursite.com/2016/05/18/springMVC方法参数值注入简要源码分析/index.html">
+<meta property="og:site_name" content="栀子花开">
+<meta property="og:description" content="1. 开始之前的唠嗑懒惰是前进道路上最大的敌人，懒着懒着心就飘远了，荒废了许久的博客今天稍微重新拾起来，今天带了一篇springMVC源码分析之参数注入。
+2. 步入正题稍微了解springMVC的同学知道，在springMVC的应用中，它采用的中心转发的一种设计模式吧，中心转发这个词是我自己鼓捣出来了，请各位自行理解，何谓中心转发呢，其实就是所有请求一律经过spring中心拦截器拦截派发，这里引">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.17.47.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.22.58.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.29.42.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.38.38.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.50.00.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.53.36.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.59.08.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午4.20.30.png">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午4.26.48.png">
+<meta property="og:updated_time" content="2016-08-12T08:36:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="springMVC方法参数值注入简要源码分析">
+<meta name="twitter:description" content="1. 开始之前的唠嗑懒惰是前进道路上最大的敌人，懒着懒着心就飘远了，荒废了许久的博客今天稍微重新拾起来，今天带了一篇springMVC源码分析之参数注入。
+2. 步入正题稍微了解springMVC的同学知道，在springMVC的应用中，它采用的中心转发的一种设计模式吧，中心转发这个词是我自己鼓捣出来了，请各位自行理解，何谓中心转发呢，其实就是所有请求一律经过spring中心拦截器拦截派发，这里引">
+<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.17.47.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/05/18/springMVC方法参数值注入简要源码分析/"/>
+
+  <title> springMVC方法参数值注入简要源码分析 | 栀子花开 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2627f4a76f6228ff020e7524fae592e2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">栀子花开</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">那一年盛夏的栀子花开</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                springMVC方法参数值注入简要源码分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-18T16:33:44+08:00" content="2016-05-18">
+              2016-05-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/05/18/springMVC方法参数值注入简要源码分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/18/springMVC方法参数值注入简要源码分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="1-开始之前的唠嗑"><a href="#1-开始之前的唠嗑" class="headerlink" title="1. 开始之前的唠嗑"></a>1. 开始之前的唠嗑</h4><p>懒惰是前进道路上最大的敌人，懒着懒着心就飘远了，荒废了许久的博客今天稍微重新拾起来，今天带了一篇springMVC源码分析之参数注入。</p>
+<h4 id="2-步入正题"><a href="#2-步入正题" class="headerlink" title="2. 步入正题"></a>2. 步入正题</h4><p>稍微了解springMVC的同学知道，在springMVC的应用中，它采用的中心转发的一种设计模式吧，中心转发这个词是我自己鼓捣出来了，请各位自行理解，何谓中心转发呢，其实就是所有请求一律经过spring中心拦截器拦截派发，这里引出了第一个疑点，springMVC的中心拦截器在哪儿呢，其实就是DispatcherServet这个类了，所有前端发出的请求都经由此类的方法doDispatch方法处理，下面上一张今天我们要将的参数值注入的入口方法</p>
+<p><pre class="lang:default decode:true">// 今天的入口方法<br>mv = ha.handle(processedRequest, response, mappedHandler.getHandler());</pre><br>上面的这段代码是doDispatch方法的一段，springMVC在初始化好web应用上下文后，请求最终都会路由这里进行真正的方法调用。该方法是HandlerAdapter接口的方法，简单看下这个接口的实现类有哪些，如下图所示</p>
+<p>&nbsp;</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.17.47.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.17.47.png" alt="屏幕快照 2016-05-18 下午3.17.47"></a>如上图所示的实现，我们进入第一个实现类中去看看他的源码，究竟怎样一步一步实现参数值注入的。在AbstractHandlerMethodAdapter类中，它的代码逻辑如下</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.22.58.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.22.58.png" alt="屏幕快照 2016-05-18 下午3.22.58"></a>可以在这个类中可以看到，其实它什么也没有做，只是将方法委托给该类的handleInternal方法，该方法是一个抽象方法，正如该类的名字一样，该类只是提供一个基础模版，具体的实现交给其子类实现，用设计模式的专业术语来说就是模版方法。</p>
+<p>handleInternal这个方法的实现在哪儿呢，当然是它的子类了，通过intellij IDEA的快捷键，我们可以快速定位到其子类，就是RequestMappingHandlerAdapter这个类，RequestMappingHandlerAdapter的handleInternal方法如下截图</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.29.42.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.29.42.png" alt="屏幕快照 2016-05-18 下午3.29.42"></a>这个类中的这个方法核心代码在最后一句代码中，即是如下代码</p>
+<p><pre class="lang:default decode:true ">return invokeHandlerMethod(request, response, handlerMethod);</pre><br>先对上面代码进行简要说明，首先在这个方法中有个checkAndPrepare方法，此方法主要是检察一下request请求方法是否被支持，是否需要session已经是否缓存请求头等，各位可自行去源码中查看，这个方法的末尾最终是去调用如上的的方法，那我们就进到这个方法去瞧瞧</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.38.38.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.38.38.png" alt="屏幕快照 2016-05-18 下午3.38.38"></a>从这个方法开始，spring开始为真正的处理请求做一些准备工作了。</p>
+<h6 id="1-封装request，response"><a href="#1-封装request，response" class="headerlink" title="1. 封装request，response"></a>1. 封装request，response</h6><h6 id="2-创建请求参数自定义工厂类，我们经常在代码中看到的-initBinder注解，就是最终交由这个工厂类创建的实例对象来处理"><a href="#2-创建请求参数自定义工厂类，我们经常在代码中看到的-initBinder注解，就是最终交由这个工厂类创建的实例对象来处理" class="headerlink" title="2. 创建请求参数自定义工厂类，我们经常在代码中看到的@initBinder注解，就是最终交由这个工厂类创建的实例对象来处理"></a>2. 创建请求参数自定义工厂类，我们经常在代码中看到的@initBinder注解，就是最终交由这个工厂类创建的实例对象来处理</h6><h6 id="3-创建方法调用对象ServletInvocableHandlerMethod的实例，最终会交给此创建的对象进行真正的处理，你可以在如上截图的代码中看到，如下代码即是"><a href="#3-创建方法调用对象ServletInvocableHandlerMethod的实例，最终会交给此创建的对象进行真正的处理，你可以在如上截图的代码中看到，如下代码即是" class="headerlink" title="3. 创建方法调用对象ServletInvocableHandlerMethod的实例，最终会交给此创建的对象进行真正的处理，你可以在如上截图的代码中看到，如下代码即是"></a>3. 创建方法调用对象ServletInvocableHandlerMethod的实例，最终会交给此创建的对象进行真正的处理，你可以在如上截图的代码中看到，如下代码即是</h6><p><pre class="lang:default decode:true">requestMappingMethod.invokeAndHandle(webRequest, mavContainer);</pre><br>我们进入这个方法详细看看</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.50.00.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.50.00.png" alt="屏幕快照 2016-05-18 下午3.50.00"></a>在这个方法中的第一句代码可以看到一个方法invokeForRequest，然后在这个方法的后台都是针对这个方法的返回值进行处理，所以并不是我们今天要讨论的主题，所以我们直接进入invokeForRequest方法去看。照惯例，先上方法截图</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.53.36.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.53.36.png" alt="屏幕快照 2016-05-18 下午3.53.36"></a>这个方法非常的简单，首先调用getMethodArgumentValues方法获取参数和参数的值，具体的获取过程，我们在下文会继续讲到，也是今天的主要内容，然后通过反射（doInvoke）进行对应方法的调用，获取执行结果。</p>
+<p>下面看与今天要讲的参数值注入密切相关的方法getMethodArgumentValues，这个方法会获取每个请求参数与对应的值。该方法截图如下</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.59.08.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午3.59.08.png" alt="屏幕快照 2016-05-18 下午3.59.08"></a>这个方法也还是比较简单的，循环遍历请求参数，然后委托给HandlerMethodArgumentResolver接口的方法<strong><span style="color: #339966;">resolveArgument</span></strong>去进行参数值解析。</p>
+<p>下面稍微仔细说明一下</p>
+<p>1.  如果有提供的参数值，直接返回提供的参数值</p>
+<p>2. 检察参数类型是否支持</p>
+<p>3. 查询参数解析器，找到后委托给参数解析器解析</p>
+<p>4. 如果未找到抛出异常</p>
+<p>通过上面的步骤，我们知道，要给参数注入参数的值，最终是通过HandlerMethodArgumentResolver接口的实现类HandlerMethodArgumentResolverComposite实现的。HandlerMethodArgumentResolverComposite类实现是采用的组合模式的设计策略，我们可以在类RequestMappingHandlerAdapter中的方法afterPropertiesSet方法中看到HandlerMethodArgumentResolverComposite中的resovler的初始化代码，如下所示</p>
+<p><pre class="lang:default decode:true">        @Override<br>    public void afterPropertiesSet() {<br>        // Do this first, it may add ResponseBody advice beans<br>        initControllerAdviceCache();</pre></p>
+<pre><code>    if (this.argumentResolvers == null) {
+        List&amp;lt;HandlerMethodArgumentResolver&amp;gt; resolvers = getDefaultArgumentResolvers();
+        this.argumentResolvers = new HandlerMethodArgumentResolverComposite().addResolvers(resolvers);
+    }
+    if (this.initBinderArgumentResolvers == null) {
+        List&amp;lt;HandlerMethodArgumentResolver&amp;gt; resolvers = getDefaultInitBinderArgumentResolvers();
+        this.initBinderArgumentResolvers = new HandlerMethodArgumentResolverComposite().addResolvers(resolvers);
+    }
+    if (this.returnValueHandlers == null) {
+        List&amp;lt;HandlerMethodReturnValueHandler&amp;gt; handlers = getDefaultReturnValueHandlers();
+        this.returnValueHandlers = new HandlerMethodReturnValueHandlerComposite().addHandlers(handlers);
+    }
+}&lt;/pre&gt;
+</code></pre><p>了解spring的都知道afterPropertiesSet方法是在什么时候执行的，当RequestMappingHandlerAdapter类创建好后就立即执行了该方法，通过这个方法我们可以看到，通过这个方法增加默认的参数解析器和我们在代码中配置的参数解析器，就是上文所说的@initBinder注解注入的参数解析类</p>
+<p>我们看下默认提供的参数解析器有哪些</p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午4.20.30.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午4.20.30.png" alt="屏幕快照 2016-05-18 下午4.20.30"></a>通过上面的截图我们可以看到spring其实已经内置了大部分的参数解析，基本能够解决我们日常开发工作中的80%了。</p>
+<p>下面我们结合AbstractNamedValueMethodArgumentResolver实现类的<strong><span style="color: #339966;">resolveArgument </span></strong><span style="color: #000000;"><span style="color: #339966;">方法进行说明</span></span></p>
+<p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午4.26.48.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/05/屏幕快照-2016-05-18-下午4.26.48.png" alt="屏幕快照 2016-05-18 下午4.26.48"></a>该方法首先创建一个键值对对象，然后首先查看是否有自定义参数解析器解析，如果有用自定义参数解析器解析，最后在进行后续的参数解析。</p>
+<p>今天的源码分析就到这里</p>
+<h4 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h4><p>今天的解析主要分析了请求处理的整个流程以及在什么时候进行参数解析，同时了解了用到的部分设计模式，对spring请求处理的前半部分有了一个更加清晰的认知</p>
+<h4 id="4-问题"><a href="#4-问题" class="headerlink" title="4. 问题"></a>4. 问题</h4><p>在看源码的过程中一直没有找到HandlerMethod实例的创建过程，留待后续的阅读中去解读</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/18/阿里云centos7.0+使用yum安装mysql/" rel="next" title="阿里云centos7.0+使用yum安装mysql">
+                <i class="fa fa-chevron-left"></i> 阿里云centos7.0+使用yum安装mysql
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/31/Tomcat_Connector_init过程简要梳理/" rel="prev" title="Tomcat Connector init过程简要梳理">
+                Tomcat Connector init过程简要梳理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/05/18/springMVC方法参数值注入简要源码分析/"
+           data-title="springMVC方法参数值注入简要源码分析" data-url="http://yoursite.com/2016/05/18/springMVC方法参数值注入简要源码分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="jsonqiao" />
+          <p class="site-author-name" itemprop="name">jsonqiao</p>
+          <p class="site-description motion-element" itemprop="description">一个猿猿的技术独白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">52</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/jsonqiao" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/jsonqiao" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qiao-yang-30-39" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jsonqiao.com" title="老博客" target="_blank">老博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lijiabei.cn" title="jiabei" target="_blank">jiabei</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-开始之前的唠嗑"><span class="nav-number">1.</span> <span class="nav-text">1. 开始之前的唠嗑</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-步入正题"><span class="nav-number">2.</span> <span class="nav-text">2. 步入正题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-封装request，response"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 封装request，response</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-创建请求参数自定义工厂类，我们经常在代码中看到的-initBinder注解，就是最终交由这个工厂类创建的实例对象来处理"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 创建请求参数自定义工厂类，我们经常在代码中看到的@initBinder注解，就是最终交由这个工厂类创建的实例对象来处理</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-创建方法调用对象ServletInvocableHandlerMethod的实例，最终会交给此创建的对象进行真正的处理，你可以在如上截图的代码中看到，如下代码即是"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 创建方法调用对象ServletInvocableHandlerMethod的实例，最终会交给此创建的对象进行真正的处理，你可以在如上截图的代码中看到，如下代码即是</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-总结"><span class="nav-number">3.</span> <span class="nav-text">3. 总结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-问题"><span class="nav-number">4.</span> <span class="nav-text">4. 问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jsonqiao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jsonqiao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
