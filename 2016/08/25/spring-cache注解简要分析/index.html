@@ -1,0 +1,708 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java,spring,源码理解," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="谈到spring的缓存注解时，大家都觉得是使用方便，偶尔也会注解失效（spring aop方法内部调用方法失效），也知道spring的缓存注解是基于aop的，单应该没怎么有人想过它是怎么实现的呢，本文今天就顺着源码的思路去看看它是如何实现。
+在看源码之前，我们应该知道从何处入手，如果各位对spring aop稍微有点了解的话，我们应该知道spring的aop默认是基于jdk的动态代理，我们在开发过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="spring_cache注解简要分析">
+<meta property="og:url" content="http://yoursite.com/2016/08/25/spring-cache注解简要分析/index.html">
+<meta property="og:site_name" content="栀子花开">
+<meta property="og:description" content="谈到spring的缓存注解时，大家都觉得是使用方便，偶尔也会注解失效（spring aop方法内部调用方法失效），也知道spring的缓存注解是基于aop的，单应该没怎么有人想过它是怎么实现的呢，本文今天就顺着源码的思路去看看它是如何实现。
+在看源码之前，我们应该知道从何处入手，如果各位对spring aop稍微有点了解的话，我们应该知道spring的aop默认是基于jdk的动态代理，我们在开发过">
+<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/08/spring_ioc.png">
+<meta property="og:updated_time" content="2016-08-25T09:56:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="spring_cache注解简要分析">
+<meta name="twitter:description" content="谈到spring的缓存注解时，大家都觉得是使用方便，偶尔也会注解失效（spring aop方法内部调用方法失效），也知道spring的缓存注解是基于aop的，单应该没怎么有人想过它是怎么实现的呢，本文今天就顺着源码的思路去看看它是如何实现。
+在看源码之前，我们应该知道从何处入手，如果各位对spring aop稍微有点了解的话，我们应该知道spring的aop默认是基于jdk的动态代理，我们在开发过">
+<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2016/08/spring_ioc.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/08/25/spring-cache注解简要分析/"/>
+
+  <title> spring_cache注解简要分析 | 栀子花开 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2627f4a76f6228ff020e7524fae592e2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">栀子花开</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">那一年盛夏的栀子花开</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                spring_cache注解简要分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-25T11:36:46+08:00" content="2016-08-25">
+              2016-08-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/25/spring-cache注解简要分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/25/spring-cache注解简要分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>谈到spring的缓存注解时，大家都觉得是使用方便，偶尔也会注解失效（spring aop方法内部调用方法失效），也知道spring的缓存注解是基于aop的，单应该没怎么有人想过它是怎么实现的呢，本文今天就顺着源码的思路去看看它是如何实现。</p>
+<p>在看源码之前，我们应该知道从何处入手，如果各位对spring aop稍微有点了解的话，我们应该知道spring的aop默认是基于jdk的动态代理，我们在开发过程中通过autowire等注解注入的类其实是一个被代理了的类，所以看spring如何实现缓存注解的，就应该看spring是如何为我们生成含有注解的代理类。到此，我们知道该去干什么了呢，下面就进入源码中一探究竟吧。</p>
+<a id="more"></a>
+<p>在开始之前，先上一张时序图，表明sping管理的bean在实例化前的调用顺序，图片可能不是很清楚，可配合下面文字理解。</p>
+<p>1.加载bean定义的文件（applicationContext.xml, dispatcher.xml 等）</p>
+<p>2.解析xml文件，形成bean的定义，spring管理的bean的定义基于Beandefinition接口</p>
+<p>3.将BeanDefinition注册到spring beanFactory中，XmlWebApplicationContext默认的beanFactory为DefaultListableBeanFactory</p>
+<p>4.调用beanFactory的getBean方法，根据BeanDefinition中的bean定义实例化。</p>
+<p><img src="http://www.jsonqiao.com/json/wp-content/uploads/2016/08/spring_ioc.png" alt=""></p>
+<h3 id="spring-bean实例化简述"><a href="#spring-bean实例化简述" class="headerlink" title="spring bean实例化简述"></a>spring bean实例化简述</h3><p>spring缓存注解是通过BeanPostProcessor来生成代理类，整个的处理过程简要描述即是</p>
+<p>1.创建被代理类示例</p>
+<p>2.依赖关系解析[getDependsOn]</p>
+<p>3.依赖关系注解解析［poplulateBean］</p>
+<p>4.初始化bean［initializeBean］</p>
+<h3 id="spring缓存注解的切入点"><a href="#spring缓存注解的切入点" class="headerlink" title="spring缓存注解的切入点"></a>spring缓存注解的切入点</h3><p>上面简单描述了spring bean初始化的整个过程，有兴趣的同学可以去研究源码看看，上面图中也描述了bean定义整个加载的过程，加载完成后，会调用如下代码的方法，在此过程中实例化spring容器中的所有bean</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">AbstractApplicationContext applicationContext = <span class="keyword">new</span> XmlWebApplicationContext(path);</div><div class="line"><span class="comment">// 此方法在applicationContext.refresh()方法内，采用模版方法的方式进行调用</span></div><div class="line">applicationContext.finishBeanFactoryInitialization()</div></pre></td></tr></table></figure>
+<p>实例化的代码用下面的类似代码简单描述下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">AbstractApplicationContext applicationContext = <span class="keyword">new</span> XmlWebApplicationContext(path);</div><div class="line"><span class="comment">// 此方法在applicationContext.refresh()方法内，采用模版方法的方式进行调用</span></div><div class="line">applicationContext.finishBeanFactoryInitialization()	</div><div class="line">applicationContext.getBean(beanName);</div><div class="line"><span class="comment">// 委托给applicationContext容器中的beanFactory = new DefaultListableFactory()</span></div><div class="line">BeanFactory beanFactory = applicationContext.beanFactory;</div><div class="line">beanFactory.getBean(beanName);</div><div class="line"><span class="comment">// 此处经过一系列的重载方法</span></div><div class="line">beanFactory.doGetBean(beanName);</div><div class="line"><span class="comment">// 此处采用回调函数的形式委托给 objectFactory.getObject()</span></div><div class="line">beanFactory.getSingleton(ObjectFactory objectFactory);</div><div class="line"><span class="comment">// getObject调用createBean方法</span></div><div class="line">beanFactory.createBean(beanName);</div><div class="line"><span class="comment">// 调用doCreateBean()</span></div><div class="line">beanFactory.doCreateBean(beanName);</div><div class="line"><span class="comment">// 调用populateBean</span></div><div class="line">beanFactory.populateBean(beanName);</div><div class="line"><span class="comment">// 调用initializeBean，缓存注解在此方法中处理</span></div><div class="line">beanFacotry.initializeBean(bean);</div></pre></td></tr></table></figure>
+<p>上述代码简单描述了spring bean实例化的整个过程，<strong>缓存注解在initializeBean方法中会循环遍历BeanPostProcessor时被调用</strong>，代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">applyBeanPostProcessorsAfterInitialization</span><span class="params">(Object existingBean, String beanName)</span></span></div><div class="line">			<span class="keyword">throws</span> BeansException &#123;</div><div class="line"></div><div class="line">		Object result = existingBean;</div><div class="line">		<span class="keyword">for</span> (BeanPostProcessor beanProcessor : getBeanPostProcessors()) &#123;</div><div class="line">			result = beanProcessor.postProcessAfterInitialization(result, beanName);</div><div class="line">			<span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">				<span class="keyword">return</span> result;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">return</span> result;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>看了这么多代码大家应该忘记了最先上的时序图，上图的时序图中有一个spring缓存注解驱动处理器的注入过程，当时注入的处理器将在此段代码中被调用, 调用的代码如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">	 * Wrap the given bean if necessary, i.e. if it is eligible for being proxied.</div><div class="line">	 * <span class="doctag">@param</span> bean the raw bean instance</div><div class="line">	 * <span class="doctag">@param</span> beanName the name of the bean</div><div class="line">	 * <span class="doctag">@param</span> cacheKey the cache key for metadata access</div><div class="line">	 * <span class="doctag">@return</span> a proxy wrapping the bean, or the raw bean instance as-is</div><div class="line">	 */</div><div class="line">	<span class="function"><span class="keyword">protected</span> Object <span class="title">wrapIfNecessary</span><span class="params">(Object bean, String beanName, Object cacheKey)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span> (beanName != <span class="keyword">null</span> &amp;&amp; <span class="keyword">this</span>.targetSourcedBeans.contains(beanName)) &#123;</div><div class="line">			<span class="keyword">return</span> bean;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (Boolean.FALSE.equals(<span class="keyword">this</span>.advisedBeans.get(cacheKey))) &#123;</div><div class="line">			<span class="keyword">return</span> bean;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (isInfrastructureClass(bean.getClass()) || shouldSkip(bean.getClass(), beanName)) &#123;</div><div class="line">			<span class="keyword">this</span>.advisedBeans.put(cacheKey, Boolean.FALSE);</div><div class="line">			<span class="keyword">return</span> bean;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">// Create proxy if we have advice.</span></div><div class="line">		Object[] specificInterceptors = getAdvicesAndAdvisorsForBean(bean.getClass(), beanName, <span class="keyword">null</span>);</div><div class="line">		<span class="keyword">if</span> (specificInterceptors != DO_NOT_PROXY) &#123;</div><div class="line">			<span class="keyword">this</span>.advisedBeans.put(cacheKey, Boolean.TRUE);</div><div class="line">			Object proxy = createProxy(</div><div class="line">					bean.getClass(), beanName, specificInterceptors, <span class="keyword">new</span> SingletonTargetSource(bean));</div><div class="line">			<span class="keyword">this</span>.proxyTypes.put(cacheKey, proxy.getClass());</div><div class="line">			<span class="keyword">return</span> proxy;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="keyword">this</span>.advisedBeans.put(cacheKey, Boolean.FALSE);</div><div class="line">		<span class="keyword">return</span> bean;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>通过上面对spring缓存注解的分析，明白了spring bean实例化的整个过程，了解了spring bean加载的大体流程，同时也更深入理解了spring aop的基础知识。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+            <a href="/tags/spring/" rel="tag">#spring</a>
+          
+            <a href="/tags/源码理解/" rel="tag">#源码理解</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/08/18/前言中不允许有内容/" rel="next" title="前言中不允许有内容">
+                <i class="fa fa-chevron-left"></i> 前言中不允许有内容
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/08/25/spring-cache注解简要分析/"
+           data-title="spring_cache注解简要分析" data-url="http://yoursite.com/2016/08/25/spring-cache注解简要分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="jsonqiao" />
+          <p class="site-author-name" itemprop="name">jsonqiao</p>
+          <p class="site-description motion-element" itemprop="description">一个猿猿的技术独白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/jsonqiao" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/jsonqiao" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qiao-yang-30-39" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jsonqiao.com" title="老博客" target="_blank">老博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lijiabei.cn" title="jiabei" target="_blank">jiabei</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#spring-bean实例化简述"><span class="nav-number">1.</span> <span class="nav-text">spring bean实例化简述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spring缓存注解的切入点"><span class="nav-number">2.</span> <span class="nav-text">spring缓存注解的切入点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jsonqiao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jsonqiao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
