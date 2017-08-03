@@ -84,34 +84,40 @@
 
 
 
-<meta name="description" content="前提条件
-安装最新的XCode
-通过命令行安装如下软件
+<meta name="description" content="前提条件安装最新的XCode通过命令行安装如下软件  
+brew install mercurial # openjdk代码托管在hg
+brew install ccache # 提高编译速度
+brew install freetype # 编译使用
 
-123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
-
-获取openjdk9源码  123hg clone http://hg.openjdk.java.net/jdk9/jdk9cd jdkbas">
+获取openjdk9源码  
+hg clone http://hg.openjdk.java.net/jdk9/jdk9
+cd jdk
+bash">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mac Serria编译OpenJdk9">
 <meta property="og:url" content="http://yoursite.com/2017/08/03/Mac serria编译openjdk 9/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="前提条件
-安装最新的XCode
-通过命令行安装如下软件
+<meta property="og:description" content="前提条件安装最新的XCode通过命令行安装如下软件  
+brew install mercurial # openjdk代码托管在hg
+brew install ccache # 提高编译速度
+brew install freetype # 编译使用
 
-123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
-
-获取openjdk9源码  123hg clone http://hg.openjdk.java.net/jdk9/jdk9cd jdkbas">
-<meta property="og:updated_time" content="2017-08-03T14:17:22.000Z">
+获取openjdk9源码  
+hg clone http://hg.openjdk.java.net/jdk9/jdk9
+cd jdk
+bash">
+<meta property="og:updated_time" content="2017-08-03T14:25:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac Serria编译OpenJdk9">
-<meta name="twitter:description" content="前提条件
-安装最新的XCode
-通过命令行安装如下软件
+<meta name="twitter:description" content="前提条件安装最新的XCode通过命令行安装如下软件  
+brew install mercurial # openjdk代码托管在hg
+brew install ccache # 提高编译速度
+brew install freetype # 编译使用
 
-123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
-
-获取openjdk9源码  123hg clone http://hg.openjdk.java.net/jdk9/jdk9cd jdkbas">
+获取openjdk9源码  
+hg clone http://hg.openjdk.java.net/jdk9/jdk9
+cd jdk
+bash">
 
 
 
@@ -321,17 +327,33 @@
       
 
       
-        <h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ol>
-<li>安装最新的XCode</li>
-<li>通过命令行安装如下软件</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew install mercurial <span class="comment"># openjdk代码托管在hg</span></div><div class="line">brew install ccache <span class="comment"># 提高编译速度</span></div><div class="line">brew install freetype <span class="comment"># 编译使用</span></div></pre></td></tr></table></figure>
-<ol>
-<li>获取openjdk9源码  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hg clone http://hg.openjdk.java.net/jdk9/jdk9</div><div class="line">cd jdk</div><div class="line">bash ./get_source.sh</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">bash ./configure --with-target-bits=64 --with-freetye=/usr/<span class="built_in">local</span>/Cellar/freetype/2.8 --enable-ccache --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span> --disable-zip-debug-info --disable-warning-as-errors --with-debug-level=slowdebug 2&gt;&amp;1 | tee configure_mac_x64.log</div><div class="line"></div><div class="line"><span class="comment">## 参数说明</span></div><div class="line"><span class="comment">## --with-target-bits 设置32位还是64位编译</span></div><div class="line"><span class="comment">## --with-freetype 设置freetype路径</span></div><div class="line"><span class="comment">## --enable-ccache 启用ccache</span></div><div class="line"><span class="comment">## --with-jvm-variants=client,server 为了保证兼容性，编译时jvm的的client和server都会被编译</span></div><div class="line"><span class="comment">## --with-boot-jdk-jvmargs 提供运行bootstrap jdk所需的参数</span></div><div class="line"><span class="comment">## --disable-zip-debug-info 禁用zip调试信息</span></div><div class="line"><span class="comment">## --disable-warnings-as-errors 禁用将警告当成错误，方式编译中断</span></div><div class="line"><span class="comment">## --with-debug-level 设置调试等级</span></div><div class="line"></div><div class="line"><span class="comment">## 编译</span></div><div class="line">make all</div></pre></td></tr></table></figure>
-<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> jdk9/build/macosx-x86_64-normal-server-slowdebug/jdk/bin</div><div class="line">./java -version</div></pre></td></tr></table></figure>
+        <h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>安装最新的XCode<br>通过命令行安装如下软件  </p>
+<pre><code class="bash">brew install mercurial <span class="comment"># openjdk代码托管在hg</span>
+brew install ccache <span class="comment"># 提高编译速度</span>
+brew install freetype <span class="comment"># 编译使用</span>
+</code></pre>
+<p>获取openjdk9源码  </p>
+<pre><code>hg clone http://hg.openjdk.java.net/jdk9/jdk9
+cd jdk
+bash ./get_source.sh
+</code></pre><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><pre><code class="bash">bash ./configure --with-target-bits=64 --with-freetye=/usr/<span class="built_in">local</span>/Cellar/freetype/2.8 --enable-ccache --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span> --disable-zip-debug-info --disable-warning-as-errors --with-debug-level=slowdebug 2&gt;&amp;1 | tee configure_mac_x64.log
+
+<span class="comment">## 参数说明</span>
+<span class="comment">## --with-target-bits 设置32位还是64位编译</span>
+<span class="comment">## --with-freetype 设置freetype路径</span>
+<span class="comment">## --enable-ccache 启用ccache</span>
+<span class="comment">## --with-jvm-variants=client,server 为了保证兼容性，编译时jvm的的client和server都会被编译</span>
+<span class="comment">## --with-boot-jdk-jvmargs 提供运行bootstrap jdk所需的参数</span>
+<span class="comment">## --disable-zip-debug-info 禁用zip调试信息</span>
+<span class="comment">## --disable-warnings-as-errors 禁用将警告当成错误，方式编译中断</span>
+<span class="comment">## --with-debug-level 设置调试等级</span>
+
+<span class="comment">## 编译</span>
+make all
+</code></pre>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><pre><code class="bash"><span class="built_in">cd</span> jdk9/build/macosx-x86_64-normal-server-slowdebug/jdk/bin
+./java -version
+</code></pre>
 
       
     </div>

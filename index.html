@@ -309,16 +309,16 @@
       
         
           
-          前提条件
-安装最新的XCode
-通过命令行安装如下软件
+          前提条件安装最新的XCode通过命令行安装如下软件  
+brew install mercurial # openjdk代码托管在hg
+brew install ccache # 提高编译速度
+brew install freetype # 编译使用
 
-123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
-
-获取openjdk9源码  123hg clone http://hg.openjdk.java.net/jdk9/jdk9cd jdkbash ./get_source.sh
-
-
-编译1234567891011121314bash ./configure --with-target-bits=64 --with-freetye=/usr/
+获取openjdk9源码  
+hg clone http://hg.openjdk.java.net/jdk9/jdk9
+cd jdk
+bash ./get_source.sh
+编译bash ./configure --with-target-bits=64 --with-freetye=/usr/local/Cellar/freetype/2
           ...
 
           <div class="post-more-link text-center">
