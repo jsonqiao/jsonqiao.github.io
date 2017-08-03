@@ -84,37 +84,49 @@
 
 
 
-<meta name="description" content="Mac serria编译openjdk 9
+<meta name="description" content="title: Mac serria编译openjdk 9tags:
+
+jvm
+java
+
 前提条件
 安装最新的XCode
 通过命令行安装如下软件
 
 123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
 
-获取openjdk9源码  123hg clone http://hg.openjdk.java.">
+获取openjdk9源码  123hg clone">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栀子花开">
 <meta property="og:url" content="http://yoursite.com/2017/08/03/Mac serria编译openjdk 9/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="Mac serria编译openjdk 9
+<meta property="og:description" content="title: Mac serria编译openjdk 9tags:
+
+jvm
+java
+
 前提条件
 安装最新的XCode
 通过命令行安装如下软件
 
 123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
 
-获取openjdk9源码  123hg clone http://hg.openjdk.java.">
-<meta property="og:updated_time" content="2017-08-03T13:53:55.000Z">
+获取openjdk9源码  123hg clone">
+<meta property="og:updated_time" content="2017-08-03T13:58:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栀子花开">
-<meta name="twitter:description" content="Mac serria编译openjdk 9
+<meta name="twitter:description" content="title: Mac serria编译openjdk 9tags:
+
+jvm
+java
+
 前提条件
 安装最新的XCode
 通过命令行安装如下软件
 
 123brew install mercurial # openjdk代码托管在hgbrew install ccache # 提高编译速度brew install freetype # 编译使用
 
-获取openjdk9源码  123hg clone http://hg.openjdk.java.">
+获取openjdk9源码  123hg clone">
 
 
 
@@ -324,7 +336,11 @@
       
 
       
-        <p>Mac serria编译openjdk 9</p>
+        <p>title: Mac serria编译openjdk 9<br>tags:</p>
+<ul>
+<li>jvm</li>
+<li>java</li>
+</ul>
 <h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><ol>
 <li>安装最新的XCode</li>
 <li>通过命令行安装如下软件</li>
@@ -334,7 +350,8 @@
 <li>获取openjdk9源码  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hg clone http://hg.openjdk.java.net/jdk9/jdk9</div><div class="line">cd jdk</div><div class="line">bash ./get_source.sh</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">bash ./configure --with-target-bits=64 --with-freetye=/usr/<span class="built_in">local</span>/Cellar/freetype/2.8 --enable-ccache --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span> --disable-zip-debug-info --disable-warning-as-errors --with-debug-level=slowdebug 2&gt;&amp;1 | tee configure_mac_x64.log</div><div class="line"></div><div class="line"><span class="comment">## 参数说明</span></div><div class="line"><span class="comment">## --with-target-bits 设置32位还是64位编译</span></div><div class="line"><span class="comment">## --with-freetype 设置freetype路径</span></div><div class="line"><span class="comment">## --enable-ccache 启用ccache</span></div><div class="line"><span class="comment">## --with-jvm-variants=client,server 为了保证兼容性，编译时jvm的的client和server都会被编译</span></div><div class="line"><span class="comment">## --with-boot-jdk-jvmargs 提供运行bootstrap jdk所需的参数</span></div><div class="line"><span class="comment">## --disable-zip-debug-info 禁用zip调试信息</span></div><div class="line"><span class="comment">## --disable-warnings-as-errors 禁用将警告当成错误，方式编译中断</span></div><div class="line"><span class="comment">## --with-debug-level 设置调试等级</span></div><div class="line"></div><div class="line"><span class="comment">## 编译</span></div><div class="line">make all</div><div class="line">``` </div><div class="line"></div><div class="line"><span class="comment">## 验证</span></div><div class="line"></div><div class="line">``` bash</div><div class="line"> <span class="built_in">cd</span> jdk9/build/macosx-x86_64-normal-server-slowdebug/jdk/bin</div><div class="line"> ./java -version</div></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">bash ./configure --with-target-bits=64 --with-freetye=/usr/<span class="built_in">local</span>/Cellar/freetype/2.8 --enable-ccache --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span> --disable-zip-debug-info --disable-warning-as-errors --with-debug-level=slowdebug 2&gt;&amp;1 | tee configure_mac_x64.log</div><div class="line"></div><div class="line"><span class="comment">## 参数说明</span></div><div class="line"><span class="comment">## --with-target-bits 设置32位还是64位编译</span></div><div class="line"><span class="comment">## --with-freetype 设置freetype路径</span></div><div class="line"><span class="comment">## --enable-ccache 启用ccache</span></div><div class="line"><span class="comment">## --with-jvm-variants=client,server 为了保证兼容性，编译时jvm的的client和server都会被编译</span></div><div class="line"><span class="comment">## --with-boot-jdk-jvmargs 提供运行bootstrap jdk所需的参数</span></div><div class="line"><span class="comment">## --disable-zip-debug-info 禁用zip调试信息</span></div><div class="line"><span class="comment">## --disable-warnings-as-errors 禁用将警告当成错误，方式编译中断</span></div><div class="line"><span class="comment">## --with-debug-level 设置调试等级</span></div><div class="line"></div><div class="line"><span class="comment">## 编译</span></div><div class="line">make all</div></pre></td></tr></table></figure>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> jdk9/build/macosx-x86_64-normal-server-slowdebug/jdk/bin</div><div class="line">./java -version</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -540,7 +557,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译"><span class="nav-number">2.</span> <span class="nav-text">编译</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前提条件"><span class="nav-number">1.</span> <span class="nav-text">前提条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译"><span class="nav-number">2.</span> <span class="nav-text">编译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证"><span class="nav-number">3.</span> <span class="nav-text">验证</span></a></li></ol></div>
             
           </div>
         </section>
