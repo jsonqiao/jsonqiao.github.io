@@ -106,7 +106,7 @@ brew install freetype # 编译使用
 hg clone http://hg.openjdk.java.net/jdk9/jdk9
 cd jdk
 bash">
-<meta property="og:updated_time" content="2017-08-03T14:25:16.000Z">
+<meta property="og:updated_time" content="2017-08-12T23:54:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac Serria编译OpenJdk9">
 <meta name="twitter:description" content="前提条件安装最新的XCode通过命令行安装如下软件  
@@ -336,7 +336,7 @@ brew install freetype <span class="comment"># 编译使用</span>
 <pre><code>hg clone http://hg.openjdk.java.net/jdk9/jdk9
 cd jdk
 bash ./get_source.sh
-</code></pre><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><pre><code class="bash">bash ./configure --with-target-bits=64 --with-freetye=/usr/<span class="built_in">local</span>/Cellar/freetype/2.8 --enable-ccache --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span> --disable-zip-debug-info --disable-warning-as-errors --with-debug-level=slowdebug 2&gt;&amp;1 | tee configure_mac_x64.log
+</code></pre><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><pre><code class="bash">bash ./configure --with-target-bits=64 --with-freetype=/usr/<span class="built_in">local</span>/Cellar/freetype/2.8 --enable-ccache --with-boot-jdk-jvmargs=<span class="string">"-Xlint:deprecation -Xlint:unchecked"</span> --disable-zip-debug-info --disable-warnings-as-errors --with-debug-level=slowdebug 2&gt;&amp;1 | tee configure_mac_x64.log
 
 <span class="comment">## 参数说明</span>
 <span class="comment">## --with-target-bits 设置32位还是64位编译</span>
