@@ -258,6 +258,123 @@
             
               
                 
+                <a class="post-title-link" href="/2017/09/28/java初始化的一些理解/" itemprop="url">
+                  java初始化的一些理解
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-09-28T20:53:01+08:00" content="2017-09-28">
+              2017-09-28
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/09/28/java初始化的一些理解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/28/java初始化的一些理解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          初始化顺序大家应该都知道JAVA基本的初始化顺序为如下  ：
+
+静态代码块，静态变量初始化
+变量，代码块初始化
+构造函数初始化  
+
+对于有父子关系的类，则是在上面的基础上先进行父类静态部分初始化，然后子类静态代码初始化，然后父类代码块以及构造函数初始化，然后子类代码块以及构造函数初始化。相信大家对于这样的初始化顺序应该是都能理解的，但是，今天说的是在多线程环境下类是如何保持正确实现初始化顺序的
+
+参考文档 java 规范5.5
+
+具体是参照上面的5.5节的说明，大致意思是JAVA类在初始化的时候会获取一把锁，如果有多个线程调用初始化则阻塞其它线程，只让单个线程进行初始化。
+为什么想写这个JV
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/09/28/java初始化的一些理解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/08/03/Mac serria编译openjdk 9/" itemprop="url">
                   Mac Serria编译OpenJdk9
                 </a>
@@ -757,114 +874,6 @@ shell
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/23/sun-misc-Unsafe讲解文章连接/" itemprop="url">
-                  sun.misc.Unsafe讲解文章连接
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-23T10:36:01+08:00" content="2016-09-23">
-              2016-09-23
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/09/23/sun-misc-Unsafe讲解文章连接/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/23/sun-misc-Unsafe讲解文章连接/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          一篇记录sun.misc.Unsafe类的文章，文章主要介绍了该类的常用使用场景和他提供的公共api
-http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
-
-          
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/09/23/sun-misc-Unsafe讲解文章连接/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -910,7 +919,7 @@ http://mishadoff.com/blog/java-magic-part-4-sun-dot-misc-dot-unsafe/
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

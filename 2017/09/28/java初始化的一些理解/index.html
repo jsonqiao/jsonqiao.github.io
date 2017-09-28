@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="jsonqiao,hexo" />
+  <meta name="keywords" content="java," />
 
 
 
@@ -84,21 +84,34 @@
 
 
 
-<meta name="description" content="1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
-1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编">
+<meta name="description" content="初始化顺序大家应该都知道JAVA基本的初始化顺序为如下  ：
+
+静态代码块，静态变量初始化
+变量，代码块初始化
+构造函数初始化  
+
+对于有父子关系的类，则是在上面的基础上先进行父类静态部分初始化，然后子类静态代码初始化，然后父类代码块以及构造函数初始化，然后子类代码块以及构造函数初始化。相信大家对于这样的初始化顺序应该是都能理解的，但是，今天说的是在多线程环境下类是如何保持正确实现初始化顺序的">
 <meta property="og:type" content="article">
-<meta property="og:title" content="spring源码导入Intellij idea">
-<meta property="og:url" content="http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/index.html">
+<meta property="og:title" content="java初始化的一些理解">
+<meta property="og:url" content="http://yoursite.com/2017/09/28/java初始化的一些理解/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
-1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编">
-<meta property="og:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png">
-<meta property="og:updated_time" content="2016-08-13T06:01:51.000Z">
+<meta property="og:description" content="初始化顺序大家应该都知道JAVA基本的初始化顺序为如下  ：
+
+静态代码块，静态变量初始化
+变量，代码块初始化
+构造函数初始化  
+
+对于有父子关系的类，则是在上面的基础上先进行父类静态部分初始化，然后子类静态代码初始化，然后父类代码块以及构造函数初始化，然后子类代码块以及构造函数初始化。相信大家对于这样的初始化顺序应该是都能理解的，但是，今天说的是在多线程环境下类是如何保持正确实现初始化顺序的">
+<meta property="og:updated_time" content="2017-09-28T13:29:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="spring源码导入Intellij idea">
-<meta name="twitter:description" content="1. 配置spring源码运行环境1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，防止spring编译出错，spring编译时会读取JAVA_HOME环境变量
-1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编">
-<meta name="twitter:image" content="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png">
+<meta name="twitter:title" content="java初始化的一些理解">
+<meta name="twitter:description" content="初始化顺序大家应该都知道JAVA基本的初始化顺序为如下  ：
+
+静态代码块，静态变量初始化
+变量，代码块初始化
+构造函数初始化  
+
+对于有父子关系的类，则是在上面的基础上先进行父类静态部分初始化，然后子类静态代码初始化，然后父类代码块以及构造函数初始化，然后子类代码块以及构造函数初始化。相信大家对于这样的初始化顺序应该是都能理解的，但是，今天说的是在多线程环境下类是如何保持正确实现初始化顺序的">
 
 
 
@@ -119,9 +132,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/28/java初始化的一些理解/"/>
 
-  <title> spring源码导入Intellij idea | 栀子花开 </title>
+  <title> java初始化的一些理解 | 栀子花开 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +274,7 @@
             
             
               
-                spring源码导入Intellij idea
+                java初始化的一些理解
               
             
           </h1>
@@ -273,38 +286,19 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-12-23T13:33:53+08:00" content="2015-12-23">
-              2015-12-23
+            <time itemprop="dateCreated" datetime="2017-09-28T20:53:01+08:00" content="2017-09-28">
+              2017-09-28
             </time>
           </span>
 
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
           
 
           
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2015/12/23/spring源码导入Intellij_idea/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/23/spring源码导入Intellij_idea/" itemprop="commentsCount"></span>
+                <a href="/2017/09/28/java初始化的一些理解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/28/java初始化的一些理解/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -327,28 +321,36 @@
       
 
       
-        <h4 id="1-配置spring源码运行环境"><a href="#1-配置spring源码运行环境" class="headerlink" title="1. 配置spring源码运行环境"></a>1. 配置spring源码运行环境</h4><p>1.1 安装jdk 1.8，配置JAVA_HOME环境变量，将%JAVA_HOME%\lib添加到classpath中，<span style="color: #ff0000;">防止spring编译出错，spring编译时会读取JAVA_HOME环境变量</span></p>
-<p>1.2 下载gradle, 配置GRADLE_HOME环境变量, 将%GRADLE_HOME%\bin添加的path中（windows），spring使用gradle编译系统</p>
-<h4 id="2-下载spring源码到本地"><a href="#2-下载spring源码到本地" class="headerlink" title="2. 下载spring源码到本地"></a>2. 下载spring源码到本地</h4><pre class="lang:default decode:true ">git clone https://github.com/spring-projects/spring-framework.git</pre>
-
-<h4 id="3-修改gradlew-bat"><a href="#3-修改gradlew-bat" class="headerlink" title="3. 修改gradlew.bat"></a>3. 修改gradlew.bat</h4><pre class="lang:default decode:true ">@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-@rem 注释掉下面这句代码
-@rem set GRADLE_OPTS=-XX:MaxMetaspaceSize=512m -Xmx1024m -XX:MaxHeapSize=256m %GRADLE_OPTS%
-set DEFAULT_JVM_OPTS=</pre>
-
-<h4 id="4-按照import-into-idea-md文件中说明的步骤执行"><a href="#4-按照import-into-idea-md文件中说明的步骤执行" class="headerlink" title="4. 按照import-into-idea.md文件中说明的步骤执行"></a>4. 按照import-into-idea.md文件中说明的步骤执行</h4><p>4.1 执行预编译步骤，执行命令如下</p>
-<pre class="lang:default decode:true " title="spring源码存储目录下执行">gradlew cleanIdea :spring-oxm:compileTestJava</pre>
-4.2 导入Intellij idea
-
-&nbsp;
-
-<span style="color: #ff0000;">**备注：因为天朝网络的缘故需要不断的杀掉进程重新编译，都是体力活，程序猿不容易，当编译过程出现错误时，请使用如下命令重新编译[该命令使用后能在控制台看见错误详情]**</span>
-<pre class="lang:default decode:true ">gradlew --debug cleanIdea :spring-oxm:compileTestJava</pre>
-
-<h4 id="5-最后的成果"><a href="#5-最后的成果" class="headerlink" title="5. 最后的成果"></a>5. 最后的成果</h4><p><a href="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png" target="_blank" rel="external"><img src="http://www.jsonqiao.com/json/wp-content/uploads/2015/12/spring_source.png" alt="spring_source"></a></p>
-<p>##### </p>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+        <h2 id="初始化顺序"><a href="#初始化顺序" class="headerlink" title="初始化顺序"></a>初始化顺序</h2><p>大家应该都知道JAVA基本的初始化顺序为如下  ：</p>
+<ul>
+<li>静态代码块，静态变量初始化</li>
+<li>变量，代码块初始化</li>
+<li>构造函数初始化  </li>
+</ul>
+<p>对于有父子关系的类，则是在上面的基础上先进行父类静态部分初始化，然后子类静态代码初始化，然后父类代码块以及构造函数初始化，然后子类代码块以及构造函数初始化。相信大家对于这样的初始化顺序应该是都能理解的，但是，今天说的是在<font color="red">多线程环境下类是如何保持正确实现初始化顺序的</font></p>
+<blockquote>
+<p>参考文档 <a href="https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-5.html" target="_blank" rel="external">java 规范5.5</a></p>
+</blockquote>
+<p>具体是参照上面的5.5节的说明，大致意思是JAVA类在初始化的时候会获取一把锁，如果有多个线程调用初始化则阻塞其它线程，只让单个线程进行初始化。</p>
+<p>为什么想写这个JVM多线程初始化保证了，大家都看过单例模式中的利用内部类保证多线程情况正确实现，利用内部类实现单例模式的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.jsonqiao.demo;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by jsonqiao on 2017/9/28.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Singleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">SingletonHolder</span> </span>&#123;</div><div class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Singleton INSTANCE = <span class="keyword">new</span> Singleton();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Singleton</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Singleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> SingletonHolder.INSTANCE;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不知大家有没有思考过为什么能够通过内部类实现线程安全的单例模式呢，其实大家应该知道另外一个非线程安全的单例模式（双重检验锁模式）代码如下：  </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.jsonqiao.demo;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Created by jsonqiao on 2017/9/28.</div><div class="line"> */</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultiThreadNotSafeSingleton</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> MultiThreadNotSafeSingleton INSTANCE;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="title">MultiThreadNotSafeSingleton</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> MultiThreadNotSafeSingleton <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">synchronized</span> (MultiThreadNotSafeSingleton.class) &#123;</div><div class="line">                <span class="keyword">if</span> (INSTANCE == <span class="keyword">null</span>) &#123;</div><div class="line">                  	<span class="comment">// 出问题的代码</span></div><div class="line">                    INSTANCE = <span class="keyword">new</span> MultiThreadNotSafeSingleton();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> INSTANCE;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码是非线程安全的单例模式，这里出现线程不安全的点在<code>new MultiThreadNotSafeSingleton</code> 这段，其实new操作在jvm层面是非原子操作的，它大概有如下3个操作组成  </p>
+<ol>
+<li>创建对象内存空间</li>
+<li>对象初始化</li>
+<li>将对象地址赋值给变量</li>
+</ol>
+<p>这3个操作jvm有时可能会被优化，即是俗称的<code>指令重排序</code>，它会将2和3的顺序调换，这时上面<code>INSTANCE</code>变量就已经有值，但是<code>INSTANCE</code>变量引用的对象还未初始化完成，此时如果有线程调用getInstance()方法就会导致看见未初始化完成的对象，那如何避免这种情况发生呢？</p>
+<blockquote>
+<p> 第一种方式是不让jvm进行<code>指令重排序</code>的优化</p>
+<p>第二种方式是不让未初始化完成的对象对外暴露</p>
+</blockquote>
+<p>那内部类就是采用的第二种方式，为什么呢，看过上面文档的应该大体是清楚的，我也按照自己的理解简单描述一下。</p>
+<blockquote>
+<p>当一个类遇到new, 或者静态变量调用时会出发初始化，上面线程安全的单例模式调用<code>SingletonHolder.INSTANCE</code>会触发内部类初始化，这时内部类正在进行初始化中，它会获取一把锁直到其初始化完成，如果这个时候有其它线程再次调用<code>SingletonHolder.INSTANCE</code>就回被阻塞等待该内部类的初始化完成，而当内部类初始化完成时，Singleton对象也已经初始化完成了。</p>
+</blockquote>
 
       
     </div>
@@ -369,22 +371,24 @@ set DEFAULT_JVM_OPTS=</pre>
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag">#java</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/12/18/linux_service/" rel="next" title="linux service">
-                <i class="fa fa-chevron-left"></i> linux service
+              <a href="/2017/08/03/Mac serria编译openjdk 9/" rel="next" title="Mac Serria编译OpenJdk9">
+                <i class="fa fa-chevron-left"></i> Mac Serria编译OpenJdk9
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2015/12/25/Spring源码阅读一：容器初始化之一/" rel="prev" title="Spring源码阅读一：容器初始化之一">
-                Spring源码阅读一：容器初始化之一 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -410,8 +414,8 @@ set DEFAULT_JVM_OPTS=</pre>
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2015/12/23/spring源码导入Intellij_idea/"
-           data-title="spring源码导入Intellij idea" data-url="http://yoursite.com/2015/12/23/spring源码导入Intellij_idea/">
+      <div class="ds-thread" data-thread-key="2017/09/28/java初始化的一些理解/"
+           data-title="java初始化的一些理解" data-url="http://yoursite.com/2017/09/28/java初始化的一些理解/">
       </div>
     
   </div>
@@ -558,7 +562,7 @@ set DEFAULT_JVM_OPTS=</pre>
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-配置spring源码运行环境"><span class="nav-number">1.</span> <span class="nav-text">1. 配置spring源码运行环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-下载spring源码到本地"><span class="nav-number">2.</span> <span class="nav-text">2. 下载spring源码到本地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-修改gradlew-bat"><span class="nav-number">3.</span> <span class="nav-text">3. 修改gradlew.bat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-按照import-into-idea-md文件中说明的步骤执行"><span class="nav-number">4.</span> <span class="nav-text">4. 按照import-into-idea.md文件中说明的步骤执行</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-最后的成果"><span class="nav-number">5.</span> <span class="nav-text">5. 最后的成果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化顺序"><span class="nav-number">1.</span> <span class="nav-text">初始化顺序</span></a></li></ol></div>
             
           </div>
         </section>
