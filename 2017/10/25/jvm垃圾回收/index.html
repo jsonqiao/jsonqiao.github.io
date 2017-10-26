@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="linux," />
+  <meta name="keywords" content="jvm," />
 
 
 
@@ -84,31 +84,22 @@
 
 
 
-<meta name="description" content="常用命令解压tgz文件到指定目录  
-123tar zxvf source targettar zcvf *.tag.gz *dir* # 打包成tar.gz
-jar包解压  
-123jar xvf sourcejavap -c class # 查看java class文件
-maven  
-12345mvn dependency:tree # 打印maven依赖树mvn versions:set">
+<meta name="description" content="如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为">
 <meta property="og:type" content="article">
-<meta property="og:title" content="日常工作linux命令">
-<meta property="og:url" content="http://yoursite.com/2017/03/04/日常工作linux命令/index.html">
+<meta property="og:title" content="jvm垃圾回收">
+<meta property="og:url" content="http://yoursite.com/2017/10/25/jvm垃圾回收/index.html">
 <meta property="og:site_name" content="栀子花开">
-<meta property="og:description" content="常用命令解压tgz文件到指定目录  
-123tar zxvf source targettar zcvf *.tag.gz *dir* # 打包成tar.gz
-jar包解压  
-123jar xvf sourcejavap -c class # 查看java class文件
-maven  
-12345mvn dependency:tree # 打印maven依赖树mvn versions:set">
-<meta property="og:updated_time" content="2017-03-04T04:24:33.000Z">
+<meta property="og:description" content="如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为">
+<meta property="og:updated_time" content="2017-10-25T13:30:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="日常工作linux命令">
-<meta name="twitter:description" content="常用命令解压tgz文件到指定目录  
-123tar zxvf source targettar zcvf *.tag.gz *dir* # 打包成tar.gz
-jar包解压  
-123jar xvf sourcejavap -c class # 查看java class文件
-maven  
-12345mvn dependency:tree # 打印maven依赖树mvn versions:set">
+<meta name="twitter:title" content="jvm垃圾回收">
+<meta name="twitter:description" content="如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为">
 
 
 
@@ -129,9 +120,9 @@ maven
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/04/日常工作linux命令/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/25/jvm垃圾回收/"/>
 
-  <title> 日常工作linux命令 | 栀子花开 </title>
+  <title> jvm垃圾回收 | 栀子花开 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -271,7 +262,7 @@ maven
             
             
               
-                日常工作linux命令
+                jvm垃圾回收
               
             
           </h1>
@@ -283,8 +274,8 @@ maven
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-04T12:14:44+08:00" content="2017-03-04">
-              2017-03-04
+            <time itemprop="dateCreated" datetime="2017-10-25T21:04:01+08:00" content="2017-10-25">
+              2017-10-25
             </time>
           </span>
 
@@ -294,8 +285,8 @@ maven
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/2017/03/04/日常工作linux命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/04/日常工作linux命令/" itemprop="commentsCount"></span>
+                <a href="/2017/10/25/jvm垃圾回收/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/25/jvm垃圾回收/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -318,14 +309,20 @@ maven
       
 
       
-        <h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p>解压tgz文件到指定目录  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar zxvf <span class="built_in">source</span> target</div><div class="line"></div><div class="line">tar zcvf *.tag.gz *dir* <span class="comment"># 打包成tar.gz</span></div></pre></td></tr></table></figure>
-<p>jar包解压  </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">jar xvf source</div><div class="line"></div><div class="line">javap -c <span class="class"><span class="keyword">class</span> # 查看<span class="title">java</span> <span class="title">class</span>文件</span></div></pre></td></tr></table></figure>
-<p>maven  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mvn dependency:tree <span class="comment"># 打印maven依赖树</span></div><div class="line"></div><div class="line">mvn versions:<span class="built_in">set</span> -DnewVersion=1.0.0-SNAPSHOT <span class="comment"># 更改pom版本</span></div><div class="line"></div><div class="line">mvn e <span class="comment"># 打印详细错误信息</span></div></pre></td></tr></table></figure>
-<p>shell  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">grep -vwf 1.txt 2.txt <span class="comment"># 1.txt中没有的行,2.txt中有的行</span></div><div class="line"></div><div class="line">sed <span class="string">'s/$/&amp;,/g'</span> <span class="comment"># 行尾追加逗号</span></div><div class="line"></div><div class="line">awk -F <span class="string">','</span> <span class="string">'&#123;print $7&#125;'</span> 1.csv <span class="comment"># 打印特定列值</span></div></pre></td></tr></table></figure>
+        <h2 id="如何确定堆中的对象可以回收"><a href="#如何确定堆中的对象可以回收" class="headerlink" title="如何确定堆中的对象可以回收"></a>如何确定堆中的对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1. 引用计数法"></a>1. 引用计数法</h3><p>一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式</p>
+<h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2. 可达性分析算法"></a>2. 可达性分析算法</h3><p>以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达</p>
+<p>在JAVA语言中，可作为 GC Roots 的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区常量引用的对象</li>
+<li>本地方法栈中 JNI 引用的对象</li>
+</ul>
+<h2 id="对象真正回收"><a href="#对象真正回收" class="headerlink" title="对象真正回收"></a>对象真正回收</h2><p>进行可达性分析后，如果确定一个对象是否要回收，还需要进行<font color="red">一次标记和一次筛选</font> 筛选的条件是是否有必要执行 <code>finalize()</code> 方法，如果有必要执行，则将该对象防置到一个被叫做 F-Queue 的队列，稍后被 jvm 启动的一个名叫 Finalizer 的线程去执行</p>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><h3 id="1-标记-清除-算法"><a href="#1-标记-清除-算法" class="headerlink" title="1. 标记-清除 算法"></a>1. 标记-清除 算法</h3><h3 id="2-复制算法"><a href="#2-复制算法" class="headerlink" title="2. 复制算法"></a>2. 复制算法</h3><p>将内存划分为容量相等的2块区域，每次近使用其中一块，每次垃圾回收时，将不回收的对象复制到另一块区域</p>
+<h3 id="3-标记-整理算法"><a href="#3-标记-整理算法" class="headerlink" title="3. 标记-整理算法"></a>3. 标记-整理算法</h3><p>第一步按照标记-清除算法进行可达性分析后标记出需要回收的对象，然后将存活的对象向一端移动，然后清理掉端边界以外的内存</p>
+<h3 id="4-分带收集算法"><a href="#4-分带收集算法" class="headerlink" title="4. 分带收集算法"></a>4. 分带收集算法</h3><p>其实就是针对不同的内存区域采用上面的 3 种算法 </p>
+
       
     </div>
 
@@ -347,7 +344,7 @@ maven
       
         <div class="post-tags">
           
-            <a href="/tags/linux/" rel="tag">#linux</a>
+            <a href="/tags/jvm/" rel="tag">#jvm</a>
           
         </div>
       
@@ -356,17 +353,13 @@ maven
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/09/23/sun-misc-Unsafe讲解文章连接/" rel="next" title="sun.misc.Unsafe讲解文章连接">
-                <i class="fa fa-chevron-left"></i> sun.misc.Unsafe讲解文章连接
+              <a href="/2017/10/18/ThreadPoolExecutor简要笔记/" rel="next" title="ThreadPoolExecutor简要笔记">
+                <i class="fa fa-chevron-left"></i> ThreadPoolExecutor简要笔记
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/06/08/Class类文件/" rel="prev" title="java class类文件">
-                java class类文件 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -392,8 +385,8 @@ maven
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/04/日常工作linux命令/"
-           data-title="日常工作linux命令" data-url="http://yoursite.com/2017/03/04/日常工作linux命令/">
+      <div class="ds-thread" data-thread-key="2017/10/25/jvm垃圾回收/"
+           data-title="jvm垃圾回收" data-url="http://yoursite.com/2017/10/25/jvm垃圾回收/">
       </div>
     
   </div>
@@ -540,7 +533,7 @@ maven
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用命令"><span class="nav-number">1.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何确定堆中的对象可以回收"><span class="nav-number">1.</span> <span class="nav-text">如何确定堆中的对象可以回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">1. 引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可达性分析算法"><span class="nav-number">1.2.</span> <span class="nav-text">2. 可达性分析算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象真正回收"><span class="nav-number">2.</span> <span class="nav-text">对象真正回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-标记-清除-算法"><span class="nav-number">3.1.</span> <span class="nav-text">1. 标记-清除 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-复制算法"><span class="nav-number">3.2.</span> <span class="nav-text">2. 复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-标记-整理算法"><span class="nav-number">3.3.</span> <span class="nav-text">3. 标记-整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-分带收集算法"><span class="nav-number">3.4.</span> <span class="nav-text">4. 分带收集算法</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
