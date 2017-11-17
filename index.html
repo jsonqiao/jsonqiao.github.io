@@ -258,6 +258,230 @@
             
               
                 
+                <a class="post-title-link" href="/2017/11/17/理解Linux中的load/" itemprop="url">
+                  理解Linux中的load
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-17T20:58:07+08:00" content="2017-11-17">
+              2017-11-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/17/理解Linux中的load/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/17/理解Linux中的load/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Mac查看系统的load信息12# 使用命令uptime
+使用该命令的截图如下
+
+该命令的最后有个load averages后面有3个数据，这3个数据分别代表当前系统1分钟，5分钟和15分钟内的系统load的平均值
+何为系统的Load信息呢个人简单的定义，可能存在误差，各位看官看到请结合自己的理解
+
+一定时间内(cpu时间片)，cup能够处理的进程以及等待进程数之和
+
+举个例子说明下
+假如单核系统CPU最多能接纳100个进程，当系统有20个进程在运行时，它的load是0.2, 当它有120个进程在运行时，它的load为1.2，其中能够运行的进程是100，等待的进程为20
+参考文献英文版说明
+阮
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/17/理解Linux中的load/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/06/zookeeper常用命令/" itemprop="url">
+                  zookeeper常用命令
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-06T21:47:01+08:00" content="2017-11-06">
+              2017-11-06
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/06/zookeeper常用命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/06/zookeeper常用命令/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          zookeep常用命令123456789101112# 1. 连接服务端zkCli -server host:port # zkCli -server 127.0.0.1:2181# 2. 创建节点带有数据的节点create /jsonqiao "jsonqiao"# 3. 获取节点数据get /jsonqiao# 4. 设置节点新数据set /jsonqiao "new data"# 5. 删除节点delete /jsonqiao# 6. 万能命令help
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/06/zookeeper常用命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/10/26/c-简要笔记/" itemprop="url">
                   c++简要笔记
                 </a>
@@ -566,234 +790,11 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/13/jvm内存划分/" itemprop="url">
-                  jvm内存划分
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-13T23:15:23+08:00" content="2017-10-13">
-              2017-10-13
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/13/jvm内存划分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/13/jvm内存划分/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          运行时数据区域jvm运行时主要由如下图的几部分组成
-
-
-方法区，主要用于存储虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码数据以及 运行时常量池
-堆，jvm重点管理的区域，java对象存活的地方，堆可以细分为新生代和老年代，再细致的话就划分为Eden区，From Survivor 区和 To Survivor 区，堆可以处于物理上不连续的区域，逻辑上连续即可
-程序计数器
-本地方法栈
-
-对象内存布局对象在内存中的存储布局可以分为 3 块区域：对象头，实例数据，对齐填充
-
-对象头，对象头包括 2 部分信息，一是，存储对象运行时自身数据，如哈希码，GC 分代年龄，锁状态标志，线程持有锁，
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/13/jvm内存划分/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/04/ConcurrentHashMap分析/" itemprop="url">
-                  ConcurrentHashMap分析(jdk8版本)
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-04T22:28:14+08:00" content="2017-10-04">
-              2017-10-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/04/ConcurrentHashMap分析/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/04/ConcurrentHashMap分析/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          初始化concurrentHashMap初始化主要是初始化sizeCtl字段为2的幂，调用的方法为tableSizeFor，简单说一下这个方法的实现，先放出方法的源代码  
-12345678910111213/** * Returns a power of two table size for the given desired capacity. * See Hackers Delight, sec 3.2 */ 	private static final int tableSizeFor(int c) &#123;    int n = c - 1;    n |= n &gt;&gt;&
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/04/ConcurrentHashMap分析/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -834,7 +835,7 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">65</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

@@ -258,6 +258,229 @@
             
               
                 
+                <a class="post-title-link" href="/2017/10/13/jvm内存划分/" itemprop="url">
+                  jvm内存划分
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-13T23:15:23+08:00" content="2017-10-13">
+              2017-10-13
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/13/jvm内存划分/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/13/jvm内存划分/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          运行时数据区域jvm运行时主要由如下图的几部分组成
+
+
+方法区，主要用于存储虚拟机加载的类信息，常量，静态变量，即时编译器编译后的代码数据以及 运行时常量池
+堆，jvm重点管理的区域，java对象存活的地方，堆可以细分为新生代和老年代，再细致的话就划分为Eden区，From Survivor 区和 To Survivor 区，堆可以处于物理上不连续的区域，逻辑上连续即可
+程序计数器
+本地方法栈
+
+对象内存布局对象在内存中的存储布局可以分为 3 块区域：对象头，实例数据，对齐填充
+
+对象头，对象头包括 2 部分信息，一是，存储对象运行时自身数据，如哈希码，GC 分代年龄，锁状态标志，线程持有锁，
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/10/13/jvm内存划分/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/04/ConcurrentHashMap分析/" itemprop="url">
+                  ConcurrentHashMap分析(jdk8版本)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-04T22:28:14+08:00" content="2017-10-04">
+              2017-10-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/04/ConcurrentHashMap分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/04/ConcurrentHashMap分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          初始化concurrentHashMap初始化主要是初始化sizeCtl字段为2的幂，调用的方法为tableSizeFor，简单说一下这个方法的实现，先放出方法的源代码  
+12345678910111213/** * Returns a power of two table size for the given desired capacity. * See Hackers Delight, sec 3.2 */ 	private static final int tableSizeFor(int c) &#123;    int n = c - 1;    n |= n &gt;&gt;&
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/10/04/ConcurrentHashMap分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/09/28/java初始化的一些理解/" itemprop="url">
                   java初始化的一些理解
                 </a>
@@ -604,281 +827,11 @@ Shared and Exclusive Locks(共享锁和排他锁)InnoDB实现了2种标准的行
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/08/Class类文件/" itemprop="url">
-                  java class类文件
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-06-08T22:14:44+08:00" content="2017-06-08">
-              2017-06-08
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/06/08/Class类文件/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/06/08/Class类文件/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Class类文件
-Class文件采用无符号数和表两种数据类型，无符号数类型有：u1, u2, u4, u8四种类型，其中1，2，4，8表示1,2,4,8个字节，无符号数组成表。
-
-class 文件格式
-
-
-
-类型
-名称
-数量
-备注
-
-
-
-
-u4
-magic
-1
-魔数
-
-
-u2
-minor_version
-1
-小版本号
-
-
-u2
-major_version
-1
-主版本号
-
-
-u2
-constant_pool_count
-1
-常量个数
-
-
-cp_info
-constant_pool
-constant_pool_count -1
-常量个数减1
-
-
-u2
-access_flag
-1
-访问标志
-
-
-u2
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/06/08/Class类文件/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/03/04/日常工作linux命令/" itemprop="url">
-                  日常工作linux命令
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-04T12:14:44+08:00" content="2017-03-04">
-              2017-03-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/03/04/日常工作linux命令/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/04/日常工作linux命令/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          常用命令解压tgz文件到指定目录  
-123tar zxvf source targettar zcvf *.tag.gz *dir* # 打包成tar.gz
-jar包解压  
-123jar xvf sourcejavap -c class # 查看java class文件
-maven  
-12345mvn dependency:tree # 打印maven依赖树mvn versions:set -DnewVersion=1.0.0-SNAPSHOT # 更改pom版本mvn e # 打印详细错误信息
-shell  
-12345grep -vwf 1.txt 2.txt # 1.txt中没有的
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/03/04/日常工作linux命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -919,7 +872,7 @@ shell
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">65</span>
+              <span class="site-state-item-count">67</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
