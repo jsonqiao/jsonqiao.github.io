@@ -258,6 +258,335 @@
             
               
                 
+                <a class="post-title-link" href="/2017/10/26/c-简要笔记/" itemprop="url">
+                  c++简要笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-26T20:52:15+08:00" content="2017-10-26">
+              2017-10-26
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/26/c-简要笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/26/c-简要笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          C++常见预处理指令123456#include // 包含一个源文件#define // 定义宏#undef // 取消已经定义的宏#if #end // 如果if添加为真，则编译代码#ifdef // 判断宏是否定义#ifndef // 如果宏没有定义，则处理
+C++友元函数类的友元函数可以访问类的私有成员变量和protected成员变量，友元函数定义在外部
+1234567891011121314151617181920212223242526272829303132333435////  frendly.cpp//  c_plus_demo////  Created by jsonqia
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/10/26/c-简要笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/25/jvm垃圾回收/" itemprop="url">
+                  jvm垃圾回收
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-25T21:04:01+08:00" content="2017-10-25">
+              2017-10-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/25/jvm垃圾回收/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/25/jvm垃圾回收/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为 GC Roots 的对象包括下面几种：
+
+虚拟机栈中引用的对象
+方法区中类静态属性引用的对象
+方法区常量引用的对象
+本地方法栈中 JNI 引用的对象
+
+对象真正回收进行可达性分析后，如果确定一个对象
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/10/25/jvm垃圾回收/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/10/18/ThreadPoolExecutor简要笔记/" itemprop="url">
+                  ThreadPoolExecutor简要笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-18T21:59:20+08:00" content="2017-10-18">
+              2017-10-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/18/ThreadPoolExecutor简要笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/18/ThreadPoolExecutor简要笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          初始化关键参数123456789101112131415161718192021222324corePoolSize # 该参数表示线程池中至少持有的线程数，这些线程可以处于 idle 状态, 仅仅可以通过 allowCoreThreadTimeOut 方法中断这些空闲线程maximumPoolSize# 线程池中允许的最大的线程数量，当向线程池中添加任务时，如果线程数量已经大于 corePoolSize 并且等待队列已经满的情况，这时将开启新的线程执行任务keepAliveTime# 线程池中 大于 corePoolSize 的线程可以空闲的时间unit# keepAliveTime的参数w
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/10/18/ThreadPoolExecutor简要笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/10/13/jvm内存划分/" itemprop="url">
                   jvm内存划分
                 </a>
@@ -316,10 +645,11 @@
 堆，jvm重点管理的区域，java对象存活的地方，堆可以细分为新生代和老年代，再细致的话就划分为Eden区，From Survivor 区和 To Survivor 区，堆可以处于物理上不连续的区域，逻辑上连续即可
 程序计数器
 本地方法栈
+pc计数器
 
 对象内存布局对象在内存中的存储布局可以分为 3 块区域：对象头，实例数据，对齐填充
 
-对象头，对象头包括 2 部分信息，一是，存储对象运行时自身数据，如哈希码，GC 分代年龄，锁状态标志，线程持有锁，
+对象头，对象头包括 2 部分信息，一是，存储对象运行时自身数据，如哈希码，GC 分代年龄，锁状态标志，
           ...
 
           <div class="post-more-link text-center">
@@ -460,373 +790,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/09/28/java初始化的一些理解/" itemprop="url">
-                  java初始化的一些理解
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-09-28T20:53:01+08:00" content="2017-09-28">
-              2017-09-28
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/09/28/java初始化的一些理解/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/28/java初始化的一些理解/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          初始化顺序大家应该都知道JAVA基本的初始化顺序为如下  ：
-
-静态代码块，静态变量初始化
-变量，代码块初始化
-构造函数初始化  
-
-对于有父子关系的类，则是在上面的基础上先进行父类静态部分初始化，然后子类静态代码初始化，然后父类代码块以及构造函数初始化，然后子类代码块以及构造函数初始化。相信大家对于这样的初始化顺序应该是都能理解的，但是，今天说的是在多线程环境下类是如何保持正确实现初始化顺序的
-
-参考文档 java 规范5.5
-
-具体是参照上面的5.5节的说明，大致意思是JAVA类在初始化的时候会获取一把锁，如果有多个线程调用初始化则阻塞其它线程，只让单个线程进行初始化。
-为什么想写这个JV
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/09/28/java初始化的一些理解/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/08/03/Mac serria编译openjdk 9/" itemprop="url">
-                  Mac Serria编译OpenJdk9
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-03T21:47:53+08:00" content="2017-08-03">
-              2017-08-03
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/08/03/Mac serria编译openjdk 9/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/03/Mac serria编译openjdk 9/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          前提条件安装最新的XCode通过命令行安装如下软件  
-brew install mercurial # openjdk代码托管在hg
-brew install ccache # 提高编译速度
-brew install freetype # 编译使用
-
-获取openjdk9源码  
-hg clone http://hg.openjdk.java.net/jdk9/jdk9
-cd jdk
-bash ./get_source.sh
-编译bash ./configure --with-target-bits=64 --with-freetype=/usr/local/Cellar/freetype/
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/08/03/Mac serria编译openjdk 9/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/07/26/mysql InnoDB 锁/" itemprop="url">
-                  mysql 事务和锁
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-07-26T23:20:44+08:00" content="2017-07-26">
-              2017-07-26
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/07/26/mysql InnoDB 锁/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/26/mysql InnoDB 锁/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          mysql 事务隔离级别
-
-
-定义
-说明
-
-
-
-
-READ_UNCOMMIT
-读未提交，可能引起脏读
-
-
-READ_COMMITED
-读已提交，可能造成2次读取数据行不一致即不可重复读
-
-
-READ_REPEATED
-可重复读，可能引起幻读
-
-
-Serializable
-串行化
-
-
-
-mysql InnoDB 锁参考原文
-Shared and Exclusive Locks(共享锁和排他锁)InnoDB实现了2种标准的行级别锁(row-level)，他们分别是共享锁(shared[s] locks)和排他锁(exclusive[x] locks)
-
-共享锁(shared(s) lock)允许一
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/07/26/mysql InnoDB 锁/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -872,7 +835,7 @@ Shared and Exclusive Locks(共享锁和排他锁)InnoDB实现了2种标准的行
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">70</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -889,7 +852,7 @@ Shared and Exclusive Locks(共享锁和排他锁)InnoDB实现了2种标准的行
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -258,6 +258,407 @@
             
               
                 
+                <a class="post-title-link" href="/2015/01/21/shell_variables(变量)/" itemprop="url">
+                  shell variables(变量)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-21T16:26:37+08:00" content="2015-01-21">
+              2015-01-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/21/shell_variables(变量)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/21/shell_variables(变量)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          全局变量全局变量或者称为环境变量，这些变量在所有的shell脚本中可用，可用命令 env,printenv显示当前的环境变量。
+# 本人当前的部分环境变量
+     jsonqiao@jsonqiao:~/shell$ printenv
+     XDG_VTNR=7
+     LC_PAPER=zh_CN.UTF-8
+     SSH_AGENT_PID=1706
+     LC_ADDRESS=zh_CN.UTF-8
+     XDG_SESSION_ID=c2
+     XDG_GREETER_DATA_DIR=/var/lib/lightdm-data/jsonqiao
+     SE
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/01/21/shell_variables(变量)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/21/Big_Endian_and_Little_Endian字节序/" itemprop="url">
+                  Big Endian and Little Endian字节序
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-21T00:05:15+08:00" content="2015-01-21">
+              2015-01-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/21/Big_Endian_and_Little_Endian字节序/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/21/Big_Endian_and_Little_Endian字节序/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          JAVA中采用Big Endain方式存储字节序
+&nbsp;
+
+Big Endian和Little Endian其实是多字节数据在存储时的存储方式，Big Endian表示物理地址的高位存储数据的低位字节，物理地址的低位存储数据的高位字节，而Little Endian表示物理地址的低位存储数据的低位字节，物理地址的高位存储数据的高位字节。
+
+##### 例子说明
+
+假设从物理地址（0x0000）开始保存数据（0x12345678）
+
+Big Endian存储方式:
+物理地址      存储单位上存储的数据
+0x0000（低位）   0x12（高位）
+0x0001          0x34
+
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/01/21/Big_Endian_and_Little_Endian字节序/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/01/20/vim_shortcut/" itemprop="url">
+                  vim shortcut
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-01-20T22:45:55+08:00" content="2015-01-20">
+              2015-01-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/01/20/vim_shortcut/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/20/vim_shortcut/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          前言vim为编辑器之神，对于我这种小菜鸟，vim只能是提升逼格的工具-哈哈，经过一段时间的基础使用，将vim常用的命令记录下来，加深自己的映象吧！
+常用命令# 进入插入模式快捷键
+a append ：在光标后一个位置插入i insert     ：在光标所在位置插入o               ：在光标所在行的下一行插入，光标移动到插入的新行行首O              ：在光标所在行的上一行插入，光标移动到插入的新行行首
+命令模式下的常见操作复制[N]yy：复制光标所在行向下N行的数据，如2yy表示复制光标及光标所在行 下一行，共计2行的数据，如若前面不加数字N，则表示复制。
+yw：复
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/01/20/vim_shortcut/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/01/17/命令模式/" itemprop="url">
                   命令模式
                 </a>
@@ -491,391 +892,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/08/fstab配置说明/" itemprop="url">
-                  fstab配置说明
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-08T22:32:36+08:00" content="2015-01-08">
-              2015-01-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/08/fstab配置说明/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/08/fstab配置说明/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          fstab综述：fstab文件表示文件系统的静态信息，位于/etc/fstab, 该文件包含7个字段，下面对每个字段说明。
-fstab字段说明# /etc/fstab: static file system information.#
-&lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;&lt;file system&gt;：该字段说明被挂载的文件系统，可用目录树结构和UUID来表示，如下所示：
-# 目录树形式/dev/sda1 / ext4 errors=r
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/08/fstab配置说明/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/01/08/Linux磁盘管理主要命令df-du-fdisk/" itemprop="url">
-                  Linux磁盘管理主要命令df/du/fdisk
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-01-08T15:01:04+08:00" content="2015-01-08">
-              2015-01-08
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/01/08/Linux磁盘管理主要命令df-du-fdisk/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/01/08/Linux磁盘管理主要命令df-du-fdisk/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          参考：http://vbird.dic.ksu.edu.tw/linux_basic/0230filesystem_2.php
-磁盘基础知识扇区（Sector）   ：最小的物理存储单位，每个扇区为512Bytes。
-磁柱（Cylinder）：将扇区组成一个圆就是磁柱，磁柱为分区（partition）的最小单位。
-磁盘的第一个扇区很重要，里面有：(1)主要启动区(Master boot record, MBR)及磁盘分区表(partition table)， 其中 MBR 占有 446 bytes，而 partition table 则占有 64 bytes。
-
-dfdf           
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/01/08/Linux磁盘管理主要命令df-du-fdisk/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/12/26/设计模式番外篇/" itemprop="url">
-                  设计模式番外篇
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2014-12-26T22:24:28+08:00" content="2014-12-26">
-              2014-12-26
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/设计模式/" itemprop="url" rel="index">
-                    <span itemprop="name">设计模式</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2014/12/26/设计模式番外篇/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2014/12/26/设计模式番外篇/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          序写了一些篇的设计模式的文章了，今天来一段插曲介绍一下模式设计的基础。其实我们在做OO设计时，最重要的目的就是去创建健壮的结构，保证项目能够迎合变化，因为变化是软件项目的本质，那如何做到软件项目健硕呢，其实是有一定准则的，这些准则就是OO设计的基础，卖了这么久的关子，下面来点真材实料。
-模式设计原则模式的设计原则其实很简单那就是SOLID，没错健壮啦，下面我们拆开SOLID，一个一个来看：
-S：SRP-Single Responsiblity Principle 单一职责原则，这个职责具体告诉我们什么呢，大意就是类的职责应该单一，不能让单一的类去做许多不应该属于它的事情.Simple is t
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2014/12/26/设计模式番外篇/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -921,7 +937,7 @@ S：SRP-Single Responsiblity Principle 单一职责原则，这个职责具体�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">70</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -938,7 +954,7 @@ S：SRP-Single Responsiblity Principle 单一职责原则，这个职责具体�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

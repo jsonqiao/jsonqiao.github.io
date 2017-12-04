@@ -258,6 +258,343 @@
             
               
                 
+                <a class="post-title-link" href="/2017/12/04/Thread一点笔记/" itemprop="url">
+                  Thread一点笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-04T21:59:27+08:00" content="2017-12-04">
+              2017-12-04
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/04/Thread一点笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/04/Thread一点笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          在 java 中，Thread 类可以代表一个线程，本文为自己对于 Thread 一些理解与笔记概要
+
+Thread.sleep(0) 当线程已经处于等待状态的时候是无法被中断的
+Thread.sleep(mills) 当 mills &gt; 0 时，线程虽然在等待时间的流转，此时是可以响应线程线程中断信号的
+Thread.sleep(mills) 不会释放线程已经持有的锁，仅仅是让出 cpu 的时间片轮转
+
+Thread.sleep(mills)的native代码实现在 openjdk9 中如下
+12345678910111213141516171819202122232425262728
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/12/04/Thread一点笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/23/jvm-解析/" itemprop="url">
+                  jvm_解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-23T21:48:51+08:00" content="2017-11-23">
+              2017-11-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/23/jvm-解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/23/jvm-解析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概述何为解析
+动态决定运行时常量池中符号引用的具体值的过程
+
+造成解析的 jvm 指令1anewarray, checkcast, getfield, getstatic, instanceof, invokedynamic, invokeinterface, invokespecial, invokestatic, invokevirtual, ldc, ldc_w, multianewarray, new, putfield, putstatic
+invokedynamic 指令对不同 invoke dynamic 指令的解析会因为动态不同，解析的值与 invokedynamic 绑定
+除
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/23/jvm-解析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="url">
+                  jvm_rum_time_constant_pool笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-21T21:37:28+08:00" content="2017-11-21">
+              2017-11-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/21/jvm-rum-time-constant-pool笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          运行时常量池分类1. 包括类，字段和方法的符号引用 
+2. 字符串，整数，浮点数的字面量
+3. 其它类型
+符号引用类符号引用对于类或者接口的符号引用，其来自于二进制 class 文件的 CONSTANT_Class_info 结构，调用 Class.getName 时返回该值
+
+对于数组类型  ‘[‘ 表示数组的维度，对于非数组的复杂对象用 L 表示对象的引用，例如 java.lang.Object 对象表示为 Ljava/lang/Object, 其中  .  用  / 表示 
+
+字段符号引用字段符号引用， 其来自于二进制 class 文件的 CONSTANT_Fieldref_info 结
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/21/jvm-rum-time-constant-pool笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/11/17/理解Linux中的load/" itemprop="url">
                   理解Linux中的load
                 </a>
@@ -461,335 +798,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/26/c-简要笔记/" itemprop="url">
-                  c++简要笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-26T20:52:15+08:00" content="2017-10-26">
-              2017-10-26
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/26/c-简要笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/26/c-简要笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          C++常见预处理指令123456#include // 包含一个源文件#define // 定义宏#undef // 取消已经定义的宏#if #end // 如果if添加为真，则编译代码#ifdef // 判断宏是否定义#ifndef // 如果宏没有定义，则处理
-C++友元函数类的友元函数可以访问类的私有成员变量和protected成员变量，友元函数定义在外部
-1234567891011121314151617181920212223242526272829303132333435////  frendly.cpp//  c_plus_demo////  Created by jsonqia
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/26/c-简要笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/25/jvm垃圾回收/" itemprop="url">
-                  jvm垃圾回收
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-25T21:04:01+08:00" content="2017-10-25">
-              2017-10-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/25/jvm垃圾回收/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/25/jvm垃圾回收/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
-2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
-在JAVA语言中，可作为 GC Roots 的对象包括下面几种：
-
-虚拟机栈中引用的对象
-方法区中类静态属性引用的对象
-方法区常量引用的对象
-本地方法栈中 JNI 引用的对象
-
-对象真正回收进行可达性分析后，如果确定一个对象
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/25/jvm垃圾回收/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/18/ThreadPoolExecutor简要笔记/" itemprop="url">
-                  ThreadPoolExecutor简要笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-18T21:59:20+08:00" content="2017-10-18">
-              2017-10-18
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/18/ThreadPoolExecutor简要笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/18/ThreadPoolExecutor简要笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          初始化关键参数123456789101112131415161718192021222324corePoolSize # 该参数表示线程池中至少持有的线程数，这些线程可以处于 idle 状态, 仅仅可以通过 allowCoreThreadTimeOut 方法中断这些空闲线程maximumPoolSize# 线程池中允许的最大的线程数量，当向线程池中添加任务时，如果线程数量已经大于 corePoolSize 并且等待队列已经满的情况，这时将开启新的线程执行任务keepAliveTime# 线程池中 大于 corePoolSize 的线程可以空闲的时间unit# keepAliveTime的参数w
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/18/ThreadPoolExecutor简要笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -835,7 +843,7 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">67</span>
+              <span class="site-state-item-count">70</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -852,7 +860,7 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
