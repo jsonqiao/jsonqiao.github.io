@@ -258,6 +258,119 @@
             
               
                 
+                <a class="post-title-link" href="/2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="url">
+                  jvm_rum_time_constant_pool笔记
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-21T21:37:28+08:00" content="2017-11-21">
+              2017-11-21
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/21/jvm-rum-time-constant-pool笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          运行时常量池分类1. 包括类，字段和方法的符号引用 
+2. 字符串，整数，浮点数的字面量
+3. 其它类型
+符号引用类符号引用对于类或者接口的符号引用，其来自于二进制 class 文件的 CONSTANT_Class_info 结构，调用 Class.getName 时返回该值
+
+对于数组类型  ‘[‘ 表示数组的维度，对于非数组的复杂对象用 L 表示对象的引用，例如 java.lang.Object 对象表示为 Ljava/lang/Object, 其中  .  用  / 表示 
+
+字段符号引用字段符号引用， 其来自于二进制 class 文件的 CONSTANT_Fieldref_info 结
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/21/jvm-rum-time-constant-pool笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/11/17/理解Linux中的load/" itemprop="url">
                   理解Linux中的load
                 </a>
@@ -684,112 +797,6 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/18/ThreadPoolExecutor简要笔记/" itemprop="url">
-                  ThreadPoolExecutor简要笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-18T21:59:20+08:00" content="2017-10-18">
-              2017-10-18
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/18/ThreadPoolExecutor简要笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/18/ThreadPoolExecutor简要笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          初始化关键参数123456789101112131415161718192021222324corePoolSize # 该参数表示线程池中至少持有的线程数，这些线程可以处于 idle 状态, 仅仅可以通过 allowCoreThreadTimeOut 方法中断这些空闲线程maximumPoolSize# 线程池中允许的最大的线程数量，当向线程池中添加任务时，如果线程数量已经大于 corePoolSize 并且等待队列已经满的情况，这时将开启新的线程执行任务keepAliveTime# 线程池中 大于 corePoolSize 的线程可以空闲的时间unit# keepAliveTime的参数w
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/18/ThreadPoolExecutor简要笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -835,7 +842,7 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">72</span>
+              <span class="site-state-item-count">73</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
