@@ -85,19 +85,23 @@
 
 
 <meta name="description" content="spring的Autowired注解是通过AutowiredAnnotationBeanPostProcessor类进行处理的，那么我们就先看下该类的类结构
-类图">
+类图
+从类图中可以看到该类直接实现了接口MergedBeanDefinitionPostProcessor，间接实现了接口InstantiationAwareBeanPostProcessor，我们从 spring创建类实例的过程笔记 文章中">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring自动注入注解原理简单分析">
 <meta property="og:url" content="http://yoursite.com/2018/04/17/spring自动注入注解原理简单分析/index.html">
 <meta property="og:site_name" content="栀子花开">
 <meta property="og:description" content="spring的Autowired注解是通过AutowiredAnnotationBeanPostProcessor类进行处理的，那么我们就先看下该类的类结构
-类图">
+类图
+从类图中可以看到该类直接实现了接口MergedBeanDefinitionPostProcessor，间接实现了接口InstantiationAwareBeanPostProcessor，我们从 spring创建类实例的过程笔记 文章中">
 <meta property="og:image" content="http://yoursite.com/2018/04/17/spring自动注入注解原理简单分析/AutowiredAnnotationBeanPostProcessor.png">
-<meta property="og:updated_time" content="2018-04-17T14:06:18.300Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/spring自动注入注解原理简单分析/InjectedElement.png">
+<meta property="og:updated_time" content="2018-04-17T14:25:38.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring自动注入注解原理简单分析">
 <meta name="twitter:description" content="spring的Autowired注解是通过AutowiredAnnotationBeanPostProcessor类进行处理的，那么我们就先看下该类的类结构
-类图">
+类图
+从类图中可以看到该类直接实现了接口MergedBeanDefinitionPostProcessor，间接实现了接口InstantiationAwareBeanPostProcessor，我们从 spring创建类实例的过程笔记 文章中">
 <meta name="twitter:image" content="http://yoursite.com/2018/04/17/spring自动注入注解原理简单分析/AutowiredAnnotationBeanPostProcessor.png">
 
 
@@ -310,6 +314,11 @@
       
         <p>spring的<code>Autowired</code>注解是通过<code>AutowiredAnnotationBeanPostProcessor</code>类进行处理的，那么我们就先看下该类的类结构</p>
 <h2 id="类图"><a href="#类图" class="headerlink" title="类图"></a>类图</h2><p><img src="/2018/04/17/spring自动注入注解原理简单分析/AutowiredAnnotationBeanPostProcessor.png" alt="AutowiredAnnotationBeanPostProcessor"></p>
+<p>从类图中可以看到该类直接实现了接口<code>MergedBeanDefinitionPostProcessor</code>，间接实现了接口<code>InstantiationAwareBeanPostProcessor</code>，我们从 <a href="http://www.liubingyan.com/2018/04/17/spring%E5%88%9B%E5%BB%BA%E7%B1%BB%E5%AE%9E%E4%BE%8B%E7%9A%84%E8%BF%87%E7%A8%8B%E7%AC%94%E8%AE%B0/" target="_blank" rel="external">spring创建类实例的过程笔记</a> 文章中知道，spring在创建类实例的过程中，首先会调用 <code>MergedBeanDefinitionPostProcessor</code>的<code>postProcessMergedBeanDefinition</code>, 后续会调用<code>InstantiationAwareBeanPostProcessor</code>的<code>postProcessPropertyValues</code>方法，所以spring对<code>Autowired</code>注解也是从这两个方法进行处理的。</p>
+<h2 id="具体处理逻辑"><a href="#具体处理逻辑" class="headerlink" title="具体处理逻辑"></a>具体处理逻辑</h2><p>首先, 调用自己的<code>postProcessMergedBeanDefinition</code>方法，为对象实例化的bean找到对应的<code>Autowired</code>注解类型保存在<code>InjectionMetadata</code>类中. 在这里的处理逻辑中，被注入的对象会根据是字段注入还是方法注入分别用下文逻辑抽象段所说的类表示。</p>
+<p>然后，调用自己的<code>postProcessPropertyValues</code>方法，进行实际对象的注入，该方法后续会调用<code>InjectionMetadata</code>的<code>inject</code>方法，最终会调用到<code>org.springframework.beans.factory.config.AutowireCapableBeanFactory#resolveDependency(org.springframework.beans.factory.config.DependencyDescriptor, java.lang.String, java.util.Set&lt;java.lang.String&gt;, org.springframework.beans.TypeConverter)</code>方法</p>
+<h2 id="逻辑抽象"><a href="#逻辑抽象" class="headerlink" title="逻辑抽象"></a>逻辑抽象</h2><p>在<code>Autowired</code>的处理逻辑中，被注入的元素用<code>InjectedElement</code>抽象表示，该类针对<code>Autowired</code>注解由2个子类，分别为<code>AutowiredFieldElement</code>和<code>AutowiredMethodElement</code>两个实现在类字段上和类方法上使用该注解的处理逻辑, 类图表示如下</p>
+<p><img src="/2018/04/17/spring自动注入注解原理简单分析/InjectedElement.png" alt="InjectedElement"></p>
 
       
     </div>
@@ -521,7 +530,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">1.</span> <span class="nav-text">类图</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#类图"><span class="nav-number">1.</span> <span class="nav-text">类图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体处理逻辑"><span class="nav-number">2.</span> <span class="nav-text">具体处理逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#逻辑抽象"><span class="nav-number">3.</span> <span class="nav-text">逻辑抽象</span></a></li></ol></div>
             
           </div>
         </section>

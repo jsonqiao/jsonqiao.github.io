@@ -311,8 +311,8 @@
           
           spring的Autowired注解是通过AutowiredAnnotationBeanPostProcessor类进行处理的，那么我们就先看下该类的类结构
 类图
-
-          
+从类图中可以看到该类直接实现了接口MergedBeanDefinitionPostProcessor，间接实现了接口InstantiationAwareBeanPostProcessor，我们从 spring创建类实例的过程笔记 文章中知道，spring在创建类实例的过程中，首先会调用 MergedBeanDefinitionPostProcessor的postProcessMergedBeanDefinition, 后续会调用In
+          ...
 
           <div class="post-more-link text-center">
             <a class="btn" href="/2018/04/17/spring自动注入注解原理简单分析/#more" rel="contents">
