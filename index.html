@@ -258,6 +258,114 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/17/spring自动注入注解原理简单分析/" itemprop="url">
+                  spring自动注入注解原理简单分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-17T21:59:38+08:00" content="2018-04-17">
+              2018-04-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/17/spring自动注入注解原理简单分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/17/spring自动注入注解原理简单分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          spring的Autowired注解是通过AutowiredAnnotationBeanPostProcessor类进行处理的，那么我们就先看下该类的类结构
+类图
+
+          
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/17/spring自动注入注解原理简单分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/17/spring创建类实例的过程笔记/" itemprop="url">
                   spring创建类实例的过程笔记
                 </a>
@@ -665,119 +773,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/12/04/Thread一点笔记/" itemprop="url">
-                  Thread一点笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-12-04T21:59:27+08:00" content="2017-12-04">
-              2017-12-04
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/12/04/Thread一点笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/04/Thread一点笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          在 java 中，Thread 类可以代表一个线程，本文为自己对于 Thread 一些理解与笔记概要
-
-Thread.sleep(0) 当线程已经处于等待状态的时候是无法被中断的
-Thread.sleep(mills) 当 mills &gt; 0 时，线程虽然在等待时间的流转，此时是可以响应线程线程中断信号的
-Thread.sleep(mills) 不会释放线程已经持有的锁，仅仅是让出 cpu 的时间片轮转
-
-Thread.sleep(mills)的native代码实现在 openjdk9 中如下
-12345678910111213141516171819202122232425262728
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/12/04/Thread一点笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -823,7 +818,7 @@ Thread.sleep(mills)的native代码实现在 openjdk9 中如下
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">74</span>
+              <span class="site-state-item-count">75</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -840,7 +835,7 @@ Thread.sleep(mills)的native代码实现在 openjdk9 中如下
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
