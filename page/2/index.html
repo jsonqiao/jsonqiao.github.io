@@ -258,6 +258,117 @@
             
               
                 
+                <a class="post-title-link" href="/2017/11/23/jvm-解析/" itemprop="url">
+                  jvm_解析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-23T21:48:51+08:00" content="2017-11-23">
+              2017-11-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/11/23/jvm-解析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/23/jvm-解析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          概述何为解析
+动态决定运行时常量池中符号引用的具体值的过程
+
+造成解析的 jvm 指令1anewarray, checkcast, getfield, getstatic, instanceof, invokedynamic, invokeinterface, invokespecial, invokestatic, invokevirtual, ldc, ldc_w, multianewarray, new, putfield, putstatic
+invokedynamic 指令对不同 invoke dynamic 指令的解析会因为动态不同，解析的值与 invokedynamic 绑定
+除
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/11/23/jvm-解析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="url">
                   jvm_rum_time_constant_pool笔记
                 </a>
@@ -682,121 +793,6 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/10/25/jvm垃圾回收/" itemprop="url">
-                  jvm垃圾回收
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-10-25T21:04:01+08:00" content="2017-10-25">
-              2017-10-25
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/10/25/jvm垃圾回收/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/25/jvm垃圾回收/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
-2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
-在JAVA语言中，可作为 GC Roots 的对象包括下面几种：
-
-虚拟机栈中引用的对象
-方法区中类静态属性引用的对象
-方法区常量引用的对象
-本地方法栈中 JNI 引用的对象
-
-对象真正回收进行可达性分析后，如果确定一个对象
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/10/25/jvm垃圾回收/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -842,7 +838,7 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">73</span>
+              <span class="site-state-item-count">74</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -859,7 +855,7 @@ C++友元函数类的友元函数可以访问类的私有成员变量和protecte
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
