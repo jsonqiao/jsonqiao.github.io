@@ -258,6 +258,118 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/23/spring基于注解的aop处理源码简析/" itemprop="url">
+                  spring基于注解的aop处理源码简析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-23T21:04:54+08:00" content="2018-04-23">
+              2018-04-23
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/23/spring基于注解的aop处理源码简析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/23/spring基于注解的aop处理源码简析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          
+spring的Aop是基于代理来完成的，不管是基于 jdk 的动态代理，还是基于cglib实现的动态代理
+
+生成代理过程今天简要看下spring是如何为它容器中的Bean生成代理类的。在spring容器类处理aop注解的类为AnnotationAwareAspectJAutoProxyCreator,首先看下该类的体系结构
+
+从该类图可以看出，该类实现了BeanPostProcessor接口以及它的2个子接口，同时继承了ProxyConfig，最后实现了Aware接口下的2个子接口.
+那么从上面这个类图，我们可以知道spring生成aop代理类是基于BeanPostProcessor来实现的
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/23/spring基于注解的aop处理源码简析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/19/spring类型转化体系结构/" itemprop="url">
                   spring类型转化体系结构
                 </a>
@@ -667,113 +779,6 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/04/06/闲话java装箱和拆箱/" itemprop="url">
-                  闲话java装箱和拆箱
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-04-06T16:15:23+08:00" content="2018-04-06">
-              2018-04-06
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/04/06/闲话java装箱和拆箱/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/06/闲话java装箱和拆箱/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          在 Java 中，将基础类型数据转化为对应的封装类型数据我们称之装箱(Boxing), 反之，我们称为拆箱(unboxing), 关于这个概念，相信大家都是知道，下面我用一个非常简单的例子来看下jvm指令层面看看是如何完成装箱和拆箱操作的，简单的 Java 代码如下
-12345678910package com.jsonqiao.study.demo.basic;public class AutoboxingUnboxingExample &#123;    public static void main(String[] args) &#123;        int a = 10;    
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/04/06/闲话java装箱和拆箱/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -819,7 +824,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -836,7 +841,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -144,7 +144,7 @@ Serializable
 
 mysql InnoDB 锁参考原文
 Shared and Exclusive Locks(共享锁和排他锁)Inn">
-<meta property="og:updated_time" content="2017-07-26T15:20:10.000Z">
+<meta property="og:updated_time" content="2018-04-23T13:10:54.676Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql 事务和锁">
 <meta name="twitter:description" content="mysql 事务隔离级别
@@ -471,8 +471,7 @@ Shared and Exclusive Locks(共享锁和排他锁)Inn">
 <h3 id="Record-Locks-索引锁"><a href="#Record-Locks-索引锁" class="headerlink" title="Record Locks(索引锁)"></a>Record Locks(索引锁)</h3><p>一个索引锁只会在索引上加锁，如果一个表没有定义索引，InnoDB将创建默认的聚集索引。</p>
 <h3 id="Gap-Locks-间隙锁"><a href="#Gap-Locks-间隙锁" class="headerlink" title="Gap Locks(间隙锁)"></a>Gap Locks(间隙锁)</h3><p>间隙锁是基于索引之间的间隙加锁的，或者在第一条索引之前的空隙或者最后一条索引之后的空隙加锁</p>
 <h3 id="Next-key-Locks"><a href="#Next-key-Locks" class="headerlink" title="Next-key Locks"></a>Next-key Locks</h3><p>Next-key Lock是基于Record Locks和Gap Locks, 这个锁只有在InnoDB的隔离事务为READ_REPEATABLE级别下才会生效，同时可以通过 innodb_locks_unsafe_for_binlog禁用它。他是一个左开右闭区间，锁住两个索引之间的间隙，同时锁住右边的索引记录。举例来说，如果一个索引包含10，11，13和20，那么他可能的Next-key Locks如下：  </p>
-<p>``` bash<br>(negative infinity,10]<br>(10,11]<br>(11,13]<br>(13,20]<br>(20,negative infinity)</p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">(negative infinity,10]</div><div class="line">(10,11]</div><div class="line">(11,13]</div><div class="line">(13,20]</div><div class="line">(20,negative infinity)</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -585,7 +584,7 @@ Shared and Exclusive Locks(共享锁和排他锁)Inn">
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">76</span>
+              <span class="site-state-item-count">77</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -602,7 +601,7 @@ Shared and Exclusive Locks(共享锁和排他锁)Inn">
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
