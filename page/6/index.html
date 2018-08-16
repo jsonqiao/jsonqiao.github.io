@@ -258,6 +258,110 @@
             
               
                 
+                <a class="post-title-link" href="/2016/08/18/前言中不允许有内容/" itemprop="url">
+                  前言中不允许有内容
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-08-18T15:06:12+08:00" content="2016-08-18">
+              2016-08-18
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/08/18/前言中不允许有内容/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/18/前言中不允许有内容/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>今天创建一个新的web项目时，按照以前的步骤顺利完成，但是启动tomcat时突然报错，错误内容为：“lineNumber: 1; columnNumber: 1; 前言中不允许有内容”，此时内心深处是方的，以前创建过这么多次都很顺利，今天怎么就不行了呢，难道是因为没拜菩萨么，还好有google法宝，果断google，发现说是文件编码问题，可我肯定我的文件编码没有问题，正在一脸茫然的时候，查看web.xml时发现有<em>空格</em>，脑子突然来电，预感到了问题存在，尝试，果然正确，遂出此文。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/08/18/前言中不允许有内容/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/08/13/ubuntu查看安装软件版本信息 上午10.50.21/" itemprop="url">
                   ubuntu查看安装软件版本信息
                 </a>
@@ -716,133 +820,6 @@ More in
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/01/红黑树浅谈/" itemprop="url">
-                  红黑树浅谈
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-01T18:47:42+08:00" content="2016-08-01">
-              2016-08-01
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/01/红黑树浅谈/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/01/红黑树浅谈/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          1.开篇大学学习数据结构时都是浅显而又初漏的，没有花多少心思去理解去想原因，工作以后发现自己知之甚少，最近看到jdk1.8中的HashMap和TreeMap中都用到了红黑树数据结构，故出此文已谈鄙人对红黑树的一点浅薄理解吧。下面进入正文，先聊聊何为红黑树［学习红黑树前请先学习二叉搜索树］
-2.红黑树的性质说起何为红黑树，简单来说它是一颗大约平衡的二叉搜索树，为何称之为大约，实际是因为它并不是严格的自平衡二叉搜索树，而红黑树的自平衡是通过它以下5个性质决定的，如下文
-1. 红黑树中每个节点要么是红色要么是黑色（非红即黑）2. 红黑树中的根节点是黑色节点3. 红黑树中每一个叶子节点（Nil)[改节
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/01/红黑树浅谈/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -888,7 +865,7 @@ More in
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -905,7 +882,7 @@ More in
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -258,6 +258,133 @@
             
               
                 
+                <a class="post-title-link" href="/2015/05/10/Java中关于noSuchMethod错误/" itemprop="url">
+                  Java中关于noSuchMethod错误
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-10T14:17:32+08:00" content="2015-05-10">
+              2015-05-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/J2EE开发错误/" itemprop="url" rel="index">
+                    <span itemprop="name">J2EE开发错误</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/05/10/Java中关于noSuchMethod错误/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/05/10/Java中关于noSuchMethod错误/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          错误出现地方java.lang.NoSuchMethodError一般出现在maven打包后部署时候（针对用maven管理），在开发阶段由于开发工具比较智能的原因，可能上述问题会被开发工具智能识别而自动屏蔽。
+错误原因出现此类错误的根本原因是jar包存在不同的版本，classloader加载了不正确版本的class文件，一般是加载了低版本的class，所以在你的项目中肯定出现了不同版本的jar包依赖。
+解决方法根据java.lang.NoSuchMethodError后面所跟的报错的类定位jar包，去web应用下WEB-INF/lib目录下找寻对应jar包，一般都会发现不同版本的jar，删除错
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/05/10/Java中关于noSuchMethod错误/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2015/05/06/git_push_错误/" itemprop="url">
                   git push 错误
                 </a>
@@ -752,135 +879,6 @@ Git流程图本地仓库由git维护着三棵“树”组成，第一个是work 
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/03/05/Java_compile-time_constant/" itemprop="url">
-                  Java compile-time constant
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-03-05T17:15:38+08:00" content="2015-03-05">
-              2015-03-05
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/03/05/Java_compile-time_constant/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/05/Java_compile-time_constant/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          # Creating a reference to a class using ".class" doesn't automatically initialize the Class object.
-# There are actually three steps in preparing a class for use
-# 1\. Loading. which is performed by the class loader. This finds the bytecodes and creates a Class \
-#    object from those bytecodes.
-# 
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/03/05/Java_compile-time_constant/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -926,7 +924,7 @@ Git流程图本地仓库由git维护着三棵“树”组成，第一个是work 
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -943,7 +941,7 @@ Git流程图本地仓库由git维护着三棵“树”组成，第一个是work 
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

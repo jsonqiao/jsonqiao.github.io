@@ -258,6 +258,114 @@
             
               
                 
+                <a class="post-title-link" href="/2018/04/08/浅谈Java序列化机制/" itemprop="url">
+                  浅谈Java序列化机制
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-04-08T21:54:49+08:00" content="2018-04-08">
+              2018-04-08
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/04/08/浅谈Java序列化机制/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/08/浅谈Java序列化机制/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          Java 中我们都知道要一个类实现序列化均要实现 Serializable接口，但是去看下这个接口的定义，却发现这个接口没有任何的字段以及方法，那Java是如何实现序列化的呢？
+引子下面给出一段比较简单的序列化实现的代码的例子,结合例子来简单的聊聊序列化机制
+1234567891011121314public class SerializableExample implements Serializable &#123;    private int a = 0;    private String b = "s";    public static void main(String[] ar
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/04/08/浅谈Java序列化机制/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/06/闲话java装箱和拆箱/" itemprop="url">
                   闲话java装箱和拆箱
                 </a>
@@ -675,119 +783,6 @@ invokedynamic 指令对不同 invoke dynamic 指令的解析会因为动态不�
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="url">
-                  jvm_rum_time_constant_pool笔记
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-11-21T21:37:28+08:00" content="2017-11-21">
-              2017-11-21
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2017/11/21/jvm-rum-time-constant-pool笔记/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/11/21/jvm-rum-time-constant-pool笔记/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          运行时常量池分类1. 包括类，字段和方法的符号引用 
-2. 字符串，整数，浮点数的字面量
-3. 其它类型
-符号引用类符号引用对于类或者接口的符号引用，其来自于二进制 class 文件的 CONSTANT_Class_info 结构，调用 Class.getName 时返回该值
-
-对于数组类型  ‘[‘ 表示数组的维度，对于非数组的复杂对象用 L 表示对象的引用，例如 java.lang.Object 对象表示为 Ljava/lang/Object, 其中  .  用  / 表示 
-
-字段符号引用字段符号引用， 其来自于二进制 class 文件的 CONSTANT_Fieldref_info 结
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/11/21/jvm-rum-time-constant-pool笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -833,7 +828,7 @@ invokedynamic 指令对不同 invoke dynamic 指令的解析会因为动态不�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -850,7 +845,7 @@ invokedynamic 指令对不同 invoke dynamic 指令的解析会因为动态不�
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

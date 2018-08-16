@@ -258,6 +258,115 @@
             
               
                 
+                <a class="post-title-link" href="/2018/08/16/并发之AQS/" itemprop="url">
+                  并发之AQS
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-08-16T23:16:45+08:00" content="2018-08-16">
+              2018-08-16
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/08/16/并发之AQS/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/16/并发之AQS/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          什么是AQSAQS 是 AbstractQueuedSynchronizer 类的简称，它是 Java 部分并发类实现的一个基石框架，典型的并发控制类 ReentrantLock , CountDownLatch 等都是基于它实现
+它的基本原理它的基本原理是内部提供一个volatile变量state, 通过对该state进行赋值与修改定义具体的锁的实现，它主要控制在获取锁失败时，一个等待队列的维护，以及释放锁时等待队列的线程的唤醒
+AQS 有 2 种工作模式，一种是 shared 模式， 一种是 exclusive 模式。
+shared 模式 — 同一时间可能有多个线程在等待统一把锁，当能够获
+          ...
+
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/08/16/并发之AQS/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2018/04/23/spring基于注解的aop处理源码简析/" itemprop="url">
                   spring基于注解的aop处理源码简析
                 </a>
@@ -671,114 +780,6 @@ spring的Aop是基于代理来完成的，不管是基于 jdk 的动态代理，
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2018/04/08/浅谈Java序列化机制/" itemprop="url">
-                  浅谈Java序列化机制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-04-08T21:54:49+08:00" content="2018-04-08">
-              2018-04-08
-            </time>
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2018/04/08/浅谈Java序列化机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/04/08/浅谈Java序列化机制/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          Java 中我们都知道要一个类实现序列化均要实现 Serializable接口，但是去看下这个接口的定义，却发现这个接口没有任何的字段以及方法，那Java是如何实现序列化的呢？
-引子下面给出一段比较简单的序列化实现的代码的例子,结合例子来简单的聊聊序列化机制
-1234567891011121314public class SerializableExample implements Serializable &#123;    private int a = 0;    private String b = "s";    public static void main(String[] ar
-          ...
-
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2018/04/08/浅谈Java序列化机制/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -824,7 +825,7 @@ spring的Aop是基于代理来完成的，不管是基于 jdk 的动态代理，
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">77</span>
+              <span class="site-state-item-count">78</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -841,7 +842,7 @@ spring的Aop是基于代理来完成的，不管是基于 jdk 的动态代理，
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
