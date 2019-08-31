@@ -1,0 +1,709 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="jvm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jvm垃圾回收">
+<meta property="og:url" content="http://yoursite.com/2017/10/25/jvm垃圾回收/index.html">
+<meta property="og:site_name" content="栀子花开">
+<meta property="og:description" content="如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为">
+<meta property="og:updated_time" content="2018-04-23T13:09:59.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="jvm垃圾回收">
+<meta name="twitter:description" content="如何确定堆中的对象可以回收1. 引用计数法一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式
+2. 可达性分析算法以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达
+在JAVA语言中，可作为">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/25/jvm垃圾回收/"/>
+
+  <title> jvm垃圾回收 | 栀子花开 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2627f4a76f6228ff020e7524fae592e2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">栀子花开</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">那一年盛夏的栀子花开</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                jvm垃圾回收
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-25T21:04:01+08:00" content="2017-10-25">
+              2017-10-25
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/25/jvm垃圾回收/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/25/jvm垃圾回收/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何确定堆中的对象可以回收"><a href="#如何确定堆中的对象可以回收" class="headerlink" title="如何确定堆中的对象可以回收"></a>如何确定堆中的对象可以回收</h2><h3 id="1-引用计数法"><a href="#1-引用计数法" class="headerlink" title="1. 引用计数法"></a>1. 引用计数法</h3><p>一个对象通过一个引用计数字段来记录它被引用的次数，该方法不能解决循环依赖的问题，JAVA没有采用这种方式</p>
+<h3 id="2-可达性分析算法"><a href="#2-可达性分析算法" class="headerlink" title="2. 可达性分析算法"></a>2. 可达性分析算法</h3><p>以 GC Roots 对象为起点，向下搜索，搜索走过的路径称为 (Reference chain) , 当一个对象与任意一个 GC Roots 对象没有 Reference chain, 则认为该对象不可达</p>
+<p>在JAVA语言中，可作为 GC Roots 的对象包括下面几种：</p>
+<ul>
+<li>虚拟机栈中引用的对象</li>
+<li>方法区中类静态属性引用的对象</li>
+<li>方法区常量引用的对象</li>
+<li>本地方法栈中 JNI 引用的对象</li>
+</ul>
+<h2 id="对象真正回收"><a href="#对象真正回收" class="headerlink" title="对象真正回收"></a>对象真正回收</h2><p>进行可达性分析后，如果确定一个对象是否要回收，还需要进行<font color="red">一次标记和一次筛选</font> 筛选的条件是是否有必要执行 <code>finalize()</code> 方法，如果有必要执行，则将该对象防置到一个被叫做 F-Queue 的队列，稍后被 jvm 启动的一个名叫 Finalizer 的线程去执行</p>
+<h2 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h2><h3 id="1-标记-清除-算法"><a href="#1-标记-清除-算法" class="headerlink" title="1. 标记-清除 算法"></a>1. 标记-清除 算法</h3><h3 id="2-复制算法"><a href="#2-复制算法" class="headerlink" title="2. 复制算法"></a>2. 复制算法</h3><p>将内存划分为容量相等的2块区域，每次近使用其中一块，每次垃圾回收时，将不回收的对象复制到另一块区域</p>
+<h3 id="3-标记-整理算法"><a href="#3-标记-整理算法" class="headerlink" title="3. 标记-整理算法"></a>3. 标记-整理算法</h3><p>第一步按照标记-清除算法进行可达性分析后标记出需要回收的对象，然后将存活的对象向一端移动，然后清理掉端边界以外的内存</p>
+<h3 id="4-分带收集算法"><a href="#4-分带收集算法" class="headerlink" title="4. 分带收集算法"></a>4. 分带收集算法</h3><p>其实就是针对不同的内存区域采用上面的 3 种算法 </p>
+<h2 id="GC-日志查看手段"><a href="#GC-日志查看手段" class="headerlink" title="GC 日志查看手段"></a>GC 日志查看手段</h2><h3 id="vm-参数配置"><a href="#vm-参数配置" class="headerlink" title="vm 参数配置"></a>vm 参数配置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">-XX:+PrintGC <span class="comment">// 输出简单GC日志</span></div><div class="line">-XX:+PrintGCDetails <span class="comment">//输出GC详细日志</span></div><div class="line">-XX:+PrintGCTimeStamps <span class="comment">// 输出GC的时间戳（相对于jvm启动时间）</span></div><div class="line">-XX:+PrintGCDateStamps <span class="comment">// 以时间的格式输出GC的时间戳 2017-10-27T22:22:22:59.234+0800</span></div><div class="line">-XX:+PrintHeadAtGC <span class="comment">//在进行GC前后打印出堆信息</span></div><div class="line">-Xloggc:../logs/gc.log <span class="comment">//gc日志文件输出路径</span></div><div class="line">-verbose:gc <span class="comment">// 输出GC日志</span></div></pre></td></tr></table></figure>
+<h3 id="gcutil-命令使用"><a href="#gcutil-命令使用" class="headerlink" title="gcutil 命令使用"></a>gcutil 命令使用</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">jstat -gc pid 间隔毫秒数 监控此处</div><div class="line">jstat -gc 123325 2000 10 # 每个2秒监控一次，共监控10次</div></pre></td></tr></table></figure>
+<h3 id="jmap-命令"><a href="#jmap-命令" class="headerlink" title="jmap 命令"></a>jmap 命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">jmap -dump:format=b,file=head.bin &lt;pid&gt;</div><div class="line"># file gc文件路径</div><div class="line"># pid 进程编号</div><div class="line"></div><div class="line">jmap -histo &lt;pid&gt; # 查看JVM中对象存活情况与占用情况</div></pre></td></tr></table></figure>
+<h3 id="GC日志格式"><a href="#GC日志格式" class="headerlink" title="GC日志格式"></a>GC日志格式</h3><p>举例说明</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">7.429: [GC 7.429: [ParNew: 45278K-&gt;6723K(47808K), 0.0251993 secs] 46974K-&gt;10551K(252608K), 0.0252421 secs]</div></pre></td></tr></table></figure>
+<p>如上一条 GC 日志,其表示的含义分别如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">7.429 # GC发生的时间，自虚拟机启动开始</div><div class="line">[GC 或者 [Full GC # 如果有Full代表发生了Stop-The-World</div><div class="line">[ParNew [DefNew # 代表发生GC的区域，这里显示的名称与采用的垃圾收集器有关，如果为ParNew收集器，其新生代名称为ParNew(Parallel New Generation), </div><div class="line"># 如果采用Parallel Scavenge收集器，其新生代名称为PSYoungGen</div><div class="line"></div><div class="line">45278K-&gt;6723K(47808K) # 方括号内的其含义为 : GC 前该内存已使用容量 -&gt; GC 后该内存已使用容量 (该内存区域总容量)</div><div class="line">46974K-&gt;10551K(252608K) # 方括号外的其含义为 : GC 前 JAVA 堆已使用容量 -&gt; GC 后 JAVA 堆已使用容量 (JAVA 堆总容量)</div><div class="line"></div><div class="line">0.0251993 secs # GC 花费时间</div></pre></td></tr></table></figure>
+<h2 id="空间分配担保"><a href="#空间分配担保" class="headerlink" title="空间分配担保"></a>空间分配担保</h2><p>在发生 Minor GC 之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果是，那么 Minor GC 可以确保安全，如果不是，则虚拟机会查看 HandlePromotionFailure 设置值是否允许担保失败。如果允许，虚拟机会继续检查老年代最大可用连续空间是否大于历次晋升到老年代的对象的平均大小，如果大于，虚拟机则会尝试一次 Minor GC, 否则或者 HandlePromotionFailure 设置值不允许担保失败，则要进行 Full GC。</p>
+<h2 id="对象分配策略"><a href="#对象分配策略" class="headerlink" title="对象分配策略"></a>对象分配策略</h2><h3 id="对象优先在-Eden-区分配"><a href="#对象优先在-Eden-区分配" class="headerlink" title="对象优先在 Eden 区分配"></a>对象优先在 Eden 区分配</h3><h3 id="大对象直接进入老年代"><a href="#大对象直接进入老年代" class="headerlink" title="大对象直接进入老年代"></a>大对象直接进入老年代</h3><h3 id="长期存活的对象进入老年代"><a href="#长期存活的对象进入老年代" class="headerlink" title="长期存活的对象进入老年代"></a>长期存活的对象进入老年代</h3><p>如果一个对象在 Eden 出生并经历一次 Minor GC 后仍然存活且能被 Suvivor 容纳，它将会被移动到 Suvivor 区，并将它的年龄设置为 1 ，对象在 Survivor 区没经历过一次 Minor GC ，其年龄就增加一岁，当它的年龄达到一定的阈值（默认为 15 岁），它就会进入老年代, 这个阈值可以通过以下参数设置</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-XX:MaxTenuringThreshold=<span class="number">1</span></div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/jvm/" rel="tag">#jvm</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/18/ThreadPoolExecutor简要笔记/" rel="next" title="ThreadPoolExecutor简要笔记">
+                <i class="fa fa-chevron-left"></i> ThreadPoolExecutor简要笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/26/c-简要笔记/" rel="prev" title="c++简要笔记">
+                c++简要笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/25/jvm垃圾回收/"
+           data-title="jvm垃圾回收" data-url="http://yoursite.com/2017/10/25/jvm垃圾回收/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="jsonqiao" />
+          <p class="site-author-name" itemprop="name">jsonqiao</p>
+          <p class="site-description motion-element" itemprop="description">一个猿猿的技术独白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/jsonqiao" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/jsonqiao" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qiao-yang-30-39" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jsonqiao.com" title="老博客" target="_blank">老博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lijiabei.cn" title="jiabei" target="_blank">jiabei</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何确定堆中的对象可以回收"><span class="nav-number">1.</span> <span class="nav-text">如何确定堆中的对象可以回收</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-引用计数法"><span class="nav-number">1.1.</span> <span class="nav-text">1. 引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-可达性分析算法"><span class="nav-number">1.2.</span> <span class="nav-text">2. 可达性分析算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象真正回收"><span class="nav-number">2.</span> <span class="nav-text">对象真正回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#垃圾收集算法"><span class="nav-number">3.</span> <span class="nav-text">垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-标记-清除-算法"><span class="nav-number">3.1.</span> <span class="nav-text">1. 标记-清除 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-复制算法"><span class="nav-number">3.2.</span> <span class="nav-text">2. 复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-标记-整理算法"><span class="nav-number">3.3.</span> <span class="nav-text">3. 标记-整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-分带收集算法"><span class="nav-number">3.4.</span> <span class="nav-text">4. 分带收集算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#GC-日志查看手段"><span class="nav-number">4.</span> <span class="nav-text">GC 日志查看手段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#vm-参数配置"><span class="nav-number">4.1.</span> <span class="nav-text">vm 参数配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gcutil-命令使用"><span class="nav-number">4.2.</span> <span class="nav-text">gcutil 命令使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jmap-命令"><span class="nav-number">4.3.</span> <span class="nav-text">jmap 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GC日志格式"><span class="nav-number">4.4.</span> <span class="nav-text">GC日志格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间分配担保"><span class="nav-number">5.</span> <span class="nav-text">空间分配担保</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象分配策略"><span class="nav-number">6.</span> <span class="nav-text">对象分配策略</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#对象优先在-Eden-区分配"><span class="nav-number">6.1.</span> <span class="nav-text">对象优先在 Eden 区分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大对象直接进入老年代"><span class="nav-number">6.2.</span> <span class="nav-text">大对象直接进入老年代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#长期存活的对象进入老年代"><span class="nav-number">6.3.</span> <span class="nav-text">长期存活的对象进入老年代</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jsonqiao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jsonqiao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

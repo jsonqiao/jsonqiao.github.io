@@ -1,0 +1,696 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="java spring," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="基础知识spring 对于注解的处理主要是利用 BeanFactoryPostProcessor 后置处理器来处理，对于 @Configuration 注解，spring 就是利用 ConfigurationClassPostProcessor 来进行处理，该类会委托给  ConfigurationClassParser 来进行处理，该类会陆续处理 @ComponentScan @Import @">
+<meta property="og:type" content="article">
+<meta property="og:title" content="EnableAutoConfiguration注解分析">
+<meta property="og:url" content="http://yoursite.com/2018/01/17/EnableAutoConfiguration注解分析/index.html">
+<meta property="og:site_name" content="栀子花开">
+<meta property="og:description" content="基础知识spring 对于注解的处理主要是利用 BeanFactoryPostProcessor 后置处理器来处理，对于 @Configuration 注解，spring 就是利用 ConfigurationClassPostProcessor 来进行处理，该类会委托给  ConfigurationClassParser 来进行处理，该类会陆续处理 @ComponentScan @Import @">
+<meta property="og:updated_time" content="2018-01-17T13:25:25.636Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="EnableAutoConfiguration注解分析">
+<meta name="twitter:description" content="基础知识spring 对于注解的处理主要是利用 BeanFactoryPostProcessor 后置处理器来处理，对于 @Configuration 注解，spring 就是利用 ConfigurationClassPostProcessor 来进行处理，该类会委托给  ConfigurationClassParser 来进行处理，该类会陆续处理 @ComponentScan @Import @">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/17/EnableAutoConfiguration注解分析/"/>
+
+  <title> EnableAutoConfiguration注解分析 | 栀子花开 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?2627f4a76f6228ff020e7524fae592e2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">栀子花开</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">那一年盛夏的栀子花开</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                EnableAutoConfiguration注解分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-01-17T20:45:18+08:00" content="2018-01-17">
+              2018-01-17
+            </time>
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/01/17/EnableAutoConfiguration注解分析/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/01/17/EnableAutoConfiguration注解分析/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>spring 对于注解的处理主要是利用 <code>BeanFactoryPostProcessor</code> 后置处理器来处理，对于 @Configuration 注解，spring 就是利用 <code>ConfigurationClassPostProcessor</code> 来进行处理，该类会委托给  <code>ConfigurationClassParser</code> 来进行处理，该类会陆续处理 @ComponentScan @Import @ImportResource @PropertySources 等注解，今天想要分析的就是基于其中处理 @Import 注解</p>
+<h2 id="Import-处理"><a href="#Import-处理" class="headerlink" title="@Import 处理"></a>@Import 处理</h2><p>对于使用 @Import 注解标识的类，spring 会直接获取被 @Import 注解引用的类，判断该类的类型，如下代码所示<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (SourceClass candidate : importCandidates) &#123;</div><div class="line">	<span class="keyword">if</span> (candidate.isAssignable(ImportSelector.class)) &#123;</div><div class="line">		<span class="comment">// Candidate class is an ImportSelector -&gt; delegate to it to determine imports</span></div><div class="line">		Class&lt;?&gt; candidateClass = candidate.loadClass();</div><div class="line">		ImportSelector selector = BeanUtils.instantiateClass(candidateClass, ImportSelector.class);</div><div class="line">		ParserStrategyUtils.invokeAwareMethods(</div><div class="line">				selector, <span class="keyword">this</span>.environment, <span class="keyword">this</span>.resourceLoader, <span class="keyword">this</span>.registry);</div><div class="line">		<span class="keyword">if</span> (<span class="keyword">this</span>.deferredImportSelectors != <span class="keyword">null</span> &amp;&amp; selector <span class="keyword">instanceof</span> DeferredImportSelector) &#123;</div><div class="line">			<span class="keyword">this</span>.deferredImportSelectors.add(</div><div class="line">					<span class="keyword">new</span> DeferredImportSelectorHolder(configClass, (DeferredImportSelector) selector));</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span> &#123;</div><div class="line">			String[] importClassNames = selector.selectImports(currentSourceClass.getMetadata());</div><div class="line">			Collection&lt;SourceClass&gt; importSourceClasses = asSourceClasses(importClassNames);</div><div class="line">			processImports(configClass, currentSourceClass, importSourceClasses, <span class="keyword">false</span>);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">if</span> (candidate.isAssignable(ImportBeanDefinitionRegistrar.class)) &#123;</div><div class="line">		<span class="comment">// Candidate class is an ImportBeanDefinitionRegistrar -&gt;</span></div><div class="line">		<span class="comment">// delegate to it to register additional bean definitions</span></div><div class="line">		Class&lt;?&gt; candidateClass = candidate.loadClass();</div><div class="line">		ImportBeanDefinitionRegistrar registrar =</div><div class="line">				BeanUtils.instantiateClass(candidateClass, ImportBeanDefinitionRegistrar.class);</div><div class="line">		ParserStrategyUtils.invokeAwareMethods(</div><div class="line">				registrar, <span class="keyword">this</span>.environment, <span class="keyword">this</span>.resourceLoader, <span class="keyword">this</span>.registry);</div><div class="line">		configClass.addImportBeanDefinitionRegistrar(registrar, currentSourceClass.getMetadata());</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span> &#123;</div><div class="line">		<span class="comment">// Candidate class not an ImportSelector or ImportBeanDefinitionRegistrar -&gt;</span></div><div class="line">		<span class="comment">// process it as an @Configuration class</span></div><div class="line">		<span class="keyword">this</span>.importStack.registerImport(</div><div class="line">				currentSourceClass.getMetadata(), candidate.getMetadata().getClassName());</div><div class="line">		processConfigurationClass(candidate.asConfigClass(configClass));</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里@Import 注解主要按照三类情况来处理</p>
+<ol>
+<li><code>ImportSelector</code> 接口的子类，同时是 <code>DeferredImportSelector</code> 则放置到 deferredImportSelectors 容器里，后续统一处理，如果只是 <code>ImportSelector</code> 的子类，但不是 <code>DeferredImportSelector</code> 的子类，则立即处理</li>
+<li><code>ImportBeanDefinitionRegistrar</code> 接口，该接口的子类是用于注册额度的bean信息</li>
+<li>除以上2种外，当成普通的 @Configuration 注解类处理</li>
+</ol>
+<h2 id="EnableAutoConfiguration-注解"><a href="#EnableAutoConfiguration-注解" class="headerlink" title="@EnableAutoConfiguration 注解"></a>@EnableAutoConfiguration 注解</h2><p>首先我们看一下该注解的头部申明的有哪些注解, @EnableAutoConfiguration 注解源码如下 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@AutoConfigurationPackage</span></div><div class="line"><span class="meta">@Import</span>(EnableAutoConfigurationImportSelector.class)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration</div></pre></td></tr></table></figure>
+<p>从这个注解的头部可以看到@Import注解，被引用的类的<code>EnableAutoConfigurationImportSelector</code>, 该类为<code>DeferredImportSelector</code>接口的实现，故如上文所描述，<code>EnableAutoConfigurationImportSelector</code> 将会被放置到 deferredImportSelectors 这个list容器里，通过如下代码进行统一处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">processDeferredImportSelectors</span><span class="params">()</span> </span>&#123;</div><div class="line">	List&lt;DeferredImportSelectorHolder&gt; deferredImports = <span class="keyword">this</span>.deferredImportSelectors;</div><div class="line">	<span class="keyword">this</span>.deferredImportSelectors = <span class="keyword">null</span>;</div><div class="line">	Collections.sort(deferredImports, DEFERRED_IMPORT_COMPARATOR);</div><div class="line">	<span class="keyword">for</span> (DeferredImportSelectorHolder deferredImport : deferredImports) &#123;</div><div class="line">		ConfigurationClass configClass = deferredImport.getConfigurationClass();</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">            <span class="comment">// 调用ImportSelector接口的selectImports去加载所有需要import的类</span></div><div class="line">			String[] imports = deferredImport.getImportSelector().selectImports(configClass.getMetadata());</div><div class="line">			processImports(configClass, asSourceClass(configClass), asSourceClasses(imports), <span class="keyword">false</span>);</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span> (BeanDefinitionStoreException ex) &#123;</div><div class="line">			<span class="keyword">throw</span> ex;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">catch</span> (Throwable ex) &#123;</div><div class="line">			<span class="keyword">throw</span> <span class="keyword">new</span> BeanDefinitionStoreException(</div><div class="line">					<span class="string">"Failed to process import candidates for configuration class ["</span> +</div><div class="line">					configClass.getMetadata().getClassName() + <span class="string">"]"</span>, ex);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>那就看下<code>EnableAutoConfigurationImportSelector</code> 是如何实现 selectImports 方法的，<code>EnableAutoConfigurationImportSelector</code> 继承于类 <code>AutoConfigurationImportSelector</code> ,实现也在该父类中，具体代码我就不在贴出来了，核心逻辑为：通过 <code>SpringFactoriesLoader</code>去加载 <code>META-INFO/spring.factories</code>目录下 <code>EnableAutoConfiguration</code>对应的具体实现类。</p>
+<p>下面简单看下 springBoot 中默认的有哪些</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"># Auto Configure</div><div class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</div><div class="line">org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.aop.AopAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.batch.BatchAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.cassandra.CassandraAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.cloud.CloudAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.context.MessageSourceAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.couchbase.CouchbaseAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.cassandra.CassandraDataAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.cassandra.CassandraRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.couchbase.CouchbaseDataAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.couchbase.CouchbaseRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.jpa.JpaRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.ldap.LdapDataAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.ldap.LdapRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.neo4j.Neo4jDataAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.neo4j.Neo4jRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.solr.SolrRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.rest.RepositoryRestMvcAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.data.web.SpringDataWebAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.elasticsearch.jest.JestAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.gson.GsonAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.h2.H2ConsoleAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.hateoas.HypermediaAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.hazelcast.HazelcastAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.hazelcast.HazelcastJpaDependencyAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jdbc.JndiDataSourceAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jdbc.XADataSourceAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jms.JmsAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jmx.JmxAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jms.JndiConnectionFactoryAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jms.activemq.ActiveMQAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jms.artemis.ArtemisAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.groovy.template.GroovyTemplateAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jersey.JerseyAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.kafka.KafkaAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.ldap.embedded.EmbeddedLdapAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.ldap.LdapAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.liquibase.LiquibaseAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mail.MailSenderValidatorAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mobile.DeviceResolverAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mobile.DeviceDelegatingViewResolverAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mobile.SitePreferenceAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.mustache.MustacheAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.reactor.ReactorAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.security.SecurityFilterAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.security.FallbackWebSecurityAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.security.oauth2.OAuth2AutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.sendgrid.SendGridAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.session.SessionAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.social.SocialWebAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.social.FacebookAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.social.LinkedInAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.social.TwitterAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.solr.SolrAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.transaction.jta.JtaAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.DispatcherServletAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.EmbeddedServletContainerAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.HttpEncodingAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.HttpMessageConvertersAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.MultipartAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.ServerPropertiesAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.WebClientAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.websocket.WebSocketAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.websocket.WebSocketMessagingAutoConfiguration,\</div><div class="line">org.springframework.boot.autoconfigure.webservices.WebServicesAutoConfiguratio</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>@EnableAutoConfiguration</code> 是通过 <code>DeferredImportSelector</code>注解的实现类 EnableAutoConfigurationImportSelector<code>, 利用</code>SpringFactoriesLoader<code>去识别需要动态加载的类，从而实现动态加载，被加载的类，后续又陆续通过</code>@Configuration` 注解将更多的类加载到 Spring 容器里</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java-spring/" rel="tag">#java spring</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/04/Thread一点笔记/" rel="next" title="Thread一点笔记">
+                <i class="fa fa-chevron-left"></i> Thread一点笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/06/闲话java装箱和拆箱/" rel="prev" title="闲话java装箱和拆箱">
+                闲话java装箱和拆箱 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/01/17/EnableAutoConfiguration注解分析/"
+           data-title="EnableAutoConfiguration注解分析" data-url="http://yoursite.com/2018/01/17/EnableAutoConfiguration注解分析/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://tva4.sinaimg.cn/crop.0.0.180.180.180/7bcad342jw1e8qgp5bmzyj2050050aa8.jpg"
+               alt="jsonqiao" />
+          <p class="site-author-name" itemprop="name">jsonqiao</p>
+          <p class="site-description motion-element" itemprop="description">一个猿猿的技术独白</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">78</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/jsonqiao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/jsonqiao" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://douban.com/people/jsonqiao" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/qiao-yang-30-39" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jsonqiao.com" title="老博客" target="_blank">老博客</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lijiabei.cn" title="jiabei" target="_blank">jiabei</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础知识"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Import-处理"><span class="nav-number">2.</span> <span class="nav-text">@Import 处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#EnableAutoConfiguration-注解"><span class="nav-number">3.</span> <span class="nav-text">@EnableAutoConfiguration 注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">jsonqiao</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"jsonqiao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
